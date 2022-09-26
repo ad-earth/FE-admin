@@ -9,7 +9,13 @@ const DefaultLayout = () => {
       >
         Header
       </header>
-      <main style={{ width: "100%", display: "flex" }}>
+      <main
+        style={{
+          width: "100%",
+          display: "flex",
+          minHeight: "calc(100vh - 80px)",
+        }}
+      >
         <nav style={{ width: "256px", backgroundColor: "#25779C" }}>nav</nav>
         <Outlet />
       </main>
