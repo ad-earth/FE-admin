@@ -1,0 +1,15 @@
+$boxSixe: 80px;
+
+header {
+  width: 100%;
+  height: $boxSixe;
+  line-height: $boxSixe;
+  background-color: #25779c;
+  img {
+    margin: calc((#{$boxSixe} - 25px) / 2) 53px;
+  }
+}
+.right {
+  float: right;
+  margin-right: 40px;
+}
