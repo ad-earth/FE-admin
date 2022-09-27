@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 //pages
-import DefaultLayout from "./pages/DefaultLayout";
-import LoginLayout from "./pages/LoginLayout";
+import DefaultLayout from "./components/layouts/DefaultLayout";
+import DefaultLoginLayout from "./components/layouts/DefaultLoginLayout";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -27,7 +27,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Routes>
-          <Route path="" element={<LoginLayout />}>
+          <Route path="" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
             <Route path="signUp" element={<SignUp />} />
             <Route path="account" element={<Account />} />
