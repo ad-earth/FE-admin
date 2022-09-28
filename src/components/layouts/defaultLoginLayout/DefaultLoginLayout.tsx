@@ -4,14 +4,14 @@ import { Outlet } from "react-router-dom";
 
 const LoginLayout = () => {
   return (
-    <section id="LoginLayout">
+    <div id="LoginLayout">
       <main>
         <div className="mainWrap">
           <Outlet />
         </div>
         <div className="slideBannerWrap">슬라이드</div>
       </main>
-    </section>
+    </div>
   );
 };
 

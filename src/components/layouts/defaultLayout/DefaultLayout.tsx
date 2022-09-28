@@ -7,13 +7,13 @@ import Nav from "../nav/Nav";
 
 const DefaultLayout = () => {
   return (
-    <section id="DefaultLayout">
+    <div id="DefaultLayout">
       <Header />
       <main>
         <Nav />
         <Outlet />
       </main>
-    </section>
+    </div>
   );
 };
 
