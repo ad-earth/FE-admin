@@ -22,7 +22,12 @@ const FindForm = (props: PropsType) => {
       <p className="errorMsg">존재하지 않는 회원입니다. 다시 확인해주세요.</p>
       <div className="buttonWrapper">
         {/* 공통 버튼으로 변경 필요 */}
-        <button>아이디 찾기</button>
+        {props.idActive ? (
+          <button>아이디 찾기</button>
+        ) : (
+          <button>비밀번호 찾기</button>
+        )}
+
         <div className="buttonWrapper row">
           <button onClick={() => navigate("/")}>로그인</button>|
           <button onClick={() => navigate("/signup")}>회원 가입</button>
