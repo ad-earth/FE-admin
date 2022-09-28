@@ -1,14 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Header from "./header/Header";
+import Nav from "./nav/Nav";
 
 const DefaultLayout = () => {
   return (
     <section style={{ width: "100%", height: "100%" }}>
-      <header
-        style={{ width: "100%", height: "80px", backgroundColor: "#25779C" }}
-      >
-        Header
-      </header>
+      <Header />
       <main
         style={{
           width: "100%",
@@ -16,7 +14,7 @@ const DefaultLayout = () => {
           minHeight: "calc(100vh - 80px)",
         }}
       >
-        <nav style={{ width: "256px", backgroundColor: "#25779C" }}>nav</nav>
+        <Nav />
         <Outlet />
       </main>
     </section>
