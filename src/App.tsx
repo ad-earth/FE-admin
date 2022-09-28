@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 //pages
-import DefaultLayout from "./components/layouts/DefaultLayout";
-import DefaultLoginLayout from "./components/layouts/DefaultLoginLayout";
+import DefaultLayout from "./components/layouts/defaultLayout/DefaultLayout";
+import DefaultLoginLayout from "./components/layouts/defaultLoginLayout/DefaultLoginLayout";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
