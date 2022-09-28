@@ -1,25 +1,29 @@
 import React from "react";
 import "./nav.style.scss";
 import { NavLink } from "react-router-dom";
+import BizMoney from "../../mypage/BizMoney";
 
 const Nav = () => {
   return (
-    <nav style={{ width: "256px", backgroundColor: "#25779C" }}>
-      {nav.map((data) => (
-        <ul key={data.id}>
-          <li>
+    <nav>
+      {/* Biz money */}
+      <div className="bizMoney">
+        <BizMoney />
+      </div>
+      {/* sideNav */}
+      <ul className="asideNav">
+        {nav.map((link) => (
+          <li key={link.id}>
             <NavLink
-              to={data.path}
-              style={({ isActive }) => ({
-                color: `${isActive ? "red" : "blue"}`,
-              })}
-              className="navLink"
+              to={link.path}
+              className={({ isActive }) => (isActive ? "isActive" : "inactive")}
             >
-              {data.name}
+              {link.name}
             </NavLink>
           </li>
-        </ul>
-      ))}
+        ))}
+      </ul>
+      <button>회원 탈퇴</button>
     </nav>
   );
 };
