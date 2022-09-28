@@ -30,14 +30,14 @@ function App() {
           <Route path="/" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="/find-account" element={<Account />} />
+            <Route path="/find_account" element={<Account />} />
           </Route>
           <Route element={<DefaultLayout />}>
             <Route path="home" element={<Main />} />
             <Route path="setProd" element={<SetProd />} />
             <Route path="postProd" element={<PostProd />} />
             <Route path="editProd" element={<EditProd />} />
-            <Route path="setParcel" element={<SetParcel />} />
+            <Route path="/shipping_service" element={<SetParcel />} />
             <Route path="prodReport" element={<ProdReport />} />
             <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
