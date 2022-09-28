@@ -27,10 +27,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Routes>
-          <Route path="" element={<DefaultLoginLayout />}>
+          <Route path="/" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
-            <Route path="signUp" element={<SignUp />} />
-            <Route path="account" element={<Account />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="/find-account" element={<Account />} />
           </Route>
           <Route element={<DefaultLayout />}>
             <Route path="home" element={<Main />} />
