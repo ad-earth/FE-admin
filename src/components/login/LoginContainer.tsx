@@ -11,8 +11,8 @@ const LoginContainer = () => {
         <img src={logo} className="logo" />
         <p className="loginTitle">사업자 로그인</p>
         <div className="inputWrapper">
-          <LoginInput placeholder="아이디 (8자 이상)" />
-          <LoginInput placeholder="비밀번호" />
+          <LoginInput placeholder="아이디" type="text" />
+          <LoginInput placeholder="비밀번호" type="password" />
         </div>
         <p className="errorMsg">아이디 비밀번호를 다시 확인해주세요</p>
         {/* 추후 공통 버튼 엘리먼트로 변경 필요 */}
