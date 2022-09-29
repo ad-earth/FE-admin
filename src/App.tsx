@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 //pages
-import DefaultLayout from "./components/layouts/DefaultLayout";
-import DefaultLoginLayout from "./components/layouts/DefaultLoginLayout";
+import DefaultLayout from "./components/layouts/defaultLayout/DefaultLayout";
+import DefaultLoginLayout from "./components/layouts/defaultLoginLayout/DefaultLoginLayout";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -20,7 +20,13 @@ import SetAd from "./pages/SetAd";
 import AdReport from "./pages/AdReport";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
 
 function App() {
   return (
@@ -41,7 +47,7 @@ function App() {
             <Route path="prodReport" element={<ProdReport />} />
             <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
-            <Route path="adReport" element={<AdReport />} />
+            <Route path="report_ad" element={<AdReport />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
