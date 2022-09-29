@@ -33,18 +33,18 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Routes>
-          <Route path="" element={<DefaultLoginLayout />}>
+          <Route path="/" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
-            <Route path="signUp" element={<SignUp />} />
-            <Route path="account" element={<Account />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="/find_account" element={<Account />} />
           </Route>
           <Route element={<DefaultLayout />}>
             <Route path="home" element={<Main />} />
             <Route path="setProd" element={<SetProd />} />
             <Route path="postProd" element={<PostProd />} />
             <Route path="editProd" element={<EditProd />} />
-            <Route path="shipping_services" element={<SetParcel />} />
-            <Route path="report_product" element={<ProdReport />} />
+            <Route path="/shipping_service" element={<SetParcel />} />
+            <Route path="prodReport" element={<ProdReport />} />
             <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
             <Route path="report_ad" element={<AdReport />} />

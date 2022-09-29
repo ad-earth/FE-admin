@@ -1,0 +1,20 @@
+@import "../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+$fc: $fc_blue300;
+input {
+  @include size(335px, 60px);
+  padding: 19px 20px;
+  border: 1px solid $lc_gray400;
+  border-radius: 8px;
+  color: $fc;
+  &::placeholder {
+    color: $fc_blue400;
+  }
+  &:focus {
+    outline: none;
+  }
+}

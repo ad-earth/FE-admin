@@ -1,0 +1,27 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin logo_size {
+  @include size(200px, 50px);
+}
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  @include size(50vw, 100vh);
+  background: $bg_white;
+  .accountWrapper {
+    width: 460px;
+    @include center;
+    flex-direction: column;
+    .logo {
+      @include logo_size;
+    }
+  }
+}
