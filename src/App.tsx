@@ -1,5 +1,4 @@
 import React from "react";
-import { io } from "socket.io-client";
 import { Route, Routes } from "react-router-dom";
 //query
 import { QueryClient, QueryClientProvider } from "react-query";
