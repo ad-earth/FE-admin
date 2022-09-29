@@ -1,7 +1,7 @@
 import React from "react";
 import "./nav.style.scss";
 import { NavLink } from "react-router-dom";
-import BizMoney from "../../mypage/BizMoney";
+import BizMoney from "../../main/BizMoney";
 
 const Nav = () => {
   return (

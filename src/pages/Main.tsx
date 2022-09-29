@@ -4,11 +4,11 @@ import React from "react";
 import AdBanner from "../components/banner/AdBanner";
 import SlideBanner from "../components/banner/SlideBanner";
 import AdSummary from "../components/graph/AdSummary";
-import BizMoney from "../components/mypage/BizMoney";
-import ExposedProd from "../components/mypage/ExposedProd";
-import KeywordRanking from "../components/mypage/KeywordRanking";
-import LastMonthSales from "../components/mypage/LastMonthSales";
-import NewOrder from "../components/mypage/NewOrder";
+import BizMoney from "../components/main/BizMoney";
+import ExposedProd from "../components/main/ExposedProd";
+import KeywordRanking from "../components/main/KeywordRanking";
+import LastMonthSales from "../components/main/LastMonthSales";
+import NewOrder from "../components/main/NewOrder";
 const Main = () => {
   return (
     <section

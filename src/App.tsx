@@ -1,4 +1,5 @@
 import React from "react";
+import { io } from "socket.io-client";
 import { Route, Routes } from "react-router-dom";
 //query
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -20,7 +21,13 @@ import SetAd from "./pages/SetAd";
 import AdReport from "./pages/AdReport";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
+});
 
 function App() {
   return (
