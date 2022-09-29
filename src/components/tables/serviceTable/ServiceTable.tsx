@@ -1,7 +1,36 @@
+import { useState } from "react";
+
 import "./_serviceTable.style.scss";
 import { testData } from "./test";
 
 const ServiceTable = () => {
+  // 체크박스 상태 관리
+  const [checkItems, setCheckItems] = useState([]);
+
+  // 체크박스 단일 선택
+  const handleSingleCheck = (checked: boolean, id: number) => {
+    if (checked) {
+      setCheckItems([...checkItems, id]);
+    } else {
+      // 선택 해제
+      setCheckItems(checkItems.filter((el) => el !== id));
+    }
+  };
+
+  // 체크박스 전체 선택
+  const handleAllCheck = (checked: boolean) => {
+    if (checked) {
+      let idArr: number[] = [];
+      // 전체 체크 박스 체크
+      testData.forEach((el) => idArr.push(el.id));
+      setCheckItems(idArr);
+    }
+    // 전체 체크 박스 체크 해제
+    else {
+      setCheckItems([]);
+    }
+  };
+
   // 테이블 제목 리스트
   const tHeadList = [
     "No",
@@ -21,18 +50,26 @@ const ServiceTable = () => {
     <table id="orderList">
       <thead>
         <th>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={(e) => handleAllCheck(e.target.checked)}
+            checked={checkItems.length === testData.length ? true : false}
+          />
         </th>
         {tHeadList.map((x, idx) => {
-          return <th>{x}</th>;
+          return <th key={idx}>{x}</th>;
         })}
       </thead>
       <tbody>
-        {testData.map((x, idx) => {
+        {testData.map((x) => {
           return (
-            <tr key={idx}>
+            <tr key={x.id}>
               <td>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(e) => handleSingleCheck(e.target.checked, x.id)}
+                  checked={checkItems.includes(x.id) ? true : false}
+                />
               </td>
               <td>{x.id}</td>
               <td>{x.o_No}</td>
