@@ -1,7 +1,11 @@
-import React from "react";
+import AccoutContainer from "../components/account/accountContainer/AccoutContainer";
 
 const Account = () => {
-  return <div>Account</div>;
+  return (
+    <div>
+      <AccoutContainer />
+    </div>
+  );
 };
 
 export default Account;

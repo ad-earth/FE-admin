@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 //pages
+import DefaultLayout from "./components/layouts/DefaultLayout";
+import DefaultLoginLayout from "./components/layouts/DefaultLoginLayout";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -16,6 +18,7 @@ import ProdReport from "./pages/ProdReport";
 import PostAd from "./pages/PostAd";
 import SetAd from "./pages/SetAd";
 import AdReport from "./pages/AdReport";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -24,18 +27,23 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signUp" element={<SignUp />}></Route>
-          <Route path="/account" element={<Account />}></Route>
-          <Route path="/setProd" element={<SetProd />}></Route>
-          <Route path="/postProd" element={<PostProd />}></Route>
-          <Route path="/editProd" element={<EditProd />}></Route>
-          <Route path="/setParcel" element={<SetParcel />}></Route>
-          <Route path="/prodReport" element={<ProdReport />}></Route>
-          <Route path="/postAd" element={<PostAd />}></Route>
-          <Route path="/setAd" element={<SetAd />}></Route>
-          <Route path="/adReport" element={<AdReport />}></Route>
+          <Route path="/" element={<DefaultLoginLayout />}>
+            <Route index element={<Login />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="/find_account" element={<Account />} />
+          </Route>
+          <Route element={<DefaultLayout />}>
+            <Route path="home" element={<Main />} />
+            <Route path="setProd" element={<SetProd />} />
+            <Route path="postProd" element={<PostProd />} />
+            <Route path="editProd" element={<EditProd />} />
+            <Route path="/shipping_service" element={<SetParcel />} />
+            <Route path="prodReport" element={<ProdReport />} />
+            <Route path="postAd" element={<PostAd />} />
+            <Route path="setAd" element={<SetAd />} />
+            <Route path="adReport" element={<AdReport />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <ReactQueryDevtools />
       </div>
