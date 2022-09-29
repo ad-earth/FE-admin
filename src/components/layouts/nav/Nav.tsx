@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <nav style={{ width: "256px", backgroundColor: "#25779C" }}>
+    <nav style={{ width: "13vw", backgroundColor: "#25779C" }}>
       {nav.map((data) => (
         <ul key={data.id}>
           <li>
