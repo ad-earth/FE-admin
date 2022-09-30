@@ -32,7 +32,7 @@ const ServiceContainer = () => {
             <CSVLink
               headers={headers}
               data={data}
-              filename="users.csv"
+              filename="order_list.csv"
               target="_blank"
             >
               파일 내려받기
