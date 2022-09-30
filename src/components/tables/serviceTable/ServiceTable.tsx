@@ -51,16 +51,18 @@ const ServiceTable = () => {
   return (
     <table id="orderList">
       <thead>
-        <th>
-          <input
-            type="checkbox"
-            onChange={(e) => handleAllCheck(e.target.checked)}
-            checked={checkItems.length === testData.length ? true : false}
-          />
-        </th>
-        {tHeadList.map((x, idx) => {
-          return <th key={idx}>{x}</th>;
-        })}
+        <tr>
+          <th>
+            <input
+              type="checkbox"
+              onChange={(e) => handleAllCheck(e.target.checked)}
+              checked={checkItems.length === testData.length ? true : false}
+            />
+          </th>
+          {tHeadList.map((x, idx) => {
+            return <th key={idx}>{x}</th>;
+          })}
+        </tr>
       </thead>
       <tbody>
         {testData.map((x) => {
