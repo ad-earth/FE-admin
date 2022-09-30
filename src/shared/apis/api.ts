@@ -1,3 +1,4 @@
-import axiosInstance from "./instance";
+// import axiosInstance from "./instance";
 
-export const getTest = () => axiosInstance.get("");
+// export const getTest = () => axiosInstance.get("");
+import React from "react";

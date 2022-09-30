@@ -1,7 +1,8 @@
 import React from "react";
-
+import useBizMoney from "./useBizMoney";
 const BizMoney = () => {
-  return <div>BizMoney</div>;
+  useBizMoney();
+  return <div></div>;
 };
 
 export default BizMoney;

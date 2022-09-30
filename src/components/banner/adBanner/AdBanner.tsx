@@ -4,7 +4,7 @@ import character from "../../../assets/bannerCharacter.svg";
 
 const AdBanner = () => {
   return (
-    <div id="adBanner">
+    <section id="adBanner">
       <h2 className="title">광고지구로 비즈니스 성장을 이루세요</h2>
       <p className="subtitle">
         CPC 키워드 광고를 통해 잠재적 고객을 찾아 비즈니스 성장을 경험해보세요
@@ -13,7 +13,7 @@ const AdBanner = () => {
         등록해 보세요!
       </p>
       <img src={character} alt="광고지구캐릭터" />
-    </div>
+    </section>
   );
 };
 

@@ -1,14 +1,13 @@
 import React from "react";
 //components
-import AdBanner from "../components/banner/adBanner/AdBanner";
 import SlideBanner from "../components/banner/SlideBanner";
-import AdSummary from "../components/graph/AdSummary";
-import BizMoney from "../components/main/BizMoney";
-import ExposedProd from "../components/main/ExposedProd";
+import AdBanner from "../components/banner/adBanner/AdBanner";
+import BoardContent from "../components/main/boardContent/BoardContent";
 import KeywordRanking from "../components/main/KeywordRanking";
-import LastMonthSales from "../components/main/LastMonthSales";
-import NewOrder from "../components/main/NewOrder";
-import useBizeMoney from "../components/main/useBizMoney";
+import BizMoney from "../components/main/bizMoney/BizMoney";
+import AdSummary from "../components/graph/AdSummary";
+
+// import useBizeMoney from "../components/main/useBizMoney";
 const Main = () => {
   // useBizeMoney();
   return (
@@ -26,16 +25,12 @@ const Main = () => {
         // style={{ flexBasis: `${`calc(100% - 720px)`}`, backgroundColor: "red" }}
       >
         <AdBanner /> {/* 광고 배너 */}
+        <BoardContent />
         <div style={{ display: "flex" }}>
-          <NewOrder /> {/* 신규주문 */}
-          <LastMonthSales /> {/* 전월 매출액 */}
-          <ExposedProd /> {/* 노출상품 수  */}
-        </div>
-        <div style={{ display: "flex" }}>
-          <KeywordRanking /> {/* 키워드랭킹 */}
+          <KeywordRanking />
           <div>
-            <BizMoney /> {/* 비즈머니 */}
-            <AdSummary /> {/* 광고 요약 보고서 */}
+            <BizMoney />
+            <AdSummary />
           </div>
         </div>
       </div>
