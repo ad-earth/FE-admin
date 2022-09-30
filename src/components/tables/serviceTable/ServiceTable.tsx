@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Tooltip from "@mui/material/Tooltip";
 
 import "./_serviceTable.style.scss";
 import { testData } from "./test";
@@ -46,6 +47,7 @@ const ServiceTable = () => {
     "주문일자",
     "배송상태",
   ];
+
   return (
     <table id="orderList">
       <thead>
@@ -74,11 +76,19 @@ const ServiceTable = () => {
               <td>{x.id}</td>
               <td>{x.o_No}</td>
               <td>{x.p_No}</td>
-              <td>{x.p_Name}</td>
+              <td>
+                <Tooltip title={x.p_Name} arrow>
+                  <span>{x.p_Name}</span>
+                </Tooltip>
+              </td>
               <td>{x.p_Cnt}</td>
               <td>{x.u_Id}</td>
               <td>{x.d_Name}</td>
-              <td>{x.d_Address1 + x.d_Address2}</td>
+              <td>
+                <Tooltip title={x.d_Address1 + x.d_Address2} arrow>
+                  <span>{x.d_Address1}</span>
+                </Tooltip>
+              </td>
               <td>{x.d_Phone}</td>
               <td>{x.d_Memo}</td>
               <td>{x.o_Date}</td>
