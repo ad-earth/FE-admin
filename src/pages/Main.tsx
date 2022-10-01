@@ -3,7 +3,7 @@ import React from "react";
 import SlideBanner from "../components/banner/SlideBanner";
 import AdBanner from "../components/banner/adBanner/AdBanner";
 import BoardContent from "../components/main/boardContent/BoardContent";
-import KeywordRanking from "../components/main/KeywordRanking";
+import KeywordRanking from "../components/main/keywordRanking/KeywordRanking";
 import BizMoney from "../components/main/bizMoney/BizMoney";
 import AdSummary from "../components/graph/AdSummary";
 
@@ -11,7 +11,7 @@ import AdSummary from "../components/graph/AdSummary";
 const Main = () => {
   // useBizeMoney();
   return (
-    <section
+    <div
       id="mainWrap"
       style={{
         width: "100%",
@@ -38,7 +38,7 @@ const Main = () => {
         {/* <div style={{ flexBasis: "720px" }}> */}
         <SlideBanner /> {/* 슬라이드 배너 */}
       </div>
-    </section>
+    </div>
   );
 };
 
