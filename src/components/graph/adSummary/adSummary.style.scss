@@ -1,0 +1,19 @@
+@import "../../../styles/colors";
+
+$title: $fc_blue300;
+
+#adSummary {
+  min-width: 490px;
+  width: 490px;
+  background-color: $bg_white;
+  padding: 20px;
+  h3 {
+    color: $title;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  p {
+    color: $fc_blue400;
+    margin-bottom: 20px;
+  }
+}

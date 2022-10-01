@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const SlideBanner = () => {
-  return (
-    <div>SlideBanner</div>
-  )
-}
+  return <div>SlideBanner</div>;
+};
 
-export default SlideBanner
+export default SlideBanner;

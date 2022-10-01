@@ -5,7 +5,7 @@ import AdBanner from "../components/banner/adBanner/AdBanner";
 import BoardContent from "../components/main/boardContent/BoardContent";
 import KeywordRanking from "../components/main/keywordRanking/KeywordRanking";
 import BizMoney from "../components/main/bizMoney/BizMoney";
-import AdSummary from "../components/graph/AdSummary";
+import AdSummary from "../components/graph/adSummary/AdSummary";
 
 // import useBizeMoney from "../components/main/useBizMoney";
 const Main = () => {
@@ -28,7 +28,7 @@ const Main = () => {
         <BoardContent />
         <div style={{ display: "flex" }}>
           <KeywordRanking />
-          <div>
+          <div style={{ flexGrow: "1" }}>
             <BizMoney />
             <AdSummary />
           </div>
