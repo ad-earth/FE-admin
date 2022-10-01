@@ -7,8 +7,8 @@ const Nav = () => {
   return (
     <nav>
       {/* Biz money */}
-      <div className="bizMoney">
-        <BizMoney />
+      <div className="bizMoneyBox">
+        <BizMoney type="nav" />
       </div>
       {/* sideNav */}
       <ul className="asideNav">
@@ -23,7 +23,7 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <button>회원 탈퇴</button>
+      <button className="withdrawal">회원 탈퇴</button>
     </nav>
   );
 };

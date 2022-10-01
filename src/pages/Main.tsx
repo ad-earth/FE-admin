@@ -29,7 +29,7 @@ const Main = () => {
         <div style={{ display: "flex" }}>
           <KeywordRanking />
           <div style={{ flexGrow: "1" }}>
-            <BizMoney />
+            <BizMoney type="home" />
             <AdSummary />
           </div>
         </div>
