@@ -24,7 +24,7 @@ const LoginContainer = () => {
         </div>
         <div className="buttonWrapper row">
           <button onClick={() => navigate("/signup")}>회원가입하기</button>|
-          <button onClick={() => navigate("/find-account")}>
+          <button onClick={() => navigate("/find_account")}>
             아이디 비밀번호 찾기
           </button>
         </div>
