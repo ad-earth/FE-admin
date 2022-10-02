@@ -1,6 +1,6 @@
 @import "../../../styles/colors";
 
-nav {
+#nav {
   width: 15vw;
   background-color: $bg_white;
   position: relative;
@@ -45,8 +45,8 @@ nav {
   }
 }
 .withdrawal {
+  width: 100%;
   position: absolute;
   bottom: 0;
-  width: 100%;
   margin-bottom: 18px;
 }

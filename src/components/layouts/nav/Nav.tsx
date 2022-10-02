@@ -5,7 +5,7 @@ import BizMoney from "../../main/bizMoney/BizMoney";
 
 const Nav = () => {
   return (
-    <nav>
+    <nav id="nav">
       {/* Biz money */}
       <div className="bizMoneyBox">
         <BizMoney type="nav" />

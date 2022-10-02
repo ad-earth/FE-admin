@@ -10,43 +10,59 @@ import AdSummary from "../components/graph/adSummary/AdSummary";
 // import useBizeMoney from "../components/main/useBizMoney";
 const Main = () => {
   // useBizeMoney();
+
   return (
-    <div
-      id="mainWrap"
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        margin: "40px 32px",
-        // backgroundColor: "blue",
-      }}
-    >
-      <div style={{ height: "100%", width: "58%" }}>
-        <AdBanner /> {/* 광고 배너 */}
+    <div id="mainWrap" style={styles.container1}>
+      <div style={styles.container1_left}>
+        <AdBanner />
         <BoardContent />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ flexBasis: "40%" }}>
+        <div style={styles.container2}>
+          <div style={styles.container2_left}>
             <KeywordRanking />
           </div>
-          <div
-            style={{
-              flexBasis: "57%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
+          <div style={styles.container2_right}>
             <BizMoney type="home" />
             <AdSummary />
           </div>
         </div>
       </div>
-      <div style={{ width: "40%" }}>
-        <SlideBanner /> {/* 슬라이드 배너 */}
+      <div style={styles.container1_right}>
+        <SlideBanner />
       </div>
     </div>
   );
+};
+
+const styles = {
+  container1: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "40px 32px",
+  } as React.CSSProperties,
+  container1_left: {
+    width: "58%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  } as React.CSSProperties,
+  container1_right: {
+    width: "40%",
+  } as React.CSSProperties,
+  container2: {
+    display: "flex",
+    justifyContent: "space-between",
+  } as React.CSSProperties,
+  container2_left: {
+    flexBasis: "40%",
+  } as React.CSSProperties,
+  container2_right: {
+    display: "flex",
+    flexBasis: "57%",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  } as React.CSSProperties,
 };
 
 export default Main;
