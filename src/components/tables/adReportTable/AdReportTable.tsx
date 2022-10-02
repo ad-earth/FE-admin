@@ -2,7 +2,6 @@ import "./_adReportTable.style.scss";
 import { testData } from "../../graphs/adChart/test";
 
 const AdReportTable = () => {
-  console.log(testData);
   const tHeadList = [
     "NO",
     "키워드",
