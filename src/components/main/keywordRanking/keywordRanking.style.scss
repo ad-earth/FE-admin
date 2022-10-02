@@ -1,6 +1,6 @@
 @import "../../../styles/colors";
 
-$numberSize: 26px;
+$number_Size: 26px;
 
 @mixin color($font_color, $bg_color) {
   color: $font_color;
@@ -37,9 +37,9 @@ $numberSize: 26px;
 }
 .ranking {
   @include color($fc_blue400, $bg_gray100);
-  width: $numberSize;
-  height: $numberSize;
-  line-height: $numberSize;
+  width: $number_Size;
+  height: $number_Size;
+  line-height: $number_Size;
   display: inline-block;
   text-align: center;
   border-radius: 5px;
