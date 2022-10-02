@@ -16,7 +16,7 @@ interface PropsType {
 }
 const BizMoney = (props: PropsType) => {
   const { type } = props;
-  const [data, setData] = useState(12500);
+  const [data, setData] = useState(2120000);
   const title = type === "home" ? <h3>Biz money</h3> : <h3>내 비즈머니</h3>;
   const subtitle = "비즈머니를 간편하 게 충전하세요";
   const button = type === "home" ? "충전하기" : "충전";

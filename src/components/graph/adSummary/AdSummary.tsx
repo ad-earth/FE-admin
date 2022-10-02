@@ -7,7 +7,7 @@ let seriesData = [
   { name: "매출", data: [35, 41, 150] },
 ];
 let optionData = {
-  chart: { width: 450, height: 260, background: "transparent" },
+  chart: { width: 400, background: "transparent" },
   colors: ["#4e60ff", "#009667"],
   plotOptions: {
     bar: {
@@ -27,14 +27,15 @@ const AdSummary = () => {
     <section id="adSummary">
       <h3>광고 요약 보고서</h3>
       <p>최근 3개월 광고비/매출</p>
-
-      <ReactApexChart
-        series={series}
-        options={options}
-        type="bar"
-        width={450}
-        height={260}
-      />
+      <div className="adChart">
+        <ReactApexChart
+          series={series}
+          options={options}
+          type="bar"
+          width={400}
+          height={220}
+        />
+      </div>
     </section>
   );
 };
