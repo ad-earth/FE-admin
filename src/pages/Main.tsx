@@ -5,7 +5,7 @@ import AdBanner from "../components/banner/adBanner/AdBanner";
 import BoardContent from "../components/main/boardContent/BoardContent";
 import KeywordRanking from "../components/main/keywordRanking/KeywordRanking";
 import BizMoney from "../components/main/bizMoney/BizMoney";
-import AdSummary from "../components/graph/adSummary/AdSummary";
+import AdSummary from "../components/graphs/adSummary/AdSummary";
 
 // import useBizeMoney from "../components/main/useBizMoney";
 const Main = () => {
