@@ -22,20 +22,20 @@ let optionData = {
 };
 
 const AdSummary = () => {
+  const [series, srtSeries] = useState(seriesData);
+  const [options, setOptions] = useState(optionData);
+  
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   useEffect(() => {
     const handelResize = () => setWindowSize(window.innerWidth);
     window.addEventListener("resize", handelResize);
     return () => window.removeEventListener("resize", handelResize);
   }, [windowSize]);
-  console.log(windowSize);
-  const [series, srtSeries] = useState(seriesData);
-  const [options, setOptions] = useState(optionData);
+
   return (
     <section id="adSummary">
       <h3>광고 요약 보고서</h3>
       <p>최근 3개월 광고비/매출</p>
-
       <div className="adChart">
         <ReactApexChart
           series={series}
