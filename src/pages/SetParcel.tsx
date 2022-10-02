@@ -1,7 +1,11 @@
-import React from "react";
+import ServiceContainer from "../components/setParcel/serviceContainer/ServiceContainer";
 
 const SetParcel = () => {
-  return <div>SetParcel</div>;
+  return (
+    <div>
+      <ServiceContainer />
+    </div>
+  );
 };
 
 export default SetParcel;
