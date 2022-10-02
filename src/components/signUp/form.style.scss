@@ -1,0 +1,10 @@
+@import "../../styles/colors";
+
+#signUpForm {
+  .success {
+    color: $fc_green;
+  }
+  .error {
+    color: $fc_red;
+  }
+}

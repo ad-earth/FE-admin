@@ -1,25 +1,29 @@
 import React from "react";
 import "./nav.style.scss";
 import { NavLink } from "react-router-dom";
+import BizMoney from "../../main/BizMoney";
 
 const Nav = () => {
   return (
-    <nav style={{ width: "13vw", backgroundColor: "#25779C" }}>
-      {nav.map((data) => (
-        <ul key={data.id}>
-          <li>
+    <nav>
+      {/* Biz money */}
+      <div className="bizMoney">
+        <BizMoney />
+      </div>
+      {/* sideNav */}
+      <ul className="asideNav">
+        {nav.map((link) => (
+          <li key={link.id}>
             <NavLink
-              to={data.path}
-              style={({ isActive }) => ({
-                color: `${isActive ? "red" : "blue"}`,
-              })}
-              className="navLink"
+              to={link.path}
+              className={({ isActive }) => (isActive ? "isActive" : "inactive")}
             >
-              {data.name}
+              {link.name}
             </NavLink>
           </li>
-        </ul>
-      ))}
+        ))}
+      </ul>
+      <button>회원 탈퇴</button>
     </nav>
   );
 };
@@ -29,8 +33,8 @@ const nav = [
   { id: 3, name: "배송 관리", path: "/shipping_service" },
   { id: 4, name: "상품 보고서", path: "/prod_report" },
   { id: 5, name: "광고 등록", path: "/ProdReport" },
-  { id: 5, name: "광고 관리", path: "/PostAd" },
-  { id: 5, name: "광고 보고서", path: "/ad_report" },
+  { id: 6, name: "광고 관리", path: "/PostAd" },
+  { id: 7, name: "광고 보고서", path: "/ad_report" },
 ];
 
 export default Nav;
