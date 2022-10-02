@@ -5,8 +5,8 @@
   height: $h;
 }
 $fc: $fc_blue300;
+
 input {
-  @include size(335px, 60px);
   padding: 19px 20px;
   border: 1px solid $lc_gray400;
   border-radius: 8px;
@@ -16,5 +16,24 @@ input {
   }
   &:focus {
     outline: none;
+  }
+  &.login {
+    @include size(335px, 60px);
+  }
+  &.input100 {
+    text-align: center;
+    @include size(100px, 40px);
+  }
+  &.input200 {
+    @include size(200px, 40px);
+  }
+  &.input250 {
+    @include size(250px, 40px);
+  }
+  &.input290 {
+    @include size(290px, 40px);
+  }
+  &.input500 {
+    @include size(500px, 40px);
   }
 }
