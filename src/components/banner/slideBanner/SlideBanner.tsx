@@ -1,8 +1,8 @@
 import React from "react";
-import "./slideBanner.style.scss";
+import styles from "./slideBanner.module.scss";
 
 const SlideBanner = () => {
-  return <section id="slideBanner">SlideBanner</section>;
+  return <section id={styles.slideBanner}>SlideBanner</section>;
 };
 
 export default SlideBanner;
