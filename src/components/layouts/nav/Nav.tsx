@@ -1,29 +1,31 @@
 import React from "react";
-import "./nav.style.scss";
+import styles from "./nav.module.scss";
 import { NavLink } from "react-router-dom";
 import BizMoney from "../../main/bizMoney/BizMoney";
 
 const Nav = () => {
   return (
-    <nav id="nav">
+    <nav id={styles.nav}>
       {/* Biz money */}
-      <div className="bizMoneyBox">
+      <div className={styles.bizMoneyBox}>
         <BizMoney type="nav" />
       </div>
       {/* sideNav */}
-      <ul className="asideNav">
+      <ul className={styles.asideNav}>
         {nav.map((link) => (
           <li key={link.id}>
             <NavLink
               to={link.path}
-              className={({ isActive }) => (isActive ? "isActive" : "inactive")}
+              className={({ isActive }) =>
+                isActive ? `${styles.isActive}` : `${styles.inactive}`
+              }
             >
               {link.name}
             </NavLink>
           </li>
         ))}
       </ul>
-      <button className="withdrawal">회원 탈퇴</button>
+      <button className={styles.withdrawal}>회원 탈퇴</button>
     </nav>
   );
 };
