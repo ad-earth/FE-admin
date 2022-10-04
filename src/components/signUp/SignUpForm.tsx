@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./signUpForm.style.scss";
+import styles from "./signUpForm.module.scss";
 import useInput from "./useInput";
 import useSignUpForm from "./useSignUpForm";
 import { StateType, FormData } from "./signUpForm.type";
@@ -49,7 +49,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <form id="signUpForm" onSubmit={handleSubmit}>
+    <form id={styles.signUpForm} onSubmit={handleSubmit}>
       {/* 아이디 */}
       <input
         type="text"
@@ -58,7 +58,11 @@ const SignUpForm = () => {
         name="id"
         onChange={onChange}
       />
-      <span className={`${id.isCheck ? "success" : "error"}`}>{id.msg}</span>
+      <span
+        className={`${id.isCheck ? `${styles.success}` : `${styles.error}`}`}
+      >
+        {id.msg}
+      </span>
       <>
         {/* 비밀번호 */}
         <input
@@ -69,7 +73,9 @@ const SignUpForm = () => {
           name="pwd"
           onChange={onChange}
         />
-        <span className={`${pwd.isCheck ? "success" : "error"}`}>
+        <span
+          className={`${pwd.isCheck ? `${styles.success}` : `${styles.error}`}`}
+        >
           {pwd.msg}
         </span>
         {/* 비밀번호 확인 */}
@@ -81,7 +87,11 @@ const SignUpForm = () => {
           name="pwdCheck"
           onChange={onChange}
         />
-        <span className={`${pCheck.isCheck ? "success" : "error"}`}>
+        <span
+          className={`${
+            pCheck.isCheck ? `${styles.success}` : `${styles.error}`
+          }`}
+        >
           {pCheck.msg}
         </span>
       </>
@@ -103,7 +113,11 @@ const SignUpForm = () => {
           name="buisness"
           onChange={onChange}
         />
-        <span className={`${buisness.isCheck ? "success" : "error"}`}>
+        <span
+          className={`${
+            buisness.isCheck ? `${styles.success}` : `${styles.error}`
+          }`}
+        >
           {buisness.msg}
         </span>
       </>
@@ -115,7 +129,9 @@ const SignUpForm = () => {
         name="phone"
         onChange={onChange}
       />
-      <span className={`${phone.isCheck ? "success" : "error"}`}>
+      <span
+        className={`${phone.isCheck ? `${styles.success}` : `${styles.error}`}`}
+      >
         {phone.msg}
       </span>
       <input
@@ -140,7 +156,7 @@ const SignUpForm = () => {
 function Find() {
   const navigate = useNavigate();
   return (
-    <p className="findeWrap">
+    <p className={styles.findeWrap}>
       이미 계정이 있으신가요?
       <span onClick={() => navigate(`/`)}>로그인</span>
     </p>
