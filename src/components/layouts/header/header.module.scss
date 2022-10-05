@@ -10,6 +10,8 @@ header {
   width: 100%;
   height: $height_size;
   line-height: $height_size;
+  position: fixed;
+  z-index: 9999;
   background-color: $bg_white;
   border-bottom: 1px solid $lc_gray400;
   img {

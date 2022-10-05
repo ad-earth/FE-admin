@@ -1,9 +1,10 @@
 @import "../../../styles/colors";
 
 #nav {
-  width: 13vw;
+  width: 13%;
+  position: fixed;
+  height: calc(100vh - 80px);
   background-color: $bg_white;
-  position: relative;
 }
 //bizMoney
 .bizMoneyBox {

@@ -12,7 +12,9 @@ const DefaultLayout = () => {
       <Header />
       <main>
         <Nav />
-        <Outlet />
+        <div className={styles.mainWrap}>
+          <Outlet />
+        </div>
       </main>
     </div>
   );

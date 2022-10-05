@@ -16,7 +16,6 @@ const Main = () => {
 
 const styles = {
   container1: {
-    width: "100%",
     display: "flex",
     justifyContent: "space-between",
     margin: "40px 32px",
