@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import "./keywordRanking.style.scss";
+import styles from "./keywordRanking.module.scss";
+import useKeywordRanking from "./useKeywordRanking";
 
 const KeywordRanking = () => {
-  let list = ["ss", "d", "sd", "sd", "sd", "ss", "sd", "ss", "ss", "ss"];
-  const [rankingList, setRankingList] = useState<string[]>([]);
+  const data: string[] = useKeywordRanking();
 
-  const menuList = list.map((menu, index) => (
+  const rankingList = data?.map((list, index) => (
     <li key={index}>
-      <span className="ranking">{index + 1}</span>
-      {menu}
+      <span className={styles.ranking}>{index + 1}</span>
+      {list}
     </li>
   ));
 
   return (
-    <section id="KeywordRanking">
+    <section id={styles.KeywordRanking}>
       <h3>광고 키워드 순위</h3>
-      <ul>{menuList}</ul>
+      <ul>{rankingList}</ul>
     </section>
   );
 };
