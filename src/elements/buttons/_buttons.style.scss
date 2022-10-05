@@ -1,0 +1,19 @@
+@import "../../styles/colors";
+
+button {
+  border: none;
+  &.login {
+    width: 335px;
+    height: 52px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: $fc_white;
+    &.blue {
+      background: $bg_blue100;
+    }
+    &.jigu {
+      background: $bg_gray200;
+      color: $fc_blue400;
+    }
+  }
+}

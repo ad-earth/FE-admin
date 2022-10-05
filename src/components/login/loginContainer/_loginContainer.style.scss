@@ -22,6 +22,7 @@
     flex-direction: column;
     .loginTitle {
       color: $fc_blue300;
+      margin-top: 25px;
       font: {
         size: 24px;
         weight: 500;
@@ -35,11 +36,13 @@
     }
     .errorMsg {
       color: $fc_red;
+      margin-top: 25px;
     }
     .buttonWrapper {
       @include center;
       flex-direction: column;
       gap: 16px;
+      margin-top: 16px;
       &.row {
         flex-direction: row;
         margin-top: 32px;
