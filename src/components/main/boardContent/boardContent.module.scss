@@ -1,0 +1,52 @@
+@import "../../../styles/";
+
+#board {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  article {
+    display: flex;
+    flex-basis: 32%;
+    border-radius: 5px;
+    background-color: $bg_white;
+    padding: 20px;
+  }
+}
+
+.iconBox {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  img {
+    width: 26px;
+    height: 26px;
+    margin: auto;
+  }
+}
+.newOrder {
+  background-color: #5ca8b3;
+}
+.lastMonth {
+  background-color: #ffbb5c;
+}
+.exposedProd {
+  background-color: #9ca4ff;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  span {
+    font-size: 22px;
+    font-weight: bold;
+    padding-top: 2px;
+  }
+}

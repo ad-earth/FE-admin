@@ -1,25 +1,26 @@
 @import "../../../styles//colors";
 
 #adBanner {
-  min-width: 850px;
-  height: 156px;
+  width: 100%;
   background-color: #007dff;
   border-radius: 5px;
   padding: 24px 20px;
   position: relative;
   color: $fc_white;
+  margin-bottom: 20px;
   img {
+    width: 146px;
     position: absolute;
-    right: 57px;
+    right: 30px;
     bottom: 0;
   }
 }
 .title {
-  font-style: 24px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 500;
 }
-.subtitle {
+.subText {
   font-size: 16px;
   font-weight: 300;
-  margin-top: 6px;
+  margin-top: 8px;
 }
