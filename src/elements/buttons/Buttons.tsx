@@ -17,22 +17,22 @@ export const LoginJiguButton = () => {
   );
 };
 
-export const SecondBlueBtn = (props: PropsType) => {
+export const MediumBlueBtn = (props: PropsType) => {
   return <button className="second blue">{props.children}</button>;
 };
-export const SecondWhiteBtn = (props: PropsType) => {
+export const MediumWhiteBtn = (props: PropsType) => {
   return <button className="second white">{props.children}</button>;
 };
-export const ThirdBlueBtn = (props: PropsType) => {
+export const SmallBlueBtn = (props: PropsType) => {
   return <button className="third blue">{props.children}</button>;
 };
-export const ThirdWhiteBtn = (props: PropsType) => {
+export const SmallWhiteBtn = (props: PropsType) => {
   return <button className="third white">{props.children}</button>;
 };
-export const ForthBtn = (props: PropsType) => {
+export const SmallGrayBtn = (props: PropsType) => {
   return <button className="forth">{props.children}</button>;
 };
-export const FifthDownBtn = (props: PropsType) => {
+export const ProdDownBtn = (props: PropsType) => {
   return (
     <button className="fifth download">
       <Download style={{ marginRight: "7px" }} />
@@ -40,7 +40,7 @@ export const FifthDownBtn = (props: PropsType) => {
     </button>
   );
 };
-export const FifthDelBtn = (props: PropsType) => {
+export const ProdDelBtn = (props: PropsType) => {
   return (
     <button className="fifth delete">
       <Del style={{ marginRight: "5px" }} />
@@ -49,15 +49,15 @@ export const FifthDelBtn = (props: PropsType) => {
   );
 };
 
-export const SixthBtn = (props: PropsType) => {
+export const ChargeBtn = (props: PropsType) => {
   return <button className="sixth">{props.children}</button>;
 };
-export const SeventhCancelBtn = (props: PropsType) => {
+export const ModalCancelBtn = (props: PropsType) => {
   return <button className="seventh cancel">{props.children}</button>;
 };
-export const SeventhDelBtn = (props: PropsType) => {
+export const ModalDelBtn = (props: PropsType) => {
   return <button className="seventh del">{props.children}</button>;
 };
-export const EightBtn = (props: PropsType) => {
+export const ConfirmBtn = (props: PropsType) => {
   return <button className="eight">{props.children}</button>;
 };
