@@ -31,7 +31,7 @@ const Nav = () => {
 };
 const nav = [
   { id: 1, name: "메인", path: "/home" },
-  { id: 2, name: "상품 관리", path: "/postProd" },
+  { id: 2, name: "상품 관리", path: "/setProd" },
   { id: 3, name: "배송 관리", path: "/shipping_service" },
   { id: 4, name: "상품 보고서", path: "/prod_report" },
   { id: 5, name: "광고 등록", path: "/ProdReport" },
