@@ -31,8 +31,10 @@
     margin-top: 24px;
   }
   .buttonWrapper {
+    width: 460px;
     @include center;
     flex-direction: column;
+    margin-top: 16px;
     &.row {
       flex-direction: row;
       margin-top: 32px;
