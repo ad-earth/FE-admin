@@ -75,4 +75,29 @@ button {
     color: $fc_white;
     background: $bg_blue200;
   }
+  &.seventh {
+    height: 40px;
+    font-size: 14px;
+    border-top: 1px solid $lc_blue400;
+    &.cancel {
+      width: 129px;
+      background: $bg_white;
+      color: $fc_blue400;
+    }
+    &.del {
+      width: 125px;
+      background: $bg_blue400;
+      color: $fc_white;
+      border-radius: 0 0 5px 0;
+    }
+  }
+  &.eight {
+    width: 264px;
+    height: 40px;
+    border-radius: 5px;
+    border-top: 1px solid $lc_gray400;
+    font-size: 14px;
+    color: $fc_blue400;
+    background: $bg_white;
+  }
 }

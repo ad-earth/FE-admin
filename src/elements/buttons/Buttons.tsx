@@ -52,3 +52,12 @@ export const FifthDelBtn = (props: PropsType) => {
 export const SixthBtn = (props: PropsType) => {
   return <button className="sixth">{props.children}</button>;
 };
+export const SeventhCancelBtn = (props: PropsType) => {
+  return <button className="seventh cancel">{props.children}</button>;
+};
+export const SeventhDelBtn = (props: PropsType) => {
+  return <button className="seventh del">{props.children}</button>;
+};
+export const EightBtn = (props: PropsType) => {
+  return <button className="eight">{props.children}</button>;
+};
