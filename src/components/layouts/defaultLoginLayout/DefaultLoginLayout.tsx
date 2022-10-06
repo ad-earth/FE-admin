@@ -1,15 +1,15 @@
 import React from "react";
-import "./defaultLoginLayout.style.scss";
+import styles from "./defaultLoginLayout.module.scss";
 import { Outlet } from "react-router-dom";
 
 const LoginLayout = () => {
   return (
-    <div id="LoginLayout">
+    <div id={styles.LoginLayout}>
       <main>
-        <div className="mainWrap">
+        <div className={styles.mainWrap}>
           <Outlet />
         </div>
-        <div className="slideBannerWrap">슬라이드</div>
+        <div className={styles.slideBannerWrap}>슬라이드</div>
       </main>
     </div>
   );
