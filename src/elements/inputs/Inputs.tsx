@@ -9,6 +9,10 @@ const LoginInput = (props: PropsType) => {
       className="login"
       placeholder={props.placeholder}
       type={props.type}
+      onChange={(e) => {
+        props.setId && props.setId(e.target.value);
+        props.setPwd && props.setPwd(e.target.value);
+      }}
     />
   );
 };
