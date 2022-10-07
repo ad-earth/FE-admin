@@ -2,7 +2,11 @@ import { PropsType } from "./buttons.type";
 import "./_buttons.style.scss";
 
 export const LoginBlueButton = (props: PropsType) => {
-  return <button className="login blue">{props.children}</button>;
+  return (
+    <button className="login blue" {...props}>
+      {props.children}
+    </button>
+  );
 };
 export const LoginJiguButton = () => {
   return (
