@@ -11,7 +11,7 @@ axiosInstance.interceptors.request.use(
     if (!config.headers) config.headers = {};
     config.headers["Content-Type"] = "application/json; charset=utf-8";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
-    config.headers["Authorization"] = process.env.REACT_APP_TEST_TOKEN;
+    config.headers["Authorization"] = localStorage.getItem("token");
     config.headers.Accept = "application/json";
     return config;
   },

@@ -3,12 +3,29 @@ import "./_inputs.style.scss";
 
 // w 335px, h 60px
 // 로그인 & 계정찾기 & 회원가입
-const LoginInput = (props: PropsType) => {
+export const LoginInput = (props: PropsType) => {
   return (
     <input
       className="login"
       placeholder={props.placeholder}
-      type={props.type}
+      type="text"
+      value={props.value}
+      onChange={(e) => {
+        props.setInput && props.setInput(e.target.value);
+      }}
+    />
+  );
+};
+export const PwdInput = (props: PropsType) => {
+  return (
+    <input
+      className="login"
+      placeholder={props.placeholder}
+      type="password"
+      value={props.value}
+      onChange={(e) => {
+        props.setInput && props.setInput(e.target.value);
+      }}
     />
   );
 };
@@ -44,5 +61,3 @@ export const Input290 = () => {
 export const Input500 = () => {
   return <input className="input500" placeholder="상품명" type="text" />;
 };
-
-export default LoginInput;

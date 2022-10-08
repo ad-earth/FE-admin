@@ -4,7 +4,11 @@ import { ReactComponent as Download } from "../../assets/lcon/download.svg";
 import { ReactComponent as Del } from "../../assets/lcon/del.svg";
 
 export const LoginBlueButton = (props: PropsType) => {
-  return <button className="login blue">{props.children}</button>;
+  return (
+    <button className="login blue" {...props}>
+      {props.children}
+    </button>
+  );
 };
 export const LoginJiguButton = () => {
   return (

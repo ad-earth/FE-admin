@@ -16,6 +16,7 @@
 .container {
   @include size(50vw, 100vh);
   @include center;
+  background: $bg_white;
   .loginWrapper {
     width: 35vw;
     @include center;

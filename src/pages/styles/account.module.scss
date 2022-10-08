@@ -1,4 +1,4 @@
-@import "../../../styles/colors";
+@import "../../styles/colors";
 
 @mixin size($w, $h) {
   width: $w;
@@ -15,6 +15,7 @@
 
 .container {
   @include size(50vw, 100vh);
+  @include center;
   background: $bg_white;
   .accountWrapper {
     width: 460px;

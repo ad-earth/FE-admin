@@ -1,0 +1,39 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 460px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 40px;
+  .inputWrapper {
+    width: 460px;
+    @include center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .msg {
+    text-align: center;
+    color: $fc_green;
+    margin-top: 24px;
+    &.error {
+      color: $fc_red;
+    }
+  }
+  .buttonWrapper {
+    width: 460px;
+    @include center;
+    flex-direction: column;
+    margin-top: 16px;
+  }
+}
