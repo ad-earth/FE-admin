@@ -1,0 +1,23 @@
+@import "../../styles/colors";
+
+.formControl {
+  width: 200px;
+  height: 40px;
+  border-color: $lc_gray400;
+}
+.select {
+  color: $bg_blue400;
+}
+.menuItem {
+  color: $bg_blue400;
+  font-size: 14px;
+  font-weight: 400;
+  .Mui-selected {
+    background-color: $bg_gray100;
+  }
+}
+.smallFormControl {
+  width: 200px;
+  height: 40px;
+  border-color: $lc_gray400;
+}
