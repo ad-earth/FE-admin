@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 //query
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -19,6 +18,8 @@ import PostAd from "./pages/PostAd";
 import SetAd from "./pages/SetAd";
 import AdReport from "./pages/AdReport";
 import NotFound from "./pages/NotFound";
+//loading indicator
+import Loading from "./elements/Loading";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
+        <Loading />
         <Routes>
           <Route path="/" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
