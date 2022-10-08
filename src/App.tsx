@@ -24,7 +24,7 @@ import Loading from "./elements/Loading";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity,
+      retry: 2,
     },
   },
 });

@@ -10,6 +10,8 @@ header {
   width: 100%;
   height: $height_size;
   line-height: $height_size;
+  position: fixed;
+  z-index: 9999;
   background-color: $bg_white;
   border-bottom: 1px solid $lc_gray400;
   img {
@@ -17,11 +19,11 @@ header {
     margin: calc((#{$height_size} - 35px) / 2) 53px;
   }
 }
-.right,
-.right button {
+.headerRight,
+.headerRight button {
   margin-right: 40px;
 }
-.right {
+.headerRight {
   float: right;
   span {
     @extend %cursor_pointer;

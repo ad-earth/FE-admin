@@ -11,11 +11,6 @@ export const PwdCheck = (pwd: string) => {
   return reg.test(pwd);
 };
 
-//-- 사업자번호 정규식 --
-export const BuisnessCheck = (buisness: string) => {
-  let reg = /[0-9]{1,10}$/;
-  return reg.test(buisness);
-};
 //-- 연락처 정규식 --
 export const PhoneCheck = (phone: string) => {
   let reg = /^01([0|1|6|7|8|9])?([0-9]{3,4})?([0-9]{4})$/;

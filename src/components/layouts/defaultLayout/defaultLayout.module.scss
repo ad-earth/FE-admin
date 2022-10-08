@@ -1,0 +1,14 @@
+#DefaultLayout {
+  position: relative;
+  height: 100%;
+  main {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+  }
+}
+.mainWrap {
+  width: 87%;
+  float: right;
+}
