@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./loginContainer.module.scss";
 import logo from "../../../assets/logo/logo.svg";
-import LoginInput from "../../../elements/inputs/Inputs";
+import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import {
   LoginBlueButton,
   LoginJiguButton,
@@ -40,8 +40,8 @@ const LoginContainer = () => {
         <img src={logo} className={styles.logo} />
         <p className={styles.loginTitle}>사업자 로그인</p>
         <div className={styles.inputWrapper}>
-          <LoginInput placeholder="아이디" type="text" setId={setId} />
-          <LoginInput placeholder="비밀번호" type="password" setPwd={setPwd} />
+          <LoginInput placeholder="아이디" type="text" setInput={setId} />
+          <PwdInput placeholder="비밀번호" setInput={setPwd} />
         </div>
         {validation === 1 && (
           <p className={styles.errorMsg}>
