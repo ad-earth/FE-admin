@@ -4,7 +4,7 @@ import { CSVLink } from "react-csv";
 import ServiceTable from "../../tables/serviceTable/ServiceTable";
 import SearchBar from "../searchBar/SearchBar";
 import { useExcel } from "./useExcel";
-import "./_serviceContainer.style.scss";
+import styles from "./serviceContainer.module.scss";
 
 const ServiceContainer = () => {
   const data = useExcel();
@@ -23,10 +23,9 @@ const ServiceContainer = () => {
   ];
   return (
     <div>
-      <h1>배송관리</h1>
-      <div className="tableContainer">
+      <div className={styles.tableContainer}>
         <SearchBar />
-        <div className="buttonWrapper">
+        <div className={styles.buttonWrapper}>
           <button>주문확정</button>
           <button>
             <CSVLink
@@ -40,7 +39,7 @@ const ServiceContainer = () => {
           </button>
         </div>
         <ServiceTable />
-        <div className="pagination">
+        <div className={styles.pagination}>
           <Pagination count={10} />
         </div>
       </div>
