@@ -6,45 +6,31 @@
 }
 @mixin center {
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .formContainer {
   @include size(460px, 383px);
+  @include center;
   border: {
     width: 0px 1px 1px 1px;
     style: solid;
     color: $lc_blue100;
     radius: 0px 5px 5px 5px;
   }
-  .inputWrapper {
-    width: 460px;
-    @include center;
-    flex-direction: column;
-    padding-top: 40px;
-    gap: 16px;
-  }
-  .errorMsg {
-    text-align: center;
-    color: $fc_red;
-    margin-top: 24px;
-  }
   .buttonWrapper {
     width: 460px;
     @include center;
-    flex-direction: column;
-    margin-top: 16px;
-    &.row {
-      flex-direction: row;
-      margin-top: 32px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-direction: row;
+    color: $fc_gray500;
+    button {
+      border: none;
+      background: none;
       color: $fc_gray500;
-      button {
-        border: none;
-        background: none;
-        color: $fc_gray500;
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
   }
 }
