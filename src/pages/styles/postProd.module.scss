@@ -6,7 +6,18 @@
 }
 
 .container {
-  @include size(1600px, 1566px);
-  background-color: $bg_white;
-  margin: 109px auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 24px 0 40px 32px;
+  }
+  .contentWrapper {
+    @include size(1600px, auto);
+    background-color: $bg_white;
+    margin: auto;
+    padding: 60px;
+  }
 }
