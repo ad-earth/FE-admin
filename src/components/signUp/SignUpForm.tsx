@@ -28,7 +28,6 @@ const SignUpForm = () => {
   useEffect(() => {
     state && setData(state);
   }, [state]);
-  console.log(state);
 
   // //버튼 비활성 조건
   // const disabled = ;
@@ -124,7 +123,7 @@ const SignUpForm = () => {
       {/* 연락처 */}
       <input
         type="tel"
-        placeholder="연락처  예) 0100000000"
+        placeholder="연락처  예) 010-0000-0000"
         value={phone.val}
         name="phone"
         onChange={onChange}
