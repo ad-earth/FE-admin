@@ -7,7 +7,7 @@ const KeywordRanking = () => {
   const rankingList = data?.map((list, index) => (
     <li key={index}>
       <span className={styles.ranking}>{index + 1}</span>
-      {list}
+      {list !== "null" ? list : "-"}
     </li>
   ));
 
