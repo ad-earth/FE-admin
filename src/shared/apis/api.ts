@@ -1,4 +1,3 @@
-import { idText } from "typescript";
 import axiosInstance from "./instance";
 
 // 로그인
@@ -45,19 +44,19 @@ export const postSingUp = (
 
 //메인
 export const getBords = (queryFnName: string) =>
-  axiosInstance.get(`/${queryFnName}`);
-//   axiosInstance.get(`/admin-main/${queryFnName}`);
-export const getKeyword = () => axiosInstance.get(`/popular-keywords`);
-// axiosInstance.get(`/admin-main/popular-keywords`);
-export const getAdSummary = () => axiosInstance.get(`/expense-reports`);
-// axiosInstance.get(`/admin-main/expense-reports`);
+  axiosInstance.get(`/admin-main/${queryFnName}`);
+export const getKeyword = () =>
+  axiosInstance.get(`/admin-main/popular-keywords`);
+export const getAdSummary = () =>
+  axiosInstance.get(`/admin-main/expense-reports`);
+export const getBiz = () => axiosInstance.get(`/admin-main/charge`);
+export const putBiz = () => axiosInstance.put(`/admin-main/charge`);
 
 //상품관리
 export const getProducts = (category: string, page: number) =>
   axiosInstance.get(
     `/admin-products?p_Category=${category}&page=${page}&maxpost=10`
   );
-// axiosInstance.get(`/admin-products?p_Category=”욕실”&page=1&maxpost=10`);
 export const delProducts = (item: number[]) =>
   axiosInstance.delete(`/admin-products`, { data: { p_No: item } });
 export const putProducts = (p_No: number) =>
