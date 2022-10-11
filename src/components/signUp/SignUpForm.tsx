@@ -46,6 +46,7 @@ const SignUpForm = () => {
         navigate({
           pathname: "/",
         });
+        setDispatch({ type: "reset" });
       },
       //회원가입 err errorMessage 확인
       onError: (error) => {
@@ -60,7 +61,6 @@ const SignUpForm = () => {
         } else return;
       },
     });
-    setDispatch({ type: "reset" });
   };
 
   return (
