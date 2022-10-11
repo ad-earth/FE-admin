@@ -44,14 +44,7 @@ export const SmallWhiteBtn = (props: PropsType) => {
 export const SmallGrayBtn = (props: PropsType) => {
   return <button className="forth">{props.children}</button>;
 };
-export const ProdDownBtn = (props: PropsType) => {
-  return (
-    <button className="fifth download">
-      <Download style={{ marginRight: "7px" }} />
-      파일 내려받기
-    </button>
-  );
-};
+
 export const ProdDelBtn = (props: PropsType) => {
   return (
     <button className="fifth delete">

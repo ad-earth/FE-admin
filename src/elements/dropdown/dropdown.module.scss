@@ -1,23 +1,25 @@
 @import "../../styles/colors";
 
-.formControl {
-  width: 200px;
-  height: 40px;
-  border-color: $lc_gray400;
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
 }
+
 .select {
-  color: $bg_blue400;
-}
-.menuItem {
-  color: $bg_blue400;
-  font-size: 14px;
-  font-weight: 400;
-  .Mui-selected {
-    background-color: $bg_gray100;
+  @include size(200px, 40px);
+  color: $fc_blue400;
+  border-color: $lc_gray400;
+  border-radius: 5px;
+  .menuItem {
+    color: $fc_blue400;
+    font-size: 14px;
+    font-weight: 400;
+    .Mui-selected {
+      background-color: $bg_gray100;
+    }
   }
 }
-.smallFormControl {
-  width: 200px;
-  height: 40px;
+.smallSelect {
+  @include size(70px, 30px);
   border-color: $lc_gray400;
 }
