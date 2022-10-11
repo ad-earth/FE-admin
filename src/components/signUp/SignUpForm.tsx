@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./signUpForm.module.scss";
-import useInput from "./useInput";
-import useSignUpForm from "./useSignUpForm";
-import { StateType, FormData } from "./signUpForm.type";
+import { useEffect, useState, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+//hook
+import { useInputReducer } from "./useInputReducer";
+import { useSignUp } from "./useSignUpForm";
+//type
+import { FormData } from "./signUpForm.type";
+//elements
+import { SingUpPwdInput, SingUpInput } from "../../elements/inputs/Inputs";
+import { SignUpBlueButton } from "../../elements/buttons/Buttons";
+//default state data (id,pwd... )
+import { initialValue } from "./initialValue";
 
 const SignUpForm = () => {
+  //로그인 후 페이지 이동
   const navigate = useNavigate();
-  const mutation = useSignUpForm();
-  //실시간 유효성 검사 hook
-  const [state, onChange] = useInput();
-  const [{ id, pwd, pCheck, brand, buisness, phone }, setData] =
-    useState<StateType>(state);
+  // userInput Data
+  const [state, setDispatch] = useReducer(useInputReducer, initialValue);
+  const { id, pwd, pCheck, brand, buisness, phone } = state;
+  //post form data
   const [formData, setFormData] = useState<FormData>();
-
+  // 회원가입 hook
+  const { mutate } = useSignUp();
+  //실시간 유효성 검사  (dispatch)
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDispatch({ type: e.target.name, payload: e.target.value });
+  };
   useEffect(() => {
     state &&
       setFormData({
@@ -25,34 +37,38 @@ const SignUpForm = () => {
       });
   }, [id.val, pwd.val, brand.val, buisness.val, phone.val]);
 
-  useEffect(() => {
-    state && setData(state);
-  }, [state]);
-
   // //버튼 비활성 조건
-  // const disabled = ;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    window.alert("데이터 넘기기");
-    console.log(formData);
-    mutation.mutate(formData, {
+    mutate(formData, {
+      //회원가입 성공시 페이지 이동
       onSuccess: () => {
         navigate({
           pathname: "/",
         });
       },
-      onError: () => {
-        console.log("onError");
+      //회원가입 err errorMessage 확인
+      onError: (error) => {
+        const errMsg = error.response.data.errorMessage;
+        //에러 핸들링
+        if (errMsg === "중복된 연락처입니다.") {
+          setDispatch({ type: "phone", payload: "err" });
+        } else if (errMsg === "중복된 아이디입니다.") {
+          setDispatch({ type: "id", payload: "err" });
+        } else if (errMsg === "중복된 사업자번호입니다.") {
+          setDispatch({ type: "buisness", payload: "err" });
+        } else return;
       },
     });
+    setDispatch({ type: "reset" });
   };
 
   return (
     <form id={styles.signUpForm} onSubmit={handleSubmit}>
       {/* 아이디 */}
-      <input
+      <SingUpInput
         type="text"
-        placeholder="아이디 (5~10자)"
+        placeholder="아이디 (영문,숫자 5~10자)"
         value={id.val}
         name="id"
         onChange={onChange}
@@ -62,64 +78,56 @@ const SignUpForm = () => {
       >
         {id.msg}
       </span>
-      <>
-        {/* 비밀번호 */}
-        <input
-          type="password"
-          placeholder="비밀번호 (영문,숫자,특수문자 포함(8~20자)"
-          value={pwd.val}
-          autoComplete="false"
-          name="pwd"
-          onChange={onChange}
-        />
-        <span
-          className={`${pwd.isCheck ? `${styles.success}` : `${styles.error}`}`}
-        >
-          {pwd.msg}
-        </span>
-        {/* 비밀번호 확인 */}
-        <input
-          type="password"
-          placeholder="비밀번호 확인"
-          value={pCheck.val}
-          autoComplete="false"
-          name="pwdCheck"
-          onChange={onChange}
-        />
-        <span
-          className={`${
-            pCheck.isCheck ? `${styles.success}` : `${styles.error}`
-          }`}
-        >
-          {pCheck.msg}
-        </span>
-      </>
-      <br />
-      <>
-        {/* 상호명 */}
-        <input
-          type="text"
-          placeholder="상호명"
-          value={brand.val}
-          name="brand"
-          onChange={onChange}
-        />
-        {/* 사업자 번호 */}
-        <input
-          type="text"
-          placeholder="사업자 번호  예) 0201021928"
-          value={buisness.val}
-          name="buisness"
-          onChange={onChange}
-        />
-        <span
-          className={`${
-            buisness.isCheck ? `${styles.success}` : `${styles.error}`
-          }`}
-        >
-          {buisness.msg}
-        </span>
-      </>
+      {/* 비밀번호 */}
+      <SingUpPwdInput
+        placeholder="비밀번호 (영문,숫자,특수문자 포함(8~20자)"
+        value={pwd.val}
+        name="pwd"
+        onChange={onChange}
+      />
+      <span
+        className={`${pwd.isCheck ? `${styles.success}` : `${styles.error}`}`}
+      >
+        {pwd.msg}
+      </span>
+      {/* 비밀번호 확인 */}
+      <SingUpPwdInput
+        // type="password"
+        placeholder="비밀번호 확인"
+        value={pCheck.val}
+        name="pCheck"
+        onChange={onChange}
+      />
+      <span
+        className={`${
+          pCheck.isCheck ? `${styles.success}` : `${styles.error}`
+        }`}
+      >
+        {pCheck.msg}
+      </span>
+
+      {/* 상호명 */}
+      <SingUpInput
+        placeholder="상호명"
+        value={brand.val}
+        name="brand"
+        onChange={onChange}
+      />
+      {/* 사업자 번호 */}
+      <SingUpInput
+        placeholder="사업자 번호  예) 0201021928"
+        value={buisness.val}
+        name="buisness"
+        onChange={onChange}
+      />
+      <span
+        className={`${
+          buisness.isCheck ? `${styles.success}` : `${styles.error}`
+        }`}
+      >
+        {buisness.msg}
+      </span>
+
       {/* 연락처 */}
       <input
         type="tel"
@@ -133,9 +141,10 @@ const SignUpForm = () => {
       >
         {phone.msg}
       </span>
-      <input
+      <SignUpBlueButton
         type="submit"
         value="회원가입"
+        text="회원가입"
         disabled={
           !(
             id.isCheck &&
@@ -146,7 +155,7 @@ const SignUpForm = () => {
             phone.isCheck
           )
         }
-      ></input>
+      />
       <Find />
     </form>
   );
