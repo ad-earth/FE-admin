@@ -1,10 +1,12 @@
 import Pagination from "@mui/material/Pagination";
 import { CSVLink } from "react-csv";
 
+import styles from "./serviceContainer.module.scss";
+import { ReactComponent as Download } from "../../../assets/lcon/download.svg";
 import ServiceTable from "../../tables/serviceTable/ServiceTable";
 import SearchBar from "../searchBar/SearchBar";
 import { useExcel } from "./useExcel";
-import "./_serviceContainer.style.scss";
+import { SmallGrayBtn } from "../../../elements/buttons/Buttons";
 
 const ServiceContainer = () => {
   const data = useExcel();
@@ -23,24 +25,24 @@ const ServiceContainer = () => {
   ];
   return (
     <div>
-      <h1>배송관리</h1>
-      <div className="tableContainer">
+      <div className={styles.tableContainer}>
         <SearchBar />
-        <div className="buttonWrapper">
-          <button>주문확정</button>
-          <button>
+        <div className={styles.buttonWrapper}>
+          <SmallGrayBtn>주문확정</SmallGrayBtn>
+          <button className={styles.download}>
             <CSVLink
               headers={headers}
               data={data}
               filename="order_list.csv"
               target="_blank"
             >
+              <Download style={{ marginRight: "7px" }} />
               파일 내려받기
             </CSVLink>
           </button>
         </div>
         <ServiceTable />
-        <div className="pagination">
+        <div className={styles.pagination}>
           <Pagination count={10} />
         </div>
       </div>

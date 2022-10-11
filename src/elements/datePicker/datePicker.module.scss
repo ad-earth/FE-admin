@@ -1,0 +1,33 @@
+@import "../../styles//colors";
+
+#dateBox {
+  display: flex;
+  align-items: center;
+}
+#start,
+#end {
+  width: 120px;
+  height: 40px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 12px;
+  padding: 10px;
+  border: 1px solid $lc_gray400;
+  border-radius: 5px;
+  color: $fc_blue400;
+  input[type="date"]::-webkit-clear-button,
+  input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+#start:focus,
+#end:focus {
+  outline: none;
+}
+#end:disabled {
+  background: $bg_gray300;
+  color: $fc_gray400;
+}
+.icon {
+  padding: 0 12px;
+}
