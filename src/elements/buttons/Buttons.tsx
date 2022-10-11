@@ -1,4 +1,4 @@
-import { PropsType, SignUpType } from "./buttons.type";
+import { PropsType, SignUpType, WithdrawalType } from "./buttons.type";
 import "./_buttons.style.scss";
 import { ReactComponent as Download } from "../../assets/lcon/download.svg";
 import { ReactComponent as Del } from "../../assets/lcon/del.svg";
@@ -36,10 +36,18 @@ export const MediumWhiteBtn = (props: PropsType) => {
   return <button className="second white">{props.children}</button>;
 };
 export const SmallBlueBtn = (props: PropsType) => {
-  return <button className="third blue">{props.children}</button>;
+  return (
+    <button className="third blue" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const SmallWhiteBtn = (props: PropsType) => {
-  return <button className="third white">{props.children}</button>;
+  return (
+    <button className="third white" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const SmallGrayBtn = (props: PropsType) => {
   return <button className="forth">{props.children}</button>;
@@ -55,7 +63,11 @@ export const ProdDelBtn = (props: PropsType) => {
 };
 
 export const ChargeBtn = (props: PropsType) => {
-  return <button className="sixth">{props.children}</button>;
+  return (
+    <button className="sixth" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const ModalCancelBtn = (props: PropsType) => {
   return <button className="seventh cancel">{props.children}</button>;
@@ -65,4 +77,12 @@ export const ModalDelBtn = (props: PropsType) => {
 };
 export const ConfirmBtn = (props: PropsType) => {
   return <button className="eight">{props.children}</button>;
+};
+export const WithdrawalBtn = (props: WithdrawalType) => {
+  const { text, children, onClick } = props;
+  return (
+    <button className="Withdrawal" onClick={onClick}>
+      {text ? text : children}
+    </button>
+  );
 };
