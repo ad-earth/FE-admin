@@ -9,12 +9,12 @@ const useBoardContent = () => {
       queryFn: () => queryFn("new-orders"),
     },
     {
-      queryKey: "exposedProd",
-      queryFn: () => queryFn("on-products"),
-    },
-    {
       queryKey: "lastMonth",
       queryFn: () => queryFn("last-sales"),
+    },
+    {
+      queryKey: "exposedProd",
+      queryFn: () => queryFn("on-products"),
     },
   ]);
   return res?.map((lists) => lists?.data?.data);
