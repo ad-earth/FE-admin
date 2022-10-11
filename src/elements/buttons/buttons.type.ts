@@ -2,10 +2,16 @@ export interface PropsType {
   children?: string;
   onClick?: () => void;
 }
-export interface SignUpType {
-  type: string;
-  value: string;
+
+interface Default {
   text: string;
   children?: React.ReactNode;
+}
+export interface SignUpType extends Default {
+  type: string;
+  value: string;
   disabled: boolean;
+}
+export interface WithdrawalType extends Default {
+  onClick: () => void;
 }
