@@ -1,4 +1,4 @@
-import { PropsType } from "./buttons.type";
+import { PropsType, SignUpType } from "./buttons.type";
 import "./_buttons.style.scss";
 import { ReactComponent as Download } from "../../assets/lcon/download.svg";
 import { ReactComponent as Del } from "../../assets/lcon/del.svg";
@@ -17,6 +17,14 @@ export const LoginJiguButton = () => {
       onClick={() => window.open("https://www.adearth.shop/")}
     >
       지구샵 바로가기
+    </button>
+  );
+};
+export const SignUpBlueButton = (props: SignUpType) => {
+  const { value, text, disabled, children } = props;
+  return (
+    <button className="login blue" value={value} disabled={disabled}>
+      {text ? text : children}
     </button>
   );
 };
