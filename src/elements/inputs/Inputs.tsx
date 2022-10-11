@@ -2,7 +2,7 @@ import { PropsType } from "./inputs.type";
 import "./_inputs.style.scss";
 
 // w 335px, h 60px
-// 로그인 & 계정찾기 & 회원가입
+// 로그인 & 계정찾기
 export const LoginInput = (props: PropsType) => {
   return (
     <input
@@ -26,6 +26,33 @@ export const PwdInput = (props: PropsType) => {
       onChange={(e) => {
         props.setInput && props.setInput(e.target.value);
       }}
+    />
+  );
+};
+//회원가입
+export const SingUpInput = (props: PropsType) => {
+  const { value, name, placeholder, onChange } = props;
+  return (
+    <input
+      className="login"
+      placeholder={placeholder}
+      type="text"
+      value={value}
+      name={name}
+      onChange={onChange}
+    />
+  );
+};
+export const SingUpPwdInput = (props: PropsType) => {
+  const { value, name, placeholder, onChange } = props;
+  return (
+    <input
+      className="login"
+      placeholder={placeholder}
+      type="password"
+      value={value}
+      name={name}
+      onChange={onChange}
     />
   );
 };
