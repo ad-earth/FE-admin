@@ -7,7 +7,7 @@ import { PropsType } from "./dropdown.type";
 // 200*40
 export const MediumDropdown = (props: PropsType) => {
   return (
-    <FormControl className={styles.formControl}>
+    <FormControl>
       <Select
         className={styles.select}
         onChange={(e: SelectChangeEvent<string>) =>
@@ -28,9 +28,9 @@ export const MediumDropdown = (props: PropsType) => {
 // 70*30
 export const SmallDropdown = (props: PropsType) => {
   return (
-    <FormControl className={styles.smallFormControl}>
+    <FormControl>
       <Select
-        className={styles.select}
+        className={styles.smallSelect}
         onChange={(e: SelectChangeEvent<string>) =>
           props.setSelected && props.setSelected(e.target.value)
         }

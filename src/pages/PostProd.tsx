@@ -5,9 +5,7 @@ const PostProd = () => {
   return (
     <div className={styles.container}>
       <p className={styles.title}>상품등록</p>
-      <div className={styles.contentWrapper}>
-        <PostForm />
-      </div>
+      <PostForm />
     </div>
   );
 };
