@@ -10,10 +10,39 @@ import {
 import ImgForm from "../imgForm/ImgForm";
 import { MediumBlueBtn, SmallBlueBtn } from "../../../elements/buttons/Buttons";
 
-const category = ["욕실", "주방", "음료용품", "생활", "식품", "화장품", "문구"];
+const category = [
+  "욕실",
+  "주방",
+  "음료용품",
+  "생활",
+  "식품",
+  "화장품",
+  "문구",
+  "욕실",
+  "주방",
+  "음료용품",
+  "생활",
+  "식품",
+  "화장품",
+  "문구",
+  "욕실",
+  "주방",
+  "음료용품",
+  "생활",
+  "식품",
+  "화장품",
+  "문구",
+  "욕실",
+  "주방",
+  "음료용품",
+  "생활",
+  "식품",
+  "화장품",
+  "문구",
+];
 
 const PostForm = () => {
-  const [selected, setSelected] = useState(category[0]);
+  const [selected, setSelected] = useState("");
 
   return (
     <div className={styles.formContainer}>
@@ -30,6 +59,8 @@ const PostForm = () => {
           <div className={styles.right}>
             <div className={styles.content}>
               <MediumDropdown
+                id={"전체"}
+                placeholder={"전체"}
                 itemList={category}
                 selected={selected}
                 setSelected={setSelected}
@@ -73,7 +104,7 @@ const PostForm = () => {
                   <p className={styles.optTitle}>수량</p>
                 </div>
                 <div className={styles.optInputWrap}>
-                  <MediumDropdown
+                  {/* <MediumDropdown
                     itemList={category}
                     selected={selected}
                     setSelected={setSelected}
@@ -82,7 +113,7 @@ const PostForm = () => {
                     itemList={category}
                     selected={selected}
                     setSelected={setSelected}
-                  />
+                  /> */}
                   <Input200 placeholder={"0"} />
                   <Input200 placeholder={"0"} />
                   <p className={styles.del}>삭제</p>
