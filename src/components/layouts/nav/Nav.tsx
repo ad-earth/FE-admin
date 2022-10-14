@@ -48,10 +48,10 @@ const Nav = () => {
 const nav = [
   { id: 1, name: "메인", path: "/home" },
   { id: 2, name: "배송 관리", path: "/shipping_service" },
-  { id: 3, name: "상품 등록", path: "/PostProd" },
+  { id: 3, name: "상품 등록", path: "/postProd" },
   { id: 4, name: "상품 관리", path: "/setProd" },
   { id: 5, name: "상품 보고서", path: "/prod_report" },
-  { id: 6, name: "광고 관리", path: "/SetAd" },
+  { id: 6, name: "광고 관리", path: "/setAd" },
   { id: 7, name: "광고 보고서", path: "/ad_report" },
 ];
 
