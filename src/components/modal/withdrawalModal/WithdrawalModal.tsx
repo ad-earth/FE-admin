@@ -51,7 +51,8 @@ const Withdrawal = (props: WithdrawalModal) => {
           <ModalCancelBtn onClick={() => hideModal()}>
             {cancelText}
           </ModalCancelBtn>
-          <ModalDelBtn onClick={() => mutate()}>{confirmText}</ModalDelBtn>
+          <ModalDelBtn>{confirmText}</ModalDelBtn>
+          {/* <ModalDelBtn onClick={() => mutate()}>{confirmText}</ModalDelBtn> */}
         </div>
       </div>
       <Snackbar
