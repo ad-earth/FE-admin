@@ -15,3 +15,7 @@ export interface SignUpType extends Default {
 export interface WithdrawalType extends Default {
   onClick: () => void;
 }
+export interface NotFoundType extends Default {
+  type: string;
+  onClick: () => void;
+}
