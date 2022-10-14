@@ -79,10 +79,18 @@ export const ChargeBtn = (props: PropsType) => {
   );
 };
 export const ModalCancelBtn = (props: PropsType) => {
-  return <button className="seventh cancel">{props.children}</button>;
+  return (
+    <button className="seventh cancel" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const ModalDelBtn = (props: PropsType) => {
-  return <button className="seventh del">{props.children}</button>;
+  return (
+    <button className="seventh del" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const ConfirmBtn = (props: PropsType) => {
   return <button className="eight">{props.children}</button>;
