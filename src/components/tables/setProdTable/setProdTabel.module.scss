@@ -1,0 +1,101 @@
+@import "../../../styles//colors";
+
+.setProdTabel {
+  width: 100%;
+  min-height: 550px;
+  background-color: $bg_white;
+  margin-bottom: 30px;
+  position: relative;
+  border-radius: 5px;
+  table {
+    width: inherit;
+    border-collapse: collapse;
+  }
+  thead {
+    background-color: $bg_gray300;
+  }
+  table tr {
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+  }
+
+  // table tr:last-child {
+  //   -moz-border-radius: 5px 5px 0 0;
+  //   -webkit-border-radius: 5px 5px 0 0;
+  //   border-radius: 0 0 5px 5px;
+  // }
+  table th,
+  table td {
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+    height: 50px;
+    border-bottom: 1px solid $lc_gray300;
+  }
+
+  //체크박스 , 상품 노출 , 수정버튼
+  table th:nth-child(1),
+  table td:nth-child(1),
+  table th:nth-child(6),
+  table td:nth-child(6),
+  table th:nth-child(7),
+  table td:nth-child(7) {
+    width: 10%;
+  }
+  // index number
+  table th:nth-child(2),
+  table td:nth-child(2) {
+    text-align: left;
+    width: 10%;
+  }
+  //상품번호
+  table th:nth-child(3),
+  table td:nth-child(3) {
+    text-align: left;
+    width: 15%;
+  }
+  //카테고리
+  table th:nth-child(4),
+  table td:nth-child(4) {
+    width: 10%;
+  }
+  //상품명
+  table th:nth-child(5),
+  table td:nth-child(5) {
+    text-align: left;
+    width: 35%;
+  }
+  //체크박스 여백 맞춤
+  table th:first-child,
+  table td:first-child {
+    text-align: left;
+    padding-left: 24px;
+  }
+  //없는 상품
+  table td.none {
+    padding: 0;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    width: inherit;
+    text-align: center;
+    line-height: 50px;
+    border-bottom: none;
+    color: $fc_gray500;
+    font-size: 16px;
+  }
+  //체크박스
+  input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px !important;
+    height: 16px !important;
+    border: 1px solid $lc_gray400;
+  }
+
+  // checkbox check 상태
+  input[type="checkbox"]:checked {
+    accent-color: $bg_blue100;
+  }
+}

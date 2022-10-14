@@ -5,3 +5,7 @@ export interface List {
   p_No: number;
   p_Status: boolean;
 }
+export interface Paginationtype {
+  category: string;
+  page: number;
+}

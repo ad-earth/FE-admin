@@ -1,28 +1,14 @@
-import { useState, SetStateAction, Dispatch, useEffect } from "react";
+import { ProdDelBtn, SmallGrayBtn } from "../../../elements/buttons/Buttons";
+import { PropsType } from "./prodButton.type";
+import styles from "./prodButton.module.scss";
 
-const ProdButton = ({
-  setDelhandler,
-  setAddhandler,
-}: {
-  setDelhandler: Dispatch<SetStateAction<boolean>>;
-  setAddhandler: Dispatch<SetStateAction<boolean>>;
-}) => {
-  function btnClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    const btn: HTMLButtonElement = e.currentTarget;
-    btn.value === "del" && setDelhandler(true);
-    btn.value === "add" && setAddhandler(true);
-  }
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {};
-
+const ProdButton = ({ setDelhandler, setAddhandler }: PropsType) => {
   return (
-    <div className="btnBox">
-      <button value="del" onClick={btnClick}>
-        상품 삭제
-      </button>
-      <button value="add" onClick={btnClick}>
+    <div className={styles.btnBox}>
+      <ProdDelBtn onClick={() => setDelhandler(true)} />
+      <SmallGrayBtn onClick={() => setAddhandler(true)}>
         상품 등록
-      </button>
+      </SmallGrayBtn>
     </div>
   );
 };

@@ -1,36 +1,13 @@
-import React, { useState, SetStateAction, Dispatch, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import styles from "./setProdTabel.module.scss";
+import { PropsType } from "./setProdTabel.type";
 import Switch from "./switch /Switch";
 
-interface List {
-  id: number;
-  p_Category: string;
-  p_Name: string;
-  p_No: number;
-  p_Status: boolean;
-}
+const SetProdTabel = (props: PropsType) => {
+  const { prodList, checkedItems, setCheckedItems } = props;
 
-const selectList = [
-  "No",
-  "상품번호",
-  "카테고리",
-  "상품명",
-  "상품on/off",
-  "상품수정",
-];
-
-const SetProdTabel = ({
-  prodList,
-  checkedItems,
-  setCheckedItems,
-}: {
-  prodList: List[];
-  checkedItems: number[];
-  setCheckedItems: Dispatch<SetStateAction<number[]>>;
-}) => {
   //thead 체크박스 데이터
   const [allNO, setAllNO] = useState<number[]>([]);
-
   useEffect(() => {
     if (prodList) setAllNO(prodList?.map((e) => e.p_No));
   }, [prodList]);
@@ -42,9 +19,8 @@ const SetProdTabel = ({
           value === 0 ? [] : checkedItems.filter((el) => el !== value)
         ); //체크해제
   };
-  // console.log(checkedItems);
   return (
-    <>
+    <div className={styles.setProdTabel}>
       <table>
         <thead>
           <tr>
@@ -52,9 +28,9 @@ const SetProdTabel = ({
               <input
                 type="checkbox"
                 value={0}
-                onChange={(e) => {
-                  changeHandler(e.target.checked, Number(e.target.value));
-                }}
+                onChange={(e) =>
+                  changeHandler(e.target.checked, Number(e.target.value))
+                }
               />
             </th>
             {selectList.map((item) => (
@@ -62,19 +38,21 @@ const SetProdTabel = ({
             ))}
           </tr>
         </thead>
-        {prodList && (
+        {/* <tbody> */}
+        {prodList && prodList.length !== 0 ? (
           <tbody>
-            {prodList.map((item, i) => {
+            {prodList.map((item: any, i: number) => {
               return (
                 <tr key={i}>
                   <td>
                     <input
+                      id="check"
                       value={item.p_No}
-                      type="checkBox"
+                      type="checkbox"
                       checked={checkedItems.includes(item.p_No) ? true : false}
-                      onChange={(e) => {
-                        changeHandler(e.target.checked, Number(e.target.value));
-                      }}
+                      onChange={(e) =>
+                        changeHandler(e.target.checked, Number(e.target.value))
+                      }
                     />
                   </td>
                   <td>{item.id}</td>
@@ -91,10 +69,25 @@ const SetProdTabel = ({
               );
             })}
           </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td className={styles.none}>등록된 상품이 없습니다.</td>
+            </tr>
+          </tbody>
         )}
       </table>
-    </>
+    </div>
   );
 };
 
 export default SetProdTabel;
+
+const selectList = [
+  "No",
+  "상품번호",
+  "카테고리",
+  "상품명",
+  "상품on/off",
+  "상품수정",
+];
