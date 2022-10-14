@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface PropsType {
-  id: string;
+  id?: string;
   itemList: (string | number)[];
   placeholder?: string;
   selected?: string;
