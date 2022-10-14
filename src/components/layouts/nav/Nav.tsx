@@ -1,9 +1,25 @@
-import React from "react";
 import styles from "./nav.module.scss";
 import { NavLink } from "react-router-dom";
 import BizMoney from "../../main/bizMoney/BizMoney";
+import { WithdrawalBtn } from "../../../elements/buttons/Buttons";
+import useModal from "../../modal/useModal";
 
 const Nav = () => {
+  const { showModal } = useModal();
+
+  //회원탈퇴 모달 클릭
+  const withdrawalClcik = () => {
+    showModal({
+      modalType: "WithdrawalModal",
+      modalProps: {
+        message:
+          "가입된 회원정보가 모두 삭제됩니다.회원 탈퇴를 진행하시겠습니까?",
+        confirmText: "탈퇴하기",
+        cancelText: "취소",
+      },
+    });
+  };
+
   return (
     <nav id={styles.nav}>
       {/* Biz money */}
@@ -25,18 +41,26 @@ const Nav = () => {
           </li>
         ))}
       </ul>
-      <button className={styles.withdrawal}>회원 탈퇴</button>
+      <div className={styles.withdrawalBtn}>
+        <WithdrawalBtn text="회원탈퇴" onClick={withdrawalClcik} />
+      </div>
     </nav>
   );
 };
 const nav = [
   { id: 1, name: "메인", path: "/home" },
-  { id: 2, name: "상품 관리", path: "/setProd" },
-  { id: 3, name: "배송 관리", path: "/shipping_service" },
-  { id: 4, name: "상품 보고서", path: "/prod_report" },
-  { id: 5, name: "광고 등록", path: "/ProdReport" },
-  { id: 6, name: "광고 관리", path: "/PostAd" },
+  { id: 2, name: "배송 관리", path: "/shipping_service" },
+  { id: 3, name: "상품 등록", path: "/postProd" },
+  { id: 4, name: "상품 관리", path: "/setProd" },
+  { id: 5, name: "상품 보고서", path: "/prod_report" },
+  { id: 6, name: "광고 관리", path: "/setAd" },
   { id: 7, name: "광고 보고서", path: "/ad_report" },
 ];
 
 export default Nav;
+
+// EditProd - 상품수정
+// PostAd - 광고등록
+// SetAd  - 광고관리
+// PostProd - 상품등록
+// SetProd - 상품관리

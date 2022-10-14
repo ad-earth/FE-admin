@@ -1,23 +1,20 @@
-// import { useQueryClient } from "react-query";
+import { getBiz, putBiz } from "../../../shared/apis/api";
+import { useQuery, useMutation } from "react-query";
+import { useQueryClient } from "react-query";
+import { AxiosResponse, AxiosError } from "axios";
+import { BizType } from "./bizMomey.type";
 
-const useBizMoney = () => {
-  return 0;
+export const useGetBiz = () => {
+  const queryFn = async () => await getBiz();
+  return useQuery<AxiosResponse<BizType>, AxiosError>("bizMoney", queryFn);
 };
 
-export default useBizMoney;
-
-// //웹소켓
-// // const sendPing = () => {
-// //   socket.emit("ping");
-// // };
-// // const queryClient = useQueryClient();
-// // useEffect(() => {
-// //   const websocket = new WebSocket("wss://echo.websocket.org/");
-// //   websocket.onopen = () => {
-// //     console.log("connected");
-// //   };
-// //   websocket.onmessage = (event) => {
-// //     const data = JSON.parse(event.data);
-// //     const queryKey = [...data.entity, data.id].filter(Boolean);
-// //     queryClient.invalidateQueries(queryKey);
-// //   };
+export const usePutBiz = () => {
+  const queryClient = useQueryClient();
+  const queryFn = async () => await putBiz();
+  return useMutation<AxiosResponse, AxiosError>("bizMoney", queryFn, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("bizMoney");
+    },
+  });
+};

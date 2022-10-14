@@ -1,30 +1,29 @@
-import React, { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import styles from "./bizMoney.module.scss";
+//elements
+import { ChargeBtn, SmallBlueBtn } from "../../../elements/buttons/Buttons";
+//icon img
 import bizNav from "../../../assets/lcon/bizNav.svg";
+import { useGetBiz, usePutBiz } from "./useBizMoney";
+//hook
 // import useBizMoney from "./useBizMoney";
-import { io } from "socket.io-client";
+import { PropsType } from "./bizMomey.type";
 
-// const socket = io("http://13.125.243.20:3005", {
-//   path: "/socket-admin",
-//   transports: ["websocket"],
-//   auth: {
-//     token: process.env.REACT_APP_TEST_TOKEN,
-//   },
-// });
-interface PropsType {
-  type: string;
-}
 const BizMoney = (props: PropsType) => {
   const { type } = props;
-  const [money, setMoney] = useState<number>(2120000);
+  //text
   const title = type === "home" ? <h3>Biz money</h3> : <h3>내 비즈머니</h3>;
   const subtitle = "비즈머니를 간편하 게 충전하세요";
   const button = type === "home" ? "충전하기" : "충전";
-  // useEffect(() => {
-  //   socket.on("biz", (data) => {
-  //     setMoney(data.a_Charge);
-  //   });
-  // }, [data]);
+  //biz data
+  const [money, setMoney] = useState<number>();
+
+  const { data } = useGetBiz();
+  const { mutate } = usePutBiz();
+
+  const bizBtnClick = () => {
+    mutate();
+  };
 
   if (type === "nav") {
     return (
@@ -35,9 +34,9 @@ const BizMoney = (props: PropsType) => {
         </div>
         <div className={styles.money}>
           <p>
-            {money} <span>원</span>
+            {data?.data.a_Charge} <span>원</span>
           </p>
-          <button className={styles.bizBtn}>{button}</button>
+          <ChargeBtn onClick={bizBtnClick}>{button}</ChargeBtn>
         </div>
       </section>
     );
@@ -49,9 +48,9 @@ const BizMoney = (props: PropsType) => {
         <p className={styles.subtitle}>{subtitle}</p>
         <div className={styles.money}>
           <p>
-            {money} <span>원</span>
+            {data?.data.a_Charge} <span>원</span>
           </p>
-          <button className={styles.bizBtn}>{button}</button>
+          <SmallBlueBtn onClick={bizBtnClick}>{button}</SmallBlueBtn>
         </div>
       </section>
     );

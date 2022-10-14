@@ -1,10 +1,9 @@
-import { postSingUp } from "../../shared/apis/api";
-// import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { FormData } from "./signUpForm.type";
+import { AxiosError, AxiosResponse } from "axios";
+import { postSingUp } from "../../shared/apis/api";
+import { FormData, ErrType } from "./signUpForm.type";
 
-export default function useSignUp() {
-  // const navigate = useNavigate();
+export function useSignUp() {
   const queryFn = async (formData: FormData) =>
     await postSingUp(
       formData.id,
@@ -13,12 +12,7 @@ export default function useSignUp() {
       formData.buisness,
       formData.phone
     );
-  return useMutation((formData: FormData) => queryFn(formData), {
-    // onSuccess: () => {
-    //   navigate({
-    //     pathname: "/",
-    //   });
-    // },
-    onError: () => {},
-  });
+  return useMutation<AxiosResponse, AxiosError<ErrType>, any, unknown>(
+    (formData: FormData) => queryFn(formData)
+  );
 }
