@@ -51,6 +51,7 @@ export const getAdSummary = () =>
   axiosInstance.get(`/admin-main/expense-reports`);
 export const getBiz = () => axiosInstance.get(`/admin-main/charge`);
 export const putBiz = () => axiosInstance.put(`/admin-main/charge`);
+export const delUser = () => axiosInstance.delete(`/admins`);
 
 //상품관리
 export const getProducts = (category: string, page: number) =>
