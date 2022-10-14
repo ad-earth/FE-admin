@@ -10,7 +10,9 @@ const AdButton = ({ setDelhandler, setAddhandler }: PropsType) => {
   return (
     <div className={styles.btnBox}>
       <ProdDelBtn onClick={() => setDelhandler(true)} />
-      <SmallGrayBtn onClick={() => setAddhandler(true)}>광고 등록</SmallGrayBtn>
+      <SmallGrayBtn onClick={() => setAddhandler(true)}>
+        키워드 등록
+      </SmallGrayBtn>
     </div>
   );
 };
