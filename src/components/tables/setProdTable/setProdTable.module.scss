@@ -7,6 +7,10 @@
   margin-bottom: 30px;
   position: relative;
   border-radius: 5px;
+  button {
+    background: none;
+    cursor: pointer;
+  }
   table {
     width: inherit;
     border-collapse: collapse;
@@ -20,12 +24,6 @@
     border-radius: 5px 5px 0 0;
     width: 100%;
   }
-
-  // table tr:last-child {
-  //   -moz-border-radius: 5px 5px 0 0;
-  //   -webkit-border-radius: 5px 5px 0 0;
-  //   border-radius: 0 0 5px 5px;
-  // }
   table th,
   table td {
     text-align: center;

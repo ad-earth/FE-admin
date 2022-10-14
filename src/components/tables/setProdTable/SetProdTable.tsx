@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import styles from "./setProdTabel.module.scss";
-import { PropsType } from "./setProdTabel.type";
+import styles from "./setProdTable.module.scss";
+import { PropsType } from "./setProdTable.type";
 import Switch from "./switch /Switch";
+import { useSetRecoilState } from "recoil";
+import { prod } from "../../../store/prod"; // atom으로 만든 전역상태
 
 const SetProdTabel = (props: PropsType) => {
   const { prodList, checkedItems, setCheckedItems } = props;
+  const setProd = useSetRecoilState(prod);
 
   //thead 체크박스 데이터
   const [allNO, setAllNO] = useState<number[]>([]);
@@ -18,6 +21,13 @@ const SetProdTabel = (props: PropsType) => {
       : setCheckedItems(
           value === 0 ? [] : checkedItems.filter((el) => el !== value)
         ); //체크해제
+  };
+  //상품 수정 페이지 이동
+  const changProd = (e: any) => {
+    setProd({
+      isProd: true,
+      prodNumber: e.target.value,
+    });
   };
   return (
     <div className={styles.setProdTabel}>
@@ -38,10 +48,9 @@ const SetProdTabel = (props: PropsType) => {
             ))}
           </tr>
         </thead>
-        {/* <tbody> */}
         {prodList && prodList.length !== 0 ? (
           <tbody>
-            {prodList.map((item: any, i: number) => {
+            {prodList.map((item, i: number) => {
               return (
                 <tr key={i}>
                   <td>
@@ -63,7 +72,9 @@ const SetProdTabel = (props: PropsType) => {
                     <Switch checked={item.p_Status} no={item.p_No} />
                   </td>
                   <td>
-                    <span>수정</span>
+                    <button value={item.p_No} onClick={changProd}>
+                      수정
+                    </button>
                   </td>
                 </tr>
               );

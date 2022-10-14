@@ -5,7 +5,7 @@ import styles from "./setProdSection.module.scss";
 import { Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //components,elements
-import SetProdTabel from "../../tables/setProdTable/SetProdTabel";
+import SetProdTabel from "../../tables/setProdTable/SetProdTable";
 import ProdButton from "../prodButton/ProdButton";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
 import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
