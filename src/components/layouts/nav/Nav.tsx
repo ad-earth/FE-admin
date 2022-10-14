@@ -2,22 +2,24 @@ import styles from "./nav.module.scss";
 import { NavLink } from "react-router-dom";
 import BizMoney from "../../main/bizMoney/BizMoney";
 import { WithdrawalBtn } from "../../../elements/buttons/Buttons";
-import { useNavigate } from "react-router-dom";
+import useModal from "../../modal/useModal";
 
 const Nav = () => {
-  const navigate = useNavigate();
+  const { showModal } = useModal();
+
+  //회원탈퇴 모달 클릭
   const withdrawalClcik = () => {
-    if (
-      window.confirm(
-        "가입된 회원정보가 모두 삭제됩니다.회원 탈퇴를 진행하시겠습니까?"
-      )
-    ) {
-      localStorage.clear();
-      navigate("/", { replace: true });
-    } else {
-      return;
-    }
+    showModal({
+      modalType: "WithdrawalModal",
+      modalProps: {
+        message:
+          "가입된 회원정보가 모두 삭제됩니다.회원 탈퇴를 진행하시겠습니까?",
+        confirmText: "탈퇴하기",
+        cancelText: "취소",
+      },
+    });
   };
+
   return (
     <nav id={styles.nav}>
       {/* Biz money */}
