@@ -1,7 +1,7 @@
 import React from "react";
 
-const postAdModal = () => {
+const PostAdModal = () => {
   return <div>postAdModal</div>;
 };
 
-export default postAdModal;
+export default PostAdModal;
