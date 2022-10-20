@@ -4,4 +4,5 @@ export interface PropsType {
   value?: string;
   setInput?: (val: string) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
 }

@@ -11,6 +11,7 @@ export const LoginInput = (props: PropsType) => {
       type="text"
       value={props.value}
       onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
     />
   );
 };
@@ -22,6 +23,7 @@ export const PwdInput = (props: PropsType) => {
       type="password"
       value={props.value}
       onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
     />
   );
 };

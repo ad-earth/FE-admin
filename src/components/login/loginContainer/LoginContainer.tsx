@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { KeyboardEventHandler, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
@@ -13,8 +13,8 @@ import { postLogin } from "../../../shared/apis/api";
 
 const LoginContainer = () => {
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [id, setId] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
 
   // 기존 토큰 무효화
   useEffect(() => {
@@ -35,8 +35,18 @@ const LoginContainer = () => {
   return (
     <>
       <div className={styles.inputWrapper}>
-        <LoginInput placeholder="아이디" value={id} setInput={setId} />
-        <PwdInput placeholder="비밀번호" value={pwd} setInput={setPwd} />
+        <LoginInput
+          placeholder="아이디"
+          value={id}
+          setInput={setId}
+          onKeyDown={(e) => e.key === "Enter" && validation && mutate()}
+        />
+        <PwdInput
+          placeholder="비밀번호"
+          value={pwd}
+          setInput={setPwd}
+          onKeyDown={(e) => e.key === "Enter" && validation && mutate()}
+        />
       </div>
       {!validation && !isError && (
         <p className={styles.errorMsg}>
