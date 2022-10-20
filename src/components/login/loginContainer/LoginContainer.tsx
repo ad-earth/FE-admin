@@ -48,7 +48,7 @@ const LoginContainer = () => {
           onKeyDown={(e) => e.key === "Enter" && validation && mutate()}
         />
       </div>
-      {!validation && !isError && (
+      {!validation && (
         <p className={styles.errorMsg}>
           아이디와 비밀번호를 다시 확인해주세요.
         </p>
