@@ -15,7 +15,7 @@ const BoardContent = () => {
         </div>
         <div className={styles.info}>
           <h3>신규주문</h3>
-          <span>{data[0]?.newProducts} 건</span>
+          <span>{data[0]?.newOrders} 건</span>
         </div>
       </article>
       <article>
@@ -25,7 +25,7 @@ const BoardContent = () => {
         </div>
         <div className={styles.info}>
           <h3>전월 매출액</h3>
-          <span>{data[1]?.productsCnt} 건</span>
+          <span>{data[1]?.lastSales} 원</span>
         </div>
       </article>
       <article>
@@ -35,7 +35,7 @@ const BoardContent = () => {
         </div>
         <div className={styles.info}>
           <h3>노출 상품 수</h3>
-          <span>{data[2]?.lastSales} 건</span>
+          <span>{data[2]?.productsCnt} 건</span>
         </div>
       </article>
     </section>

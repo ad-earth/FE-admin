@@ -1,6 +1,5 @@
 import { getProducts } from "../../../shared/apis/api";
 import { useQuery } from "react-query";
-import { useQueryClient } from "react-query";
 
 export const fetchProd = async (category: string, page: number) =>
   await getProducts(category, page);

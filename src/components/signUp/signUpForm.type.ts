@@ -20,4 +20,8 @@ export interface StateType {
   onChange: () => void;
 }
 
-export type Action = { type: string; payload: string };
+export type Action = { type: string; payload?: string; msg?: string };
+
+export interface ErrType {
+  errorMessage: string;
+}

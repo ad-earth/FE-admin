@@ -32,4 +32,8 @@
       cursor: pointer;
     }
   }
+  :disabled {
+    color: $fc_gray500;
+    background-color: $bg_gray200;
+  }
 }
