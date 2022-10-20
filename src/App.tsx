@@ -49,7 +49,7 @@ function App() {
             <Route path="postProd" element={<PostProd />} />
             <Route path="editProd" element={<EditProd />} />
             <Route path="/shipping_service" element={<SetParcel />} />
-            <Route path="/prod_report" element={<ProdReport />} />
+            <Route path="/sales_report" element={<ProdReport />} />
             <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
             <Route path="/ad_report" element={<AdReport />} />

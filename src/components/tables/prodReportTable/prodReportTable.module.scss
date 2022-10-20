@@ -1,18 +1,18 @@
 @import "../../../styles/colors";
 
-table {
+.tableContainer {
   width: 83vw;
-  height: 550px;
   margin-top: 16px;
   border-radius: 5px;
   border-collapse: collapse;
   background: $bg_white;
 }
-thead {
+.tHead {
   width: 83vw;
   font-weight: 700;
   background: $bg_gray300;
-  th {
+
+  .th {
     font-size: 12px;
     height: 50px;
     &:first-child {
@@ -23,17 +23,20 @@ thead {
     }
   }
 }
-tbody {
-  tr {
+.tBody {
+  .tr {
     border-bottom: 1px solid $lc_gray300;
     &:last-child {
       border-radius: 0px 0px 5px 5px;
       border-bottom: none;
     }
-    td {
+    .td {
       height: 50px;
       font-size: 12px;
       text-align: center;
+      &.hidden {
+        color: $fc_white;
+      }
     }
   }
 }

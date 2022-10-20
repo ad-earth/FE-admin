@@ -1,24 +1,31 @@
-import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 
-import "./_prodContainer.style.scss";
+import styles from "./prodContainer.module.scss";
 import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
-import "./_prodContainer.style.scss";
+import ProdFilter from "../prodFilter/ProdFilter";
+import { useSalesQuery } from "./useSalesQuery";
+import { useDate } from "./useDate";
 
 const ProdContainer = () => {
-  return (
-    <div>
-      <h1>상품 보고서</h1>
+  const [category, setCategory] = useState<string>(null);
+  const [date, setDate] = useState<string>(null);
 
-      <div className="tableContainer">
-        <div className="salesSummary">
-          업로드 된 상품 총 수량: <span>200개</span> / 전체 판매 금액:
-          <span>900,000원</span>
-        </div>
-        <ProdReportTable />
-        <div className="pagination">
-          <Pagination count={10} />
-        </div>
+  const todayDate = useDate();
+
+  // axios GET 보고서 데이터 조회
+  const salesData = useSalesQuery(category, !date ? todayDate : date);
+
+  return (
+    <div className={styles.tableContainer}>
+      <ProdFilter setCategory={setCategory} setDate={setDate} />
+      <div className={styles.salesSummary}>
+        상품 총 수량: <span>{salesData.data?.data.cnt} 개</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;전체 판매 금액:
+        <span>
+          {salesData && salesData.data?.data.totalPrice.toLocaleString()} 원
+        </span>
       </div>
+      <ProdReportTable productData={salesData.data?.data.products} />
     </div>
   );
 };

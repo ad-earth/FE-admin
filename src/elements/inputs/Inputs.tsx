@@ -10,9 +10,8 @@ export const LoginInput = (props: PropsType) => {
       placeholder={props.placeholder}
       type="text"
       value={props.value}
-      onChange={(e) => {
-        props.setInput && props.setInput(e.target.value);
-      }}
+      onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
     />
   );
 };
@@ -23,9 +22,8 @@ export const PwdInput = (props: PropsType) => {
       placeholder={props.placeholder}
       type="password"
       value={props.value}
-      onChange={(e) => {
-        props.setInput && props.setInput(e.target.value);
-      }}
+      onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
     />
   );
 };
