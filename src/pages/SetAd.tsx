@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import SetAdSection from "../components/setAd/SetAdSection";
+import styles from "./styles/setAd.module.scss";
 
 const SetAd = () => {
   return (
-    <div>SetAd</div>
-  )
-}
+    <section id={styles.setAd}>
+      <h2>광고관리</h2>
+      <SetAdSection />
+    </section>
+  );
+};
 
-export default SetAd
+export default SetAd;

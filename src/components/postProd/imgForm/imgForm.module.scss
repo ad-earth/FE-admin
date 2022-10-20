@@ -1,0 +1,11 @@
+@import "../../../styles/colors";
+.imgDiv {
+  display: flex;
+  flex-direction: row;
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 24px;
+  }
+}
