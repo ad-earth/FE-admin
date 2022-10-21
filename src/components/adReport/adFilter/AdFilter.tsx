@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import styles from "./adFilter.module.scss";
 import DatePicker from "../../../elements/datePicker/DatePicker";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
 import { useProductQuery } from "./useProductQuery";
-import { useDate } from "../../prodReport/prodContainer/useDate";
 import { DataType, PropsType } from "./adFilter.type";
 
 const AdFilter = (props: PropsType) => {
   const [selected, setSelected] = useState<string>(null);
-  const [selectedDate, setSelectedDate] = useState<string>(null);
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
-  const todayDate = useDate();
-  const result = useProductQuery(todayDate);
-  let productData = result.data?.data.products;
+  const result = useProductQuery(selectedDate);
+
+  const { productData } = useMemo(
+    () => ({
+      productData: result.data?.data.products,
+    }),
+    [result]
+  );
 
   useEffect(() => {
     props.setProductNumber(selected && selected.slice(-13));

@@ -9,7 +9,7 @@ import { PropsType } from "./prodFilter.type";
 const ProdFilter = (props: PropsType) => {
   const category = useCategory();
   const [selected, setSelected] = useState<string>("전체");
-  const [selectedDate, setSelectedDate] = useState<string>(null);
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
   useEffect(() => {
     props.setCategory(selected === "전체" ? null : selected);

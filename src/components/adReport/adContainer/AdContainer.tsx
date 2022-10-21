@@ -1,18 +1,16 @@
 import { useState } from "react";
 
 import AdChart from "../../graphs/adChart/AdChart";
-import { useDate } from "../../prodReport/prodContainer/useDate";
 import AdReportTable from "../../tables/adReportTable/AdReportTable";
 import AdFilter from "../adFilter/AdFilter";
 import styles from "./adContainer.module.scss";
 import { useAdQuery } from "./useAdQuery";
 
 const AdContainer = () => {
-  const [date, setDate] = useState<string>(null);
+  const [date, setDate] = useState<string>("");
   const [productNumber, setProductNumber] = useState<string>(null);
 
-  const todayDate = useDate();
-  const adData = useAdQuery(date === null ? todayDate : date, productNumber);
+  const adData = useAdQuery(date, productNumber);
 
   return (
     <div>
