@@ -10,7 +10,7 @@ const AdContainer = () => {
   const [date, setDate] = useState<string>("");
   const [productNumber, setProductNumber] = useState<string>(null);
 
-  const adData = useAdQuery(date, productNumber);
+  const adData = useAdQuery(date, String(productNumber));
 
   return (
     <div>
