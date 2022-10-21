@@ -61,23 +61,20 @@ export const putProducts = (p_No: number) =>
   axiosInstance.put(`/admin-products/status/${p_No}`);
 
 // 배송관리 주문확정
-export const putOrderConfirm = (orderNumber: number, productNumber: number) =>
+export const putOrderConfirm = (
+  confirmList: { o_No: number; p_No: number }[]
+) =>
   axiosInstance.put(`/order-list`, {
-    confirm: [
-      {
-        o_No: orderNumber,
-        p_No: productNumber,
-      },
-    ],
+    confirm: confirmList,
   });
-  
+
 // 배송관리 조회
 export const getOrders = (
   page: string,
   postQty: string,
   date: string,
   product: string,
-  status: "신규주문" | "배송완료" | "주문취소"
+  status: string
 ) =>
   axiosInstance.get(
     `/order-list?page=${page}&maxpost=${postQty}&date=${date}&p_Name=${product}&o_Status=${status}`

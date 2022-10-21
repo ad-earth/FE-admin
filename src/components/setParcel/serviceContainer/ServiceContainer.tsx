@@ -1,49 +1,55 @@
+import { useMemo, useState } from "react";
 import Pagination from "@mui/material/Pagination";
-import { CSVLink } from "react-csv";
 
 import styles from "./serviceContainer.module.scss";
-import { ReactComponent as Download } from "../../../assets/lcon/download.svg";
 import ServiceTable from "../../tables/serviceTable/ServiceTable";
-import SearchBar from "../searchBar/SearchBar";
-import { useExcel } from "./useExcel";
-import { SmallGrayBtn } from "../../../elements/buttons/Buttons";
+import { useOrderListQuery } from "./useOrderListQuery";
+import ParcelFilter from "../parcelFilter/ParcelFilter";
 
 const ServiceContainer = () => {
-  const data = useExcel();
-  const headers = [
-    { label: "주문번호", key: "orderNo" },
-    { label: "상품번호", key: "prodNo" },
-    { label: "상품명", key: "prodName" },
-    { label: "수량", key: "prodQty" },
-    { label: "아이디", key: "userId" },
-    { label: "수령인", key: "userName" },
-    { label: "주소", key: "address" },
-    { label: "연락처", key: "phone" },
-    { label: "배송메시지", key: "comment" },
-    { label: "주문일자", key: "orderDate" },
-    { label: "배송상태", key: "status" },
-  ];
+  const [page, setPage] = useState<number>(1);
+  const [date, setDate] = useState<string>(null);
+  const [product, setProduct] = useState<string>("전체");
+  const [status, setStatus] = useState<string>("전체");
+
+  // 배송 리스트 조회
+  const orderData = useOrderListQuery(
+    String(page),
+    "10",
+    date,
+    product === "전체" ? null : product,
+    status === "전체" ? null : product
+  );
+
+  const { orderList, dataQty } = useMemo(
+    () => ({
+      orderList: orderData.data?.data.list,
+      dataQty: orderData.data?.data.cnt,
+    }),
+    [orderData]
+  );
+
+  // 페이지네이션
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   return (
     <div>
       <div className={styles.tableContainer}>
-        <SearchBar />
-        <div className={styles.buttonWrapper}>
-          <SmallGrayBtn>주문확정</SmallGrayBtn>
-          <button className={styles.download}>
-            <CSVLink
-              headers={headers}
-              data={data}
-              filename="order_list.csv"
-              target="_blank"
-            >
-              <Download style={{ marginRight: "7px" }} />
-              파일 내려받기
-            </CSVLink>
-          </button>
-        </div>
-        <ServiceTable />
+        <ParcelFilter
+          setDate={setDate}
+          setProduct={setProduct}
+          setStatus={setStatus}
+        />
+        <ServiceTable
+          orderList={orderList}
+          date={date}
+          product={product}
+          status={status}
+        />
         <div className={styles.pagination}>
-          <Pagination count={10} />
+          <Pagination count={Math.ceil(dataQty / 10)} onChange={handleChange} />
         </div>
       </div>
     </div>

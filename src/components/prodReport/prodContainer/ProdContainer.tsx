@@ -4,16 +4,13 @@ import styles from "./prodContainer.module.scss";
 import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
 import ProdFilter from "../prodFilter/ProdFilter";
 import { useSalesQuery } from "./useSalesQuery";
-import { useDate } from "./useDate";
 
 const ProdContainer = () => {
   const [category, setCategory] = useState<string>(null);
   const [date, setDate] = useState<string>(null);
 
-  const todayDate = useDate();
-
   // axios GET 보고서 데이터 조회
-  const salesData = useSalesQuery(category, !date ? todayDate : date);
+  const salesData = useSalesQuery(category, date);
 
   return (
     <div className={styles.tableContainer}>
