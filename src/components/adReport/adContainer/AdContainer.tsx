@@ -1,22 +1,28 @@
-import Pagination from "@mui/material/Pagination";
+import { useState } from "react";
 
 import AdChart from "../../graphs/adChart/AdChart";
+import { useDate } from "../../prodReport/prodContainer/useDate";
 import AdReportTable from "../../tables/adReportTable/AdReportTable";
-import "./_adContainer.style.scss";
+import AdFilter from "../adFilter/AdFilter";
+import styles from "./adContainer.module.scss";
+import { useAdQuery } from "./useAdQuery";
 
 const AdContainer = () => {
+  const [date, setDate] = useState<string>(null);
+  const [productNumber, setProductNumber] = useState<string>(null);
+
+  const todayDate = useDate();
+  const adData = useAdQuery(date === null ? todayDate : date, productNumber);
+
   return (
     <div>
-      <h1>광고 보고서</h1>
-      <div className="chartContainer">
-        <div className="chart">
+      <div className={styles.chartContainer}>
+        <AdFilter setDate={setDate} setProductNumber={setProductNumber} />
+        <div className={styles.chart}>
           <h3>3개월 간 광고 키워드 클릭 수 & 전환 수</h3>
-          <AdChart />
+          <AdChart dataList={adData.data?.data.list} />
         </div>
-        <AdReportTable />
-        <div className="pagination">
-          <Pagination count={10} />
-        </div>
+        <AdReportTable dataList={adData.data?.data.list} />
       </div>
     </div>
   );

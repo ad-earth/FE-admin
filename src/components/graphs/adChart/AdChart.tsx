@@ -1,21 +1,25 @@
 import Chart from "react-apexcharts";
 
-import { testData } from "./test";
-import "./_adChart.style.scss";
+import { PropsType } from "./adChart.type";
 
-const AdChart = () => {
+const AdChart = (props: PropsType) => {
+  const dataList = props?.dataList;
+
   let keywordList: string[] = [];
-  testData.map((x) => {
-    keywordList.push(x.keyword);
-  });
+  dataList &&
+    dataList.map((x) => {
+      keywordList.push(x.keyword);
+    });
   let clickCntList: number[] = [];
-  testData.map((x) => {
-    clickCntList.push(x.k_Click);
-  });
+  dataList &&
+    dataList.map((x) => {
+      clickCntList.push(x.k_Click);
+    });
   let conversionCntList: number[] = [];
-  testData.map((x) => {
-    conversionCntList.push(x.k_Trans);
-  });
+  dataList &&
+    dataList.map((x) => {
+      conversionCntList.push(x.k_Trans);
+    });
 
   let options = {
     xaxis: {

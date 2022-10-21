@@ -1,0 +1,41 @@
+@import "../../../styles/colors";
+
+.tableContainer {
+  width: 83vw;
+  margin-top: 40px;
+  border-radius: 5px;
+  border-collapse: collapse;
+  background: $bg_white;
+}
+.tHead {
+  width: 83vw;
+  height: 50px;
+  font-weight: 700;
+  background: $bg_gray300;
+  .th {
+    font-size: 12px;
+    height: 50px;
+    &:first-child {
+      border-radius: 5px 0px 0px 0px;
+    }
+    &:last-child {
+      border-radius: 0px 5px 0px 0px;
+    }
+  }
+}
+.tBody {
+  .tr {
+    border-bottom: 1px solid $lc_gray300;
+    &:last-child {
+      border-radius: 0px 0px 5px 5px;
+      border-bottom: none;
+    }
+    .td {
+      font-size: 12px;
+      text-align: center;
+      &.hidden {
+        color: $fc_white;
+      }
+    }
+  }
+}
