@@ -1,5 +1,5 @@
 import { ProdDelBtn, SmallGrayBtn } from "../../../elements/buttons/Buttons";
-import styles from "./adButton.module.scss";
+import styles from  "./adButton.module.scss";
 import { SetStateAction, Dispatch } from "react";
 
 interface PropsType {

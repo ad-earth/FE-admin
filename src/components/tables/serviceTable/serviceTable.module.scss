@@ -1,0 +1,73 @@
+@import "../../../styles/colors";
+
+.buttonWrapper {
+  width: 83vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &.download {
+      width: 130px;
+      height: 40px;
+      border: 1px solid $lc_blue400;
+      border-radius: 5px;
+      background: $bg_white;
+      text-decoration: none;
+    }
+  }
+}
+.tableContainer {
+  width: 83vw;
+  margin-top: 16px;
+  border-radius: 5px;
+  border-collapse: collapse;
+  background: $bg_white;
+}
+.tHead {
+  width: 83vw;
+  font-weight: 700;
+  background: $bg_gray300;
+  .th {
+    font-size: 12px;
+    height: 50px;
+    &:first-child {
+      border-radius: 5px 0px 0px 0px;
+    }
+    &:last-child {
+      border-radius: 0px 5px 0px 0px;
+    }
+    input {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+.tBody {
+  tr {
+    border-bottom: 1px solid $lc_gray300;
+    &:last-child {
+      border-radius: 0px 0px 5px 5px;
+      border-bottom: none;
+    }
+    td {
+      height: 50px;
+      font-size: 12px;
+      text-align: center;
+      input {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}
+a {
+  text-decoration: none;
+  color: $fc_blue400;
+  font-weight: 500;
+}

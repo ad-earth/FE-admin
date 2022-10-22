@@ -1,4 +1,4 @@
-import { getAdProducts } from "../../../shared/apis/api";
+import { getAd } from "../../../shared/apis/api";
 import { useQuery } from "react-query";
 import { AxiosResponse, AxiosError } from "axios";
 
@@ -12,7 +12,7 @@ interface ResType {
 }
 
 export function useAdProducts() {
-  const fetchProd = async () => await getAdProducts();
+  const fetchProd = async () => await getAd();
   return useQuery<AxiosResponse<ResType>, AxiosError>("adProducts", () =>
     fetchProd()
   );

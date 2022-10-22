@@ -7,4 +7,5 @@ export interface PropsType {
   setInputNum?: (val: number) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   min?: number;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
 }

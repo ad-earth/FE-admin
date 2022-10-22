@@ -1,28 +1,25 @@
 import axiosInstance from "./instance";
 
 // 로그인
-export const _postLogin = (id: string, pwd: string) =>
+export const postLogin = (id: string, pwd: string) =>
   axiosInstance.post(`/admins/login`, { a_Id: id, a_Pw: pwd });
+
 // 아이디 찾기
-export const _getId = (shop: string, buisnessNo: string) =>
-  axiosInstance.get(`/admins/find-id`, {
-    params: {
-      a_Brand: shop,
-      a_Number: buisnessNo,
-    },
-  });
+export const getId = (brand: string, businessNumber: string) =>
+  axiosInstance.get(
+    `/admins/find-id?a_Brand=${brand}&a_Number=${businessNumber}`
+  );
+
 // 비밀번호 찾기 1차
-export const _getPwd = (id: string, buisnessNo: string) =>
-  axiosInstance.get(`/admins/find-password`, {
-    params: {
-      a_Id: id,
-      a_Number: buisnessNo,
-    },
-  });
+export const getPwd = (id: string, businessNumber: string) =>
+  axiosInstance.get(
+    `/admins/find-password?a_Id=${id}&a_Number=${businessNumber}`
+  );
+
 // 비밀번호 재설정 2차
-export const _putPwd = (id: number, newPwd: string) =>
+export const putPwd = (authNumber: number, newPwd: string) =>
   axiosInstance.put(`/admins/reset-password`, {
-    a_Idx: id,
+    a_Idx: authNumber,
     a_Pw: newPwd,
   });
 
@@ -63,8 +60,36 @@ export const delProducts = (item: number[]) =>
 export const putProducts = (p_No: number) =>
   axiosInstance.put(`/admin-products/status/${p_No}`);
 
+// 배송관리 주문확정
+export const putOrderConfirm = (
+  confirmList: { o_No: number; p_No: number }[]
+) =>
+  axiosInstance.put(`/order-list`, {
+    confirm: confirmList,
+  });
+
+// 배송관리 조회
+export const getOrders = (
+  page: string,
+  postQty: string,
+  date: string,
+  product: string,
+  status: string
+) =>
+  axiosInstance.get(
+    `/order-list?page=${page}&maxpost=${postQty}&date=${date}&p_Name=${product}&o_Status=${status}`
+  );
+
+// 상품보고서 조회
+export const getSalesReport = (category: string, date: string) =>
+  axiosInstance.get(`/sales-report?p_Category=${category}&date=${date}`);
+
+// 광고보고서 조회
+export const getAdReport = (date: string, productNumber: string) =>
+  axiosInstance.get(`/ad-report?date=${date}&p_No=${productNumber}`);
+
 //광고관리
-export const getAdProducts = () => axiosInstance.get(`/admin-products/list`); //상품조회
+export const getAd = () => axiosInstance.get(`/admin-products/list`); //상품조회
 export const getAdProd = (p_No: number) =>
   axiosInstance.get(`/admin-keywords/${p_No}`); //광고상품 조회
 export const postAdProd = (
