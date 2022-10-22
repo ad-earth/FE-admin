@@ -37,13 +37,21 @@ const SetAdSection = () => {
   // 드롭다운 데이터 가공
   useEffect(() => {
     if (productList?.data.productList.length > 0) {
-      const pName = productList.data.productList.map((list) => list.p_Name);
-      const pNo = productList.data.productList.map((list) => list.p_No);
-      setCopyList(productList.data.productList);
-      setSelectList(pName);
-      setSelected(pName[0]);
-      setSelectedPNo(pNo[0]);
-    }
+      if (selected === "상품없음") {
+        const pName = productList.data.productList.map((list) => list.p_Name);
+        setCopyList(productList.data.productList);
+        const pNo = productList.data.productList.map((list) => list.p_No);
+        setSelected(pName[0]);
+        setSelectedPNo(pNo[0]);
+        setSelectList(pName);
+      } else {
+        const found = productList?.data.productList.find(
+          (e) => e.p_Name === selected
+        );
+        // console.log(found);
+        setSelectedPNo(found?.p_No);
+      }
+    } else setSelectList(["상품없음"]);
   }, [productList]);
 
   //조회 버튼 클릭시 상품 데이터 요청
