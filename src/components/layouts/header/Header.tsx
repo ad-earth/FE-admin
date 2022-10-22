@@ -18,9 +18,7 @@ const Header = () => {
     showModal({
       modalType: "LogoutModal",
       modalProps: {
-        message: "로그아웃 하시겠습니까?",
-        confirmText: "로그아웃",
-        cancelText: "취소",
+        title: "로그아웃 하시겠습니까?",
       },
     });
   };
