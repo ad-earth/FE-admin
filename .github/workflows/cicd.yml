@@ -12,6 +12,14 @@ jobs:
 
       - name: Check Node v
         run: node -v
+        
+        
+      - name: setting .env
+        run: |
+         echo "REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL" >> .env.production
+        env:
+         REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
+ 
 
       - name: Install Dependencies
         run: yarn
