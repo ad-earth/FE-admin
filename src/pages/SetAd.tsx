@@ -1,5 +1,5 @@
 import React from "react";
-import SetAdSection from "../components/setAd/SetAdSection";
+import SetAdSection from "../components/setAd/setAdSection/SetAdSection";
 import styles from "./styles/setAd.module.scss";
 
 const SetAd = () => {

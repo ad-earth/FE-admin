@@ -76,7 +76,7 @@ const PostForm = () => {
               </div>
               <p>할인율</p>
               <div className={styles.contWrap}>
-                <Input100 />
+                {/* <Input100 /> */}
                 <span>%</span>
                 <p>1000원</p>
               </div>

@@ -80,15 +80,15 @@ const SetProdSection = () => {
   }, [addhandler]);
   //상품 삭제
   useEffect(() => {
-    // if (delhandler) {
-    //   checkedItems.length !== 0
-    //     ? mutate(checkedItems, {
-    //         onSuccess: () => {
-    //           alert("삭제완료");
-    //         },
-    //       })
-    //     : alert("삭제할 상품이 없습니다.");
-    // }
+    if (delhandler) {
+      checkedItems.length !== 0
+        ? mutate(checkedItems, {
+            onSuccess: () => {
+              alert("삭제완료");
+            },
+          })
+        : alert("삭제할 상품이 없습니다.");
+    }
     setDelhandler(false);
   }, [delhandler]);
 
