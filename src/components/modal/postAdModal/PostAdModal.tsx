@@ -84,6 +84,7 @@ const PostAdModal = (props: PostAdType) => {
     adStatus
       ? setInitalState((prev) => ({
           ...prev,
+          level: 1,
           adStatus: true,
         }))
       : setInitalState((prev) => ({
@@ -97,16 +98,17 @@ const PostAdModal = (props: PostAdType) => {
 
   //모달 닫기
   const { hideModal } = useModal();
-
-  const bodyData = {
-    pNo: initalState.pNo,
-    keyword: initalState.keyword,
-    level: initalState.level,
-    cost: initalState.cost,
-    adStatus: initalState.adStatus,
-  };
+  console.log(initalState);
   //광고 추가 , 수정 버튼 클릭
   const btnClick = () => {
+    const bodyData = {
+      pNo: initalState.pNo,
+      keyword: initalState.keyword,
+      level: initalState.level,
+      cost: initalState.cost,
+      adStatus: initalState.adStatus,
+    };
+
     switch (title) {
       case "광고등록":
         if (initalState.levelCost <= initalState.cost) {
