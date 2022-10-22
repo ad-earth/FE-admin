@@ -98,20 +98,18 @@ const PostAdModal = (props: PostAdType) => {
   //모달 닫기
   const { hideModal } = useModal();
 
+  const bodyData = {
+    pNo: initalState.pNo,
+    keyword: initalState.keyword,
+    level: initalState.level,
+    cost: initalState.cost,
+    adStatus: initalState.adStatus,
+  };
   //광고 추가 , 수정 버튼 클릭
   const btnClick = () => {
-    const bodyData = {
-      pNo: initalState.pNo,
-      keyword: initalState.keyword,
-      level: initalState.level,
-      cost: initalState.cost,
-      adStatus: initalState.adStatus,
-    };
-    // console.log(bodyData);
-
-    if (initalState.levelCost <= initalState.cost) {
-      switch (title) {
-        case "광고등록":
+    switch (title) {
+      case "광고등록":
+        if (initalState.levelCost <= initalState.cost) {
           addMutate(bodyData, {
             onSuccess: () => {
               alert("등록 완료");
@@ -123,23 +121,34 @@ const PostAdModal = (props: PostAdType) => {
               setErrorMessage(errMsg);
             },
           });
-          break;
-        case "광고수정":
+        } else {
+          alert("입찰가가 예상금액보다 낮습니다.");
+        }
+        break;
+      case "광고수정":
+        if (bodyData.adStatus) {
+          initalState.levelCost <= initalState.cost
+            ? changeMutate(bodyData, {
+                onSuccess: () => {
+                  alert("수정 완료");
+                  hideModal();
+                },
+              })
+            : alert("입찰가가 예상금액보다 낮습니다.");
+        } else {
           changeMutate(bodyData, {
             onSuccess: () => {
               alert("수정 완료");
               hideModal();
             },
           });
-          break;
-        default:
-          console.log(`err : ${title}`);
-      }
-    } else {
-      alert("입찰가가 예상금액보다 낮습니다.");
+        }
+
+        break;
+      default:
+        console.log(`err : ${title}`);
     }
   };
-  // console.log(errorMessage);
   return (
     <div className={styles.postAdModal}>
       <div className={styles.modalContent}>
