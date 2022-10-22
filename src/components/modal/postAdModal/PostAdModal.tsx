@@ -79,26 +79,33 @@ const PostAdModal = (props: PostAdType) => {
         levelCost: resLevelCost.data.levelCost,
       }));
   }, [resLevelCost]);
+
   //스위치 감지 업데이트
   useEffect(() => {
-    adStatus
-      ? setInitalState((prev) => ({
-          ...prev,
-          level: 1,
-          adStatus: true,
-        }))
-      : setInitalState((prev) => ({
-          ...prev,
-          level: 5,
-          levelCost: 0,
-          cost: 0,
-          adStatus: false,
-        }));
+    if (adStatus) {
+      setInitalState((prev) => ({
+        ...prev,
+        keyword: state.keyword ? state.keyword : "",
+        level: 1,
+        adStatus: true,
+      }));
+      console.log(initalState.keyword);
+    } else {
+      setInitalState((prev) => ({
+        ...prev,
+        keyword: state.keyword ? state.keyword : "",
+        level: 5,
+        levelCost: 0,
+        cost: 0,
+        adStatus: false,
+      }));
+      setInput("");
+    }
   }, [adStatus]);
 
   //모달 닫기
   const { hideModal } = useModal();
-  console.log(initalState);
+  // console.log(initalState);
   //광고 추가 , 수정 버튼 클릭
   const btnClick = () => {
     const bodyData = {
@@ -112,15 +119,15 @@ const PostAdModal = (props: PostAdType) => {
     switch (title) {
       case "광고등록":
         if (initalState.levelCost <= initalState.cost) {
+          bodyData.keyword = input;
           addMutate(bodyData, {
             onSuccess: () => {
               alert("등록 완료");
               hideModal();
             },
             onError: (error) => {
-              const errMsg = error.response.data.errorMessage;
-              //에러 핸들링
-              setErrorMessage(errMsg);
+              // const errMsg = error.response.data.errorMessage;
+              setErrorMessage(error.response.data.errorMessage);
             },
           });
         } else {
@@ -143,6 +150,9 @@ const PostAdModal = (props: PostAdType) => {
               alert("수정 완료");
               hideModal();
             },
+            onError: (error) => {
+              setErrorMessage(error.response.data.errorMessage);
+            },
           });
         }
 
@@ -151,6 +161,7 @@ const PostAdModal = (props: PostAdType) => {
         console.log(`err : ${title}`);
     }
   };
+  console.log(initalState.keyword);
   return (
     <div className={styles.postAdModal}>
       <div className={styles.modalContent}>
@@ -206,14 +217,19 @@ const PostAdModal = (props: PostAdType) => {
                   setInput(e.target.value)
                 }
               />
-              <SmallGrayBtn onClick={keywordClick}>조회</SmallGrayBtn>
+              {initalState.adStatus && (
+                <SmallGrayBtn onClick={keywordClick}>조회</SmallGrayBtn>
+              )}
             </div>
           )}
         </>
-        <PostAdTable
-          initalState={initalState}
-          setInitalState={setInitalState}
-        />
+        {initalState.adStatus && (
+          <PostAdTable
+            initalState={initalState}
+            setInitalState={setInitalState}
+          />
+        )}
+
         {errorMessage && <span className={styles.errMsg}>{errorMessage}</span>}
         <MediumBlueBtn onClick={btnClick}>{title}</MediumBlueBtn>
       </div>

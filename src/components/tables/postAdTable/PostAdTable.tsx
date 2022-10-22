@@ -22,6 +22,7 @@ const PostAdTable = ({
   setInitalState: Dispatch<SetStateAction<PropsType>>;
 }) => {
   const { level, levelCost, adStatus, keyword, cost } = initalState;
+  // console.log(keyword);
   //elememt 드롭다운 감지
   const [selected, setSelected] = useState<string>();
   const [inputNum, setInputNum] = useState<number>();
@@ -46,44 +47,34 @@ const PostAdTable = ({
             ))}
           </tr>
         </thead>
-        {adStatus ? (
-          keyword ? (
-            <tbody>
-              <tr>
-                <td>{keyword}</td>
-                <td>
-                  <SmallDropdown
-                    itemList={["1", "2", "3", "4"]}
-                    selected={level ? (level === 5 ? "1" : String(level)) : "1"}
-                    setSelected={setSelected}
-                  />
-                </td>
-                <td>{levelCost} 원</td>
-                <td>
-                  <Input100
-                    type="number"
-                    min={levelCost ? levelCost : 0}
-                    placeholder={`${levelCost ? levelCost : 0}`}
-                    value={String(cost ? cost : "")}
-                    setInputNum={setInputNum}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          ) : (
-            <tbody>
-              <tr>
-                <td className={styles.none}>
-                  키워드를 입력후 조회가 가능합니다.
-                </td>
-              </tr>
-            </tbody>
-          )
+        {keyword ? (
+          <tbody>
+            <tr>
+              <td>{keyword}</td>
+              <td>
+                <SmallDropdown
+                  itemList={["1", "2", "3", "4"]}
+                  selected={level ? (level === 5 ? "1" : String(level)) : "1"}
+                  setSelected={setSelected}
+                />
+              </td>
+              <td>{levelCost} 원</td>
+              <td>
+                <Input100
+                  type="number"
+                  min={levelCost ? levelCost : 0}
+                  placeholder={`${levelCost ? levelCost : 0}`}
+                  value={String(cost ? cost : "")}
+                  setInputNum={setInputNum}
+                />
+              </td>
+            </tr>
+          </tbody>
         ) : (
           <tbody>
             <tr>
               <td className={styles.none}>
-                광고 스위치를 켠 후 조회가 가능합니다.
+                키워드를 입력후 조회가 가능합니다.
               </td>
             </tr>
           </tbody>
