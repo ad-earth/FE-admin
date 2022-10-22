@@ -12,12 +12,20 @@ jobs:
 
       - name: Check Node v
         run: node -v
+        
+        
+      - name: setting .env
+        run: |
+         echo "REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL" >> .env.production
+        env:
+         REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
+ 
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn
 
       - name: Build
-        run: CI='' yarn build
+        run: unset CI && yarn build
 
       # aws user 연결
       - name: Configure AWS credentials 
