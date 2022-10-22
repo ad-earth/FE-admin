@@ -35,7 +35,11 @@ export const SignUpBlueButton = (props: SignUpType) => {
 };
 
 export const MediumBlueBtn = (props: PropsType) => {
-  return <button className="second blue">{props.children}</button>;
+  return (
+    <button className="second blue" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const MediumWhiteBtn = (props: PropsType) => {
   return <button className="second white">{props.children}</button>;
