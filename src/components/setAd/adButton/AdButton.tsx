@@ -1,5 +1,5 @@
 import { ProdDelBtn, SmallGrayBtn } from "../../../elements/buttons/Buttons";
-import styles from  "./adButton.module.scss";
+// import styles from  "./adButton.module.scss";
 import { SetStateAction, Dispatch } from "react";
 
 interface PropsType {
@@ -8,7 +8,7 @@ interface PropsType {
 }
 const AdButton = ({ setDelhandler, setAddhandler }: PropsType) => {
   return (
-    <div className={styles.btnBox}>
+    <div>
       <ProdDelBtn onClick={() => setDelhandler(true)} />
       <SmallGrayBtn onClick={() => setAddhandler(true)}>
         키워드 등록
