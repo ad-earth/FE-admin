@@ -89,4 +89,40 @@ export const getAdReport = (date: string, productNumber: string) =>
   axiosInstance.get(`/ad-report?date=${date}&p_No=${productNumber}`);
 
 //광고관리
-export const getAd = () => axiosInstance.get(`/admin-products/list`);
+export const getAd = () => axiosInstance.get(`/admin-products/list`); //상품조회
+export const getAdProd = (p_No: number) =>
+  axiosInstance.get(`/admin-keywords/${p_No}`); //광고상품 조회
+export const postAdProd = (
+  p_No: number,
+  keyword: string,
+  k_Level: number,
+  k_Cost: number,
+  k_Status: boolean
+) =>
+  axiosInstance.post(`/admin-keywords/${p_No}`, {
+    keyword,
+    k_Level,
+    k_Cost,
+    k_Status,
+  }); //광고상품 등록
+export const putAdProd = (
+  p_No: number,
+  keyword: string,
+  k_Level: number,
+  k_Cost: number,
+  k_Status: boolean
+) =>
+  axiosInstance.put(`/admin-keywords/${p_No}`, {
+    keyword,
+    k_Level,
+    k_Cost,
+    k_Status,
+  }); //광고상품 수정
+export const delAdProd = (p_No: number, item: number[]) =>
+  axiosInstance.delete(`/admin-keywords/${p_No}`, {
+    data: { keywordList: item },
+  }); //광고 삭제
+export const getAdLevel = (p_No: number, keyword: string, k_Level: number) =>
+  axiosInstance.get(
+    `/ad-keyword?p_No=${p_No}&keyword=${keyword}&k_Level=${k_Level}` //키워드 예상금액 조희
+  );

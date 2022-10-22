@@ -12,10 +12,8 @@ const Nav = () => {
     showModal({
       modalType: "WithdrawalModal",
       modalProps: {
-        message:
+        title:
           "가입된 회원정보가 모두 삭제됩니다.회원 탈퇴를 진행하시겠습니까?",
-        confirmText: "탈퇴하기",
-        cancelText: "취소",
       },
     });
   };
@@ -58,9 +56,3 @@ const nav = [
 ];
 
 export default Nav;
-
-// EditProd - 상품수정
-// PostAd - 광고등록
-// SetAd  - 광고관리
-// PostProd - 상품등록
-// SetProd - 상품관리

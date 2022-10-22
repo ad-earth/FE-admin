@@ -30,7 +30,7 @@ const SetProdTabel = (props: PropsType) => {
     });
   };
   return (
-    <div className={styles.setProdTabel}>
+    <div className={styles.setProdTable}>
       <table>
         <thead>
           <tr>
@@ -43,7 +43,7 @@ const SetProdTabel = (props: PropsType) => {
                 }
               />
             </th>
-            {selectList.map((item) => (
+            {thList.map((item) => (
               <th key={item}>{item}</th>
             ))}
           </tr>
@@ -94,7 +94,7 @@ const SetProdTabel = (props: PropsType) => {
 
 export default SetProdTabel;
 
-const selectList = [
+const thList = [
   "No",
   "상품번호",
   "카테고리",

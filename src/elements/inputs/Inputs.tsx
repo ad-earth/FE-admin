@@ -57,8 +57,19 @@ export const SingUpPwdInput = (props: PropsType) => {
 
 // w 100px, h 40px
 // 상품등록 & 광고등록
-export const Input100 = () => {
-  return <input className="input100" placeholder="0" type="text" />;
+export const Input100 = (props: PropsType) => {
+  return (
+    <input
+      className="input100"
+      placeholder={props.placeholder}
+      type={props.type}
+      value={props.value}
+      onChange={(e) => {
+        props.setInputNum && props.setInputNum(Number(e.target.value));
+      }}
+      min={props.min}
+    />
+  );
 };
 
 // w 200px, h 40px
@@ -77,8 +88,17 @@ export const Input250 = () => {
 
 // w 290px, h 40px
 // 광고등록
-export const Input290 = () => {
-  return <input className="input290" placeholder="키워드 입력" type="text" />;
+export const Input290 = (props: PropsType) => {
+  const { value, onChange, placeholder } = props;
+  return (
+    <input
+      className="input290"
+      placeholder={placeholder}
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 // w 500px, h 40px

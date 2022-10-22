@@ -10,14 +10,12 @@ import { useWithdrawal } from "./useWithdrawal";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-export interface WithdrawalModal {
-  message: string;
-  cancelText: string;
-  confirmText: string;
+export interface WithdrawalType {
+  title: string;
 }
 
-const Withdrawal = (props: WithdrawalModal) => {
-  const { message, cancelText, confirmText } = props;
+const WithdrawalModal = (props: WithdrawalType) => {
+  const { title } = props;
   const navigate = useNavigate();
   //에러메세지
   const [errMsg, setErrMsg] = useState<string>();
@@ -46,13 +44,11 @@ const Withdrawal = (props: WithdrawalModal) => {
   return (
     <div className={styles.withdrawal}>
       <div className={styles.modalContent}>
-        <h2>{message}</h2>
+        <h2>{title}</h2>
         <div className={styles.btnBox}>
-          <ModalCancelBtn onClick={() => hideModal()}>
-            {cancelText}
-          </ModalCancelBtn>
-          <ModalDelBtn>{confirmText}</ModalDelBtn>
-          {/* <ModalDelBtn onClick={() => mutate()}>{confirmText}</ModalDelBtn> */}
+          <ModalCancelBtn onClick={() => hideModal()}>취소</ModalCancelBtn>
+          <ModalDelBtn>탈퇴하기</ModalDelBtn>
+          {/* <ModalDelBtn onClick={() => mutate()}>탈퇴하기</ModalDelBtn> */}
         </div>
       </div>
       <Snackbar
@@ -67,4 +63,4 @@ const Withdrawal = (props: WithdrawalModal) => {
   );
 };
 
-export default Withdrawal;
+export default WithdrawalModal;
