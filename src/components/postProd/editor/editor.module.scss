@@ -1,0 +1,10 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+.reactQuill {
+  @include size(1378px, 704px);
+}
