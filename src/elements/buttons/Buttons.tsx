@@ -22,13 +22,21 @@ export const LoginJiguButton = () => {
 };
 
 export const MediumBlueBtn = (props: PropsType) => {
-  return <button className="second blue">{props.children}</button>;
+  return (
+    <button className="second blue" onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };
 export const MediumWhiteBtn = (props: PropsType) => {
   return <button className="second white">{props.children}</button>;
 };
 export const SmallBlueBtn = (props: PropsType) => {
-  return <button className="third blue">{props.children}</button>;
+  return (
+    <button className="third blue" {...props}>
+      {props.children}
+    </button>
+  );
 };
 export const SmallWhiteBtn = (props: PropsType) => {
   return <button className="third white">{props.children}</button>;

@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { PropsType } from "./inputs.type";
 import "./_inputs.style.scss";
 
@@ -32,22 +33,53 @@ export const PwdInput = (props: PropsType) => {
 
 // w 100px, h 40px
 // 상품등록 & 광고등록
-export const Input100 = () => {
-  return <input className="input100" placeholder="0" type="text" />;
+export const Input100 = (props: PropsType) => {
+  return (
+    <input
+      className="input100"
+      placeholder={props.placeholder}
+      type={props.type}
+      value={props.value}
+      onChange={(e) => {
+        props.setInput && props.setInput(e.target.value);
+      }}
+    />
+  );
 };
 
 // w 200px, h 40px
 // 상품등록
-export const Input200 = (props: PropsType) => {
-  return (
-    <input className="input200" placeholder={props.placeholder} type="text" />
-  );
-};
+export const Input200 = forwardRef<HTMLInputElement, PropsType>(
+  (props, ref) => {
+    return (
+      <input
+        className="input200"
+        placeholder={props.placeholder}
+        disabled={props.disabled}
+        value={props.value}
+        name={props.name}
+        type="text"
+        ref={ref}
+        onChange={props.onChange}
+      />
+    );
+  }
+);
 
 // w 250px, h 40px
 // 상품등록
-export const Input250 = () => {
-  return <input className="input250" placeholder="상품 가격" type="text" />;
+export const Input250 = (props: PropsType) => {
+  return (
+    <input
+      className="input250"
+      placeholder={props.placeholder}
+      type="text"
+      value={props.value}
+      onChange={(e) => {
+        props.setInput && props.setInput(e.target.value);
+      }}
+    />
+  );
 };
 
 // w 290px, h 40px
@@ -58,6 +90,16 @@ export const Input290 = () => {
 
 // w 500px, h 40px
 // 상품등록
-export const Input500 = () => {
-  return <input className="input500" placeholder="상품명" type="text" />;
+export const Input500 = (props: PropsType) => {
+  return (
+    <input
+      className="input500"
+      placeholder={props.placeholder}
+      type="text"
+      value={props.value}
+      onChange={(e) => {
+        props.setInput && props.setInput(e.target.value);
+      }}
+    />
+  );
 };
