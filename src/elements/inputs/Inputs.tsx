@@ -3,7 +3,7 @@ import { PropsType } from "./inputs.type";
 import "./_inputs.style.scss";
 
 // w 335px, h 60px
-// 로그인 & 계정찾기 & 회원가입
+// 로그인 & 계정찾기
 export const LoginInput = (props: PropsType) => {
   return (
     <input
@@ -11,9 +11,8 @@ export const LoginInput = (props: PropsType) => {
       placeholder={props.placeholder}
       type="text"
       value={props.value}
-      onChange={(e) => {
-        props.setInput && props.setInput(e.target.value);
-      }}
+      onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
     />
   );
 };
@@ -24,9 +23,35 @@ export const PwdInput = (props: PropsType) => {
       placeholder={props.placeholder}
       type="password"
       value={props.value}
-      onChange={(e) => {
-        props.setInput && props.setInput(e.target.value);
-      }}
+      onChange={(e) => props.setInput(e.target.value)}
+      onKeyDown={props.onKeyDown}
+    />
+  );
+};
+//회원가입
+export const SingUpInput = (props: PropsType) => {
+  const { value, name, placeholder, onChange } = props;
+  return (
+    <input
+      className="login"
+      placeholder={placeholder}
+      type="text"
+      value={value}
+      name={name}
+      onChange={onChange}
+    />
+  );
+};
+export const SingUpPwdInput = (props: PropsType) => {
+  const { value, name, placeholder, onChange } = props;
+  return (
+    <input
+      className="login"
+      placeholder={placeholder}
+      type="password"
+      value={value}
+      name={name}
+      onChange={onChange}
     />
   );
 };
@@ -41,8 +66,9 @@ export const Input100 = (props: PropsType) => {
       type={props.type}
       value={props.value}
       onChange={(e) => {
-        props.setInput && props.setInput(e.target.value);
+        props.setInputNum && props.setInputNum(Number(e.target.value));
       }}
+      min={props.min}
     />
   );
 };
@@ -84,8 +110,17 @@ export const Input250 = (props: PropsType) => {
 
 // w 290px, h 40px
 // 광고등록
-export const Input290 = () => {
-  return <input className="input290" placeholder="키워드 입력" type="text" />;
+export const Input290 = (props: PropsType) => {
+  const { value, onChange, placeholder } = props;
+  return (
+    <input
+      className="input290"
+      placeholder={placeholder}
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 // w 500px, h 40px

@@ -10,7 +10,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 5,
-      width: 200,
+      width: 250,
     },
   },
 };
@@ -23,7 +23,7 @@ const MenuProps2 = {
   },
 };
 
-// 200*40
+// 250*40
 export const MediumDropdown = (props: PropsType) => {
   return (
     <FormControl>

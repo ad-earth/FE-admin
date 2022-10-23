@@ -55,7 +55,7 @@ export default AdSummary;
 //default data
 const seriesData = [
   { name: "광고비", data: [0, 0, 0] },
-  { name: "매출", data: [233, 0, 0] },
+  { name: "매출", data: [0, 0, 0] },
 ];
 
 let optionData = {

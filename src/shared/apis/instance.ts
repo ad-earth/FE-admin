@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
-  baseURL: process.env.REACT_APP_SERVER,
+  baseURL: process.env.REACT_APP_SERVER_URL,
 };
 const axiosInstance = axios.create(axiosConfig);
 
@@ -11,7 +11,7 @@ axiosInstance.interceptors.request.use(
     if (!config.headers) config.headers = {};
     config.headers["Content-Type"] = "application/json; charset=utf-8";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
-    config.headers["Authorization"] = localStorage.getItem("token");
+    config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
     config.headers.Accept = "application/json";
     return config;
   },

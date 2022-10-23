@@ -6,33 +6,7 @@
   flex-direction: column;
   align-items: center;
 }
-.buttonWrapper {
-  width: 83vw;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 16px;
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    &.download {
-      width: 130px;
-      height: 40px;
-      border: 1px solid $lc_blue400;
-      border-radius: 5px;
-      background: $bg_white;
-      text-decoration: none;
-    }
-  }
-}
 .pagination {
   margin-top: 40px;
   padding-bottom: 40px;
-}
-a {
-  text-decoration: none;
-  color: $fc_blue400;
-  font-weight: 500;
 }

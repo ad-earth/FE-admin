@@ -24,10 +24,11 @@ $radius: 5px;
 //--bizMoney (home,nav) --
 .bizMoney.home {
   width: 100%;
-  height: 225px;
+  height: 205px;
   padding: 20px;
   background: $bg_color_home url("../../../assets/bizBg.svg") no-repeat right
     center;
+  margin-bottom: 20px;
 }
 .bizMoney.nav {
   width: calc(100% - 32px);

@@ -1,63 +1,35 @@
 @import "../../../styles/colors";
 
-@mixin size($w, $h) {
-  width: $w;
-  height: $h;
-}
-@mixin logo_size {
-  @include size(200px, 50px);
-}
 @mixin center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container {
-  @include size(50vw, 100vh);
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 62px-16px;
+}
+.errorMsg {
+  color: $fc_red;
+  margin-top: 25px;
+}
+.buttonWrapper {
   @include center;
-  background: $bg_white;
-  .loginWrapper {
-    width: 35vw;
-    @include center;
-    flex-direction: column;
-    .loginTitle {
-      color: $fc_blue300;
-      margin-top: 25px;
-      font: {
-        size: 24px;
-        weight: 500;
-      }
-    }
-    .inputWrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 62px-16px;
-    }
-    .errorMsg {
-      color: $fc_red;
-      margin-top: 25px;
-    }
-    .buttonWrapper {
-      @include center;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 16px;
-      &.row {
-        flex-direction: row;
-        margin-top: 32px;
-        color: $fc_gray500;
-        button {
-          border: none;
-          background: none;
-          color: $fc_gray500;
-          cursor: pointer;
-        }
-      }
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  &.row {
+    flex-direction: row;
+    margin-top: 32px;
+    color: $fc_gray500;
+    button {
+      border: none;
+      background: none;
+      color: $fc_gray500;
+      cursor: pointer;
     }
   }
-}
-.logo {
-  @include logo_size;
 }

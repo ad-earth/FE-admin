@@ -20,6 +20,8 @@ import AdReport from "./pages/AdReport";
 import NotFound from "./pages/NotFound";
 //loading indicator
 import Loading from "./elements/Loading";
+//GlobalModal components
+import GlobalModal from "./components/modal/GlobalModal";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +35,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
+        <GlobalModal />
         <Loading />
         <Routes>
           <Route path="/" element={<DefaultLoginLayout />}>
@@ -46,7 +49,7 @@ function App() {
             <Route path="postProd" element={<PostProd />} />
             <Route path="editProd" element={<EditProd />} />
             <Route path="/shipping_service" element={<SetParcel />} />
-            <Route path="/prod_report" element={<ProdReport />} />
+            <Route path="/sales_report" element={<ProdReport />} />
             <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
             <Route path="/ad_report" element={<AdReport />} />
