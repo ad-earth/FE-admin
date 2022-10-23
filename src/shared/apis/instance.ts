@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
-  baseURL: process.env.REACT_APP_LOCAL,
+  baseURL: process.env.REACT_APP_SERVER,
 };
 const axiosInstance = axios.create(axiosConfig);
 

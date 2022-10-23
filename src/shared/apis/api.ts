@@ -62,3 +62,7 @@ export const delProducts = (item: number[]) =>
   axiosInstance.delete(`/admin-products`, { data: { p_No: item } });
 export const putProducts = (p_No: number) =>
   axiosInstance.put(`/admin-products/status/${p_No}`);
+
+// test
+export const test = (p_Content: string) =>
+  axiosInstance.put(`/admin-products/content/1665346898889`, { p_Content });
