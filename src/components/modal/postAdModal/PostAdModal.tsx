@@ -86,10 +86,9 @@ const PostAdModal = (props: PostAdType) => {
       setInitalState((prev) => ({
         ...prev,
         keyword: state.keyword ? state.keyword : "",
-        level: 1,
+        level: state.level ? (state.level === 5 ? 1 : state.level) : 1,
         adStatus: true,
       }));
-      console.log(initalState.keyword);
     } else {
       setInitalState((prev) => ({
         ...prev,
@@ -120,16 +119,19 @@ const PostAdModal = (props: PostAdType) => {
       case "광고등록":
         if (initalState.levelCost <= initalState.cost) {
           bodyData.keyword = input;
-          addMutate(bodyData, {
-            onSuccess: () => {
-              alert("등록 완료");
-              hideModal();
-            },
-            onError: (error) => {
-              // const errMsg = error.response.data.errorMessage;
-              setErrorMessage(error.response.data.errorMessage);
-            },
-          });
+          const inputCheck =
+            bodyData?.keyword !== " " && bodyData?.keyword?.length !== 0;
+          inputCheck
+            ? addMutate(bodyData, {
+                onSuccess: () => {
+                  alert("등록 완료");
+                  hideModal();
+                },
+                onError: (error) => {
+                  setErrorMessage(error.response.data.errorMessage);
+                },
+              })
+            : alert("키워드를 입력해주세요");
         } else {
           alert("입찰가가 예상금액보다 낮습니다.");
         }
@@ -161,14 +163,17 @@ const PostAdModal = (props: PostAdType) => {
         console.log(`err : ${title}`);
     }
   };
-  console.log(initalState.keyword);
+  const Head = (
+    <div className={styles.head}>
+      <h3>{title}</h3>
+      <img src={cancel} alt="닫기" onClick={() => hideModal()} />
+    </div>
+  );
+
   return (
     <div className={styles.postAdModal}>
       <div className={styles.modalContent}>
-        <div className={styles.head}>
-          <h3>{title}</h3>
-          <img src={cancel} alt="닫기" onClick={() => hideModal()} />
-        </div>
+        {Head}
         <>
           <div className={styles.info}>
             <h5>상품</h5>

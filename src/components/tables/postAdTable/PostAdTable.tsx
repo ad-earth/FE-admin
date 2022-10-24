@@ -22,7 +22,6 @@ const PostAdTable = ({
   setInitalState: Dispatch<SetStateAction<PropsType>>;
 }) => {
   const { level, levelCost, adStatus, keyword, cost } = initalState;
-  // console.log(keyword);
   //elememt 드롭다운 감지
   const [selected, setSelected] = useState<string>();
   const [inputNum, setInputNum] = useState<number>();
