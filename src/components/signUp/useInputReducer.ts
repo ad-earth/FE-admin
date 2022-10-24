@@ -1,5 +1,5 @@
 //정규식 hook
-import { IdCheck, PwdCheck, PhoneCheck } from "../../shared/hooks/useRegExp";
+import { IdCheck, PwdCheck, PhoneCheck } from "../../shared/hooks/regExp";
 //default state data (id,pwd... )
 import { initialValue } from "./initialValue";
 //type
