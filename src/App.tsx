@@ -24,6 +24,7 @@ import GlobalModal from "./components/modal/GlobalModal";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      keepPreviousData: true,
       retry: 2,
     },
   },
