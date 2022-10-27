@@ -11,10 +11,8 @@ import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import SetProd from "./pages/SetProd";
 import PostProd from "./pages/PostProd";
-import EditProd from "./pages/EditProd";
 import SetParcel from "./pages/SetParcel";
 import ProdReport from "./pages/ProdReport";
-import PostAd from "./pages/PostAd";
 import SetAd from "./pages/SetAd";
 import AdReport from "./pages/AdReport";
 import NotFound from "./pages/NotFound";
@@ -47,10 +45,8 @@ function App() {
             <Route path="home" element={<Main />} />
             <Route path="setProd" element={<SetProd />} />
             <Route path="postProd" element={<PostProd />} />
-            <Route path="editProd" element={<EditProd />} />
             <Route path="/shipping_service" element={<SetParcel />} />
             <Route path="/sales_report" element={<ProdReport />} />
-            <Route path="postAd" element={<PostAd />} />
             <Route path="setAd" element={<SetAd />} />
             <Route path="/ad_report" element={<AdReport />} />
           </Route>

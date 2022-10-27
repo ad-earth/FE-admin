@@ -7,7 +7,7 @@ export interface Product {
   p_Name: string;
 }
 
-interface ResType {
+export interface ResType {
   productList: Product[];
 }
 

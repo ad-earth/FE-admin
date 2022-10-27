@@ -1,7 +1,9 @@
 import styles from "./nav.module.scss";
 import { NavLink } from "react-router-dom";
+//components,elements
 import BizMoney from "../../main/bizMoney/BizMoney";
 import { WithdrawalBtn } from "../../../elements/buttons/Buttons";
+//hook
 import useModal from "../../modal/useModal";
 
 const Nav = () => {

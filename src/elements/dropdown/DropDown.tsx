@@ -1,9 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
 import styles from "./dropdown.module.scss";
-import { PropsType } from "./dropdown.type";
+import { PropsType, AllPropsType } from "./dropdown.type";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { InputLabel, OutlinedInput } from "@mui/material";
+import { isPropertyAccessExpression, preProcessFile } from "typescript";
 
 const ITEM_HEIGHT = 40;
 const MenuProps = {
@@ -70,6 +72,35 @@ export const SmallDropdown = (props: PropsType) => {
         {props.itemList.map((item, idx) => (
           <MenuItem selected className={styles.menuItem} key={idx} value={item}>
             {item}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+};
+
+// 250*40
+export const AllMediumDropdown = (props: AllPropsType) => {
+  const { list, setSelected, selected } = props;
+  const selectChange = (e: SelectChangeEvent<number>) => {
+    setSelected(Number(e.target.value));
+  };
+  return (
+    <FormControl>
+      <Select
+        className={styles.select}
+        value={selected}
+        MenuProps={MenuProps}
+        onChange={selectChange}
+      >
+        {list.map((item, idx) => (
+          <MenuItem
+            selected
+            className={styles.menuItem}
+            key={idx}
+            value={item.p_No}
+          >
+            {item.p_Name}
           </MenuItem>
         ))}
       </Select>

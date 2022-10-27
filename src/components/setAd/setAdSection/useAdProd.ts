@@ -18,13 +18,13 @@ interface ResType {
   keywordList: ProductList[];
 }
 
-export function useAdProd(pNo: number) {
-  const fetchProd = async () => await getAdProd(pNo);
+export function useAdProd(filterData: number) {
+  const fetchProd = async () => await getAdProd(filterData);
   return useQuery<AxiosResponse<ResType>, AxiosError>(
-    ["adProd", pNo],
+    ["setAdTable", filterData],
     fetchProd,
     {
-      enabled: !!pNo,
+      enabled: !!filterData,
     }
   );
 }
