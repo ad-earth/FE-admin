@@ -1,4 +1,13 @@
-export interface List {
+export interface Paginationtype {
+  category: string;
+  sort: string;
+  page: number;
+}
+export interface FilterDataType {
+  p_Name: string;
+  p_No: number | null;
+}
+interface List {
   id: number; //index id
   k_No: number;
   keyword: string; //키워드
@@ -8,13 +17,8 @@ export interface List {
   clickCost: number;
   k_Status: boolean;
 }
-export interface AdList {
+//res
+export interface AdTableListType {
   cnt: number;
   keywordList: List[];
-}
-
-export interface Paginationtype {
-  category: string;
-  sort: string;
-  page: number;
 }

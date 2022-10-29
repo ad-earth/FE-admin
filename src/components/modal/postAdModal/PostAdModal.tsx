@@ -3,39 +3,22 @@ import styles from "./postAdModal.module.scss";
 import cancel from "../../../assets/lcon/cancel.svg";
 import PostAdTable from "../../tables/postAdTable/PostAdTable";
 import Switch from "./switch/Switch";
-//hook
 import useModal from "../useModal";
 import { Input290 } from "../../../elements/inputs/Inputs";
-import { useAdLevel } from "./useAdLevel";
-import { usePostAd, usePutAd } from "./usePostAd";
-//recoil
+import { useAdLevelQuery } from "./useAdLevelQuery";
+import { usePostAdQuery, usePutAdQuery } from "./usePostAdQuery";
 import { useRecoilValue } from "recoil";
 import { prodAd } from "../../../store/prodAd";
 import { MediumBlueBtn, SmallGrayBtn } from "../../../elements/buttons/Buttons";
-
 import Tooltip from "@mui/material/Tooltip";
 import info from "../../../assets/lcon/info.svg";
+import { PostAdType, InitalStateType } from "./postAdModal.type";
 
-export interface PostAdType {
-  title: string;
-}
-
-interface ProdAdType {
-  pNo?: number | null;
-  pName?: string | null;
-  keyword?: string | null;
-  level?: number | undefined;
-  levelCost?: number;
-  cost?: number | null;
-  adStatus?: boolean;
-}
-
-const PostAdModal = (props: PostAdType) => {
-  const { title } = props;
-  //modal sstate
+const PostAdModal = ({ title }: PostAdType) => {
+  const { hideModal } = useModal();
   const { seleted, state } = useRecoilValue(prodAd);
 
-  const [initalState, setInitalState] = useState<ProdAdType>({
+  const [initalState, setInitalState] = useState<InitalStateType>({
     pNo: seleted.pNo, //제품 넘버
     pName: seleted.pName, //제품 이름
     keyword: state.keyword, //키워드
@@ -44,6 +27,15 @@ const PostAdModal = (props: PostAdType) => {
     cost: state.cost, //입찰가
     adStatus: state.adStatus, // 광고노출 상태
   });
+  //순위별 예상금액 hook
+  const { data: levelCostRes } = useAdLevelQuery(
+    initalState.pNo,
+    initalState.keyword,
+    initalState.level
+  );
+  //추가,변경 hook
+  const { mutate: addMutate } = usePostAdQuery();
+  const { mutate: changeMutate } = usePutAdQuery();
   //키워드 입력 감지
   const [input, setInput] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -52,33 +44,20 @@ const PostAdModal = (props: PostAdType) => {
 
   // 예상금액 검색 (항상 1위 데이터 )
   const keywordClick = () => {
-    if (adStatus) {
-      input !== "" && input !== " " && input?.length > 0
-        ? setInitalState((prev) => ({ ...prev, keyword: input, level: 1 }))
-        : alert("키워드를 입력해주세요");
-    } else {
-      alert("광고 스위치를 켜주세요");
-    }
+    if (!adStatus) alert("광고 스위치를 켜주세요");
+    input !== "" && input !== " " && input?.length > 0
+      ? setInitalState((prev) => ({ ...prev, keyword: input, level: 1 }))
+      : alert("키워드를 입력해주세요");
   };
-  //순위별 예상금액 hook
-  const { data: resLevelCost } = useAdLevel(
-    initalState.pNo,
-    initalState.keyword,
-    initalState.level
-  );
-  //추가 hook
-  const { mutate: addMutate } = usePostAd();
-  //변경 hook
-  const { mutate: changeMutate } = usePutAd();
 
   //예상금액 업데이트
   useEffect(() => {
-    resLevelCost &&
-      setInitalState((prev) => ({
-        ...prev,
-        levelCost: resLevelCost.data.levelCost,
-      }));
-  }, [resLevelCost]);
+    if (!levelCostRes) return;
+    setInitalState((prev) => ({
+      ...prev,
+      levelCost: levelCostRes.data.levelCost,
+    }));
+  }, [levelCostRes]);
 
   //스위치 감지 업데이트
   useEffect(() => {
@@ -102,9 +81,6 @@ const PostAdModal = (props: PostAdType) => {
     }
   }, [adStatus]);
 
-  //모달 닫기
-  const { hideModal } = useModal();
-  // console.log(initalState);
   //광고 추가 , 수정 버튼 클릭
   const btnClick = () => {
     const bodyData = {
@@ -114,27 +90,24 @@ const PostAdModal = (props: PostAdType) => {
       cost: initalState.cost,
       adStatus: initalState.adStatus,
     };
-
     switch (title) {
       case "광고등록":
-        if (initalState.levelCost <= initalState.cost) {
-          bodyData.keyword = input;
-          const inputCheck =
-            bodyData?.keyword !== " " && bodyData?.keyword?.length !== 0;
-          inputCheck
-            ? addMutate(bodyData, {
-                onSuccess: () => {
-                  alert("등록 완료");
-                  hideModal();
-                },
-                onError: (error) => {
-                  setErrorMessage(error.response.data.errorMessage);
-                },
-              })
-            : alert("키워드를 입력해주세요");
-        } else {
+        if (initalState.levelCost > initalState.cost)
           alert("입찰가가 예상금액보다 낮습니다.");
-        }
+        bodyData.keyword = input;
+        const inputCheck =
+          bodyData?.keyword !== " " && bodyData?.keyword?.length !== 0;
+        inputCheck
+          ? addMutate(bodyData, {
+              onSuccess: () => {
+                alert("등록 완료");
+                hideModal();
+              },
+              onError: (error) => {
+                setErrorMessage(error.response.data.errorMessage);
+              },
+            })
+          : alert("키워드를 입력해주세요");
         break;
       case "광고수정":
         if (bodyData.adStatus) {
@@ -157,7 +130,6 @@ const PostAdModal = (props: PostAdType) => {
             },
           });
         }
-
         break;
       default:
         console.log(`err : ${title}`);
@@ -169,7 +141,6 @@ const PostAdModal = (props: PostAdType) => {
       <img src={cancel} alt="닫기" onClick={() => hideModal()} />
     </div>
   );
-
   return (
     <div className={styles.postAdModal}>
       <div className={styles.modalContent}>
@@ -194,11 +165,7 @@ const PostAdModal = (props: PostAdType) => {
               <img src={info} alt="infoIcon" />
             </Tooltip>
           </div>
-          <Switch
-            checked={initalState.adStatus}
-            setAdStatus={setAdStatus}
-            adStatus={adStatus}
-          />
+          <Switch setAdStatus={setAdStatus} adStatus={adStatus} />
         </>
         <>
           <div className={styles.info}>
@@ -234,7 +201,6 @@ const PostAdModal = (props: PostAdType) => {
             setInitalState={setInitalState}
           />
         )}
-
         {errorMessage && <span className={styles.errMsg}>{errorMessage}</span>}
         <MediumBlueBtn onClick={btnClick}>{title}</MediumBlueBtn>
       </div>

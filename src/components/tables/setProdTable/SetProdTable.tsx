@@ -1,26 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./setProdTable.module.scss";
 import { PropsType } from "./setProdTable.type";
-import Switch from "./switch /Switch";
+import Switch from "./switch/Switch";
 import { useSetRecoilState } from "recoil";
 import { prod } from "../../../store/prod"; // atom으로 만든 전역상태
+import { useNavigate } from "react-router-dom";
 
 const SetProdTabel = (props: PropsType) => {
   const { prodList, checkedItems, setCheckedItems } = props;
   const setProd = useSetRecoilState(prod);
-
-  //thead 체크박스 데이터
-  const [allNO, setAllNO] = useState<number[]>([]);
+  const navigate = useNavigate();
+  let isAllCheck;
   useEffect(() => {
-    if (prodList) setAllNO(prodList?.map((e) => e.p_No));
+    if (!prodList) return;
+    isAllCheck = prodList.length === checkedItems.length;
   }, [prodList]);
 
   const changeHandler = (checked: boolean, value: number) => {
-    checked
-      ? setCheckedItems(value === 0 ? allNO : [...checkedItems, value]) //체크 데이터 담기
-      : setCheckedItems(
-          value === 0 ? [] : checkedItems.filter((el) => el !== value)
-        ); //체크해제
+    if (checked)
+      setCheckedItems(
+        value === 0 ? prodList.map((e) => e.p_No) : [...checkedItems, value]
+      );
+    else
+      setCheckedItems(
+        value === 0 ? [] : checkedItems.filter((el) => el !== value)
+      );
   };
   //상품 수정 페이지 이동
   const changProd = (e: any) => {
@@ -28,7 +32,9 @@ const SetProdTabel = (props: PropsType) => {
       isProd: true,
       prodNumber: e.target.value,
     });
+    navigate("/PostProd");
   };
+
   return (
     <div className={styles.setProdTable}>
       <table>
@@ -38,6 +44,7 @@ const SetProdTabel = (props: PropsType) => {
               <input
                 type="checkbox"
                 value={0}
+                checked={isAllCheck}
                 onChange={(e) =>
                   changeHandler(e.target.checked, Number(e.target.value))
                 }
@@ -65,11 +72,27 @@ const SetProdTabel = (props: PropsType) => {
                     />
                   </td>
                   <td>{item.id}</td>
-                  <td>{item.p_No}</td>
+                  <td className={styles.hover}>
+                    <a
+                      target="_blank"
+                      href={`https://www.adearth.shop/${item.p_No}`}
+                      rel="noopener noreferer nofollow noreferrer"
+                    >
+                      {item.p_No}
+                    </a>
+                  </td>
                   <td>{item.p_Category}</td>
-                  <td>{item.p_Name}</td>
+                  <td className={styles.hover}>
+                    <a
+                      target="_blank"
+                      href={`https://www.adearth.shop/${item.p_No}`}
+                      rel="noopener noreferer nofollow noreferrer"
+                    >
+                      {item.p_Name}
+                    </a>
+                  </td>
                   <td>
-                    <Switch checked={item.p_Status} no={item.p_No} />
+                    <Switch status={item.p_Status} no={item.p_No} />
                   </td>
                   <td>
                     <button value={item.p_No} onClick={changProd}>

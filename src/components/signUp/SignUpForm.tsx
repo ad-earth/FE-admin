@@ -1,57 +1,48 @@
 import styles from "./signUpForm.module.scss";
 import { useEffect, useState, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-//hook
 import { useInputReducer } from "./useInputReducer";
-import { useSignUp } from "./useSignUpForm";
-//type
-import { FormData } from "./signUpForm.type";
-//elements
+import { useSignUpQuery } from "./useSignUpFormQuery";
+import { FormDataType } from "./signUpForm.type";
 import { SingUpPwdInput, SingUpInput } from "../../elements/inputs/Inputs";
 import { SignUpBlueButton } from "../../elements/buttons/Buttons";
-//default state data (id,pwd... )
 import { initialValue } from "./initialValue";
 
 const SignUpForm = () => {
-  //로그인 후 페이지 이동
   const navigate = useNavigate();
   // userInput Data
   const [state, setDispatch] = useReducer(useInputReducer, initialValue);
   const { id, pwd, pCheck, brand, buisness, phone } = state;
   //post form data
-  const [formData, setFormData] = useState<FormData>();
+  const [formData, setFormData] = useState<FormDataType>();
   // 회원가입 hook
-  const { mutate } = useSignUp();
+  const { mutate } = useSignUpQuery();
   //실시간 유효성 검사  (dispatch)
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setDispatch({ type: e.target.name, payload: e.target.value });
-  };
+
   useEffect(() => {
-    state &&
-      setFormData({
-        id: id.val,
-        pwd: pwd.val,
-        brand: brand.val,
-        buisness: buisness.val,
-        phone: phone.val,
-      });
+    if (!state) return;
+    setFormData({
+      id: id.val,
+      pwd: pwd.val,
+      brand: brand.val,
+      buisness: buisness.val,
+      phone: phone.val,
+    });
   }, [id.val, pwd.val, brand.val, buisness.val, phone.val]);
 
   // //버튼 비활성 조건
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(formData, {
-      //회원가입 성공시 페이지 이동
       onSuccess: () => {
-        navigate({
-          pathname: "/",
-        });
+        navigate("/");
         setDispatch({ type: "reset" });
       },
-      //회원가입 err errorMessage 확인
+      //회원가입 err errorMessage ,에러 핸들링
       onError: (error) => {
         const errMsg = error.response.data.errorMessage;
-        //에러 핸들링
         if (errMsg === "중복된 연락처입니다.") {
           setDispatch({ type: "phone", payload: "err" });
         } else if (errMsg === "중복된 아이디입니다.") {
@@ -166,7 +157,7 @@ function Find() {
   return (
     <p className={styles.findeWrap}>
       이미 계정이 있으신가요?
-      <span onClick={() => navigate(`/`)}>로그인</span>
+      <span onClick={() => navigate("/")}>로그인</span>
     </p>
   );
 }

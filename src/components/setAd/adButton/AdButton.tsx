@@ -1,13 +1,8 @@
 import { ProdDelBtn, SmallGrayBtn } from "../../../elements/buttons/Buttons";
 import styles from "./adButton.module.scss";
-import { SetStateAction, Dispatch } from "react";
+import { PropsType } from "./adButton.type";
 
-interface PropsType {
-  setDelhandler: Dispatch<SetStateAction<boolean>>;
-  setAddhandler: Dispatch<SetStateAction<boolean>>;
-  prodLength: number;
-}
-const AdButton = ({ setDelhandler, setAddhandler, prodLength }: PropsType) => {
+const AdButton = ({ setDelhandler, setAddhandler }: PropsType) => {
   return (
     <div className={styles.btnBox}>
       <ProdDelBtn onClick={() => setDelhandler(true)} />

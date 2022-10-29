@@ -1,51 +1,45 @@
-import React, { useEffect, useState } from "react";
 import styles from "./adSummary.module.scss";
+import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { SummaryType } from "./adSummary.type";
-import useAdSummary from "./useAdSummary";
+import useAdSummary from "./useAdSummaryQuery";
+import { useWindowResize } from "./useWindowResize";
 
 const AdSummary = () => {
-  //hook
-  const data: SummaryType[] = useAdSummary();
-  //그래프 반응형
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
-  useEffect(() => {
-    const handelResize = () => setWindowSize(window.innerWidth);
-    window.addEventListener("resize", handelResize);
-    return () => window.removeEventListener("resize", handelResize);
-  }, [windowSize]);
+  const { summaryRes } = useAdSummary();
+  const month = summaryRes?.map((data) => data.month);
+  const adCost = summaryRes?.map((data) => data.adCost);
+  const salesCost = summaryRes?.map((data) => data.salesCost);
+  //windowSize 반응형 hook
+  const windowSize = useWindowResize();
   //series
   const [series, setSeries] = useState(seriesData);
   const copySelectedTags = [...series];
   //options
   const [options, setOptions] = useState(optionData);
-  //데이터 수정
+  // ReactApexChart 라이브러리 데이터 업데이트
   useEffect(() => {
-    if (data) {
-      const month = data.map((item) => item.month);
-      setOptions({ ...options, xaxis: { categories: month } });
-      const adCost = data.map((item) => item.adCost);
-      const salesCost = data.map((item) => item.salesCost);
-      copySelectedTags[0] = { name: "광고비", data: adCost };
-      copySelectedTags[1] = { name: "매출", data: salesCost };
-      setSeries(copySelectedTags);
-    }
-  }, [data]);
+    if (!summaryRes) return;
+    setOptions({ ...options, xaxis: { categories: month } });
+    copySelectedTags[0] = { name: "광고비", data: adCost };
+    copySelectedTags[1] = { name: "매출", data: salesCost };
+    setSeries(copySelectedTags);
+  }, [summaryRes]);
 
   return (
     <section id={styles.adSummary}>
       <h3>광고 요약 보고서</h3>
       <p>최근 3개월 광고비/매출</p>
-
-      <div className={styles.adChart}>
-        <ReactApexChart
-          series={series}
-          options={options}
-          type="bar"
-          width={windowSize / 4}
-          height={280}
-        />
-      </div>
+      {windowSize && (
+        <div className={styles.adChart}>
+          <ReactApexChart
+            series={series}
+            options={options}
+            type="bar"
+            width={windowSize / 4}
+            height={280}
+          />
+        </div>
+      )}
     </section>
   );
 };
@@ -57,7 +51,6 @@ const seriesData = [
   { name: "광고비", data: [0, 0, 0] },
   { name: "매출", data: [0, 0, 0] },
 ];
-
 let optionData = {
   chart: { width: 400, background: "transparent" },
   colors: ["#4e60ff", "#009667"],
