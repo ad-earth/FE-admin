@@ -1,10 +1,10 @@
 import { useMutation } from "react-query";
 import { AxiosError, AxiosResponse } from "axios";
 import { postSingUp } from "../../shared/apis/api";
-import { FormData, ErrType } from "./signUpForm.type";
+import { FormDataType, ErrType } from "./signUpForm.type";
 
-export function useSignUp() {
-  const queryFn = async (formData: FormData) =>
+export function useSignUpQuery() {
+  const queryFn = async (formData: FormDataType) =>
     await postSingUp(
       formData.id,
       formData.pwd,
@@ -13,6 +13,6 @@ export function useSignUp() {
       formData.phone
     );
   return useMutation<AxiosResponse, AxiosError<ErrType>, any, unknown>(
-    (formData: FormData) => queryFn(formData)
+    (formData: FormDataType) => queryFn(formData)
   );
 }

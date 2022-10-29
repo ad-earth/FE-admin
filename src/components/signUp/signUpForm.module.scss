@@ -3,8 +3,7 @@
 #signUpForm {
   display: flex;
   flex-direction: column;
-  .success,
-  .error {
+  :is(.success, .error) {
     height: 14px;
     margin: 0px 0 16px 0;
     text-align: left;

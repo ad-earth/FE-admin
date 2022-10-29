@@ -1,4 +1,6 @@
-export const initialValue = {
+import { StateType } from "./signUpForm.type";
+
+export const initialValue: StateType = {
   id: {
     val: "",
     msg: "",
