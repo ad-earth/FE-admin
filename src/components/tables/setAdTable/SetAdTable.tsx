@@ -1,47 +1,23 @@
-import { useState, useEffect } from "react";
-import { SetStateAction, Dispatch } from "react";
 import useModal from "../../modal/useModal";
 import { useSetRecoilState } from "recoil";
 import { prodAdState } from "../../../store/prodAd";
 import styles from "./setAdTable.module.scss";
 import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-import { useAdProd } from "../../setAd/setAdSection/useAdProd";
-interface Prod {
-  id: number;
-  k_No: number;
-  keyword: string;
-  k_Level: number;
-  k_Cost: number;
-  k_Click: number;
-  clickCost: number;
-  k_Status: boolean;
-}
-interface ProdList {
-  cnt: number;
-  keywordList?: Prod[];
-}
-interface PropsType {
-  prodList?: ProdList;
-  type?: string;
-  checkedItems?: number[];
-  setCheckedItems?: Dispatch<SetStateAction<number[]>>;
-}
+import { PropsType } from "./setAdTable.type";
 
-const SetAdTable = ({
-  prodList,
-  type,
-  checkedItems,
-  setCheckedItems,
-}: PropsType) => {
+const SetAdTable = (props: PropsType) => {
+  const { prodList, type, checkedItems, setCheckedItems } = props;
   const navigate = useNavigate();
   const keywordList = prodList?.keywordList;
   //상품 수정 모달
   const { showModal } = useModal();
   const setProdAd = useSetRecoilState(prodAdState);
-  const isAllCheck: boolean = checkedItems.length === prodList.cnt;
-  const changeProd = (e: any) => {
-    const findProd = keywordList[e.target.value];
+  const isAllCheck = prodList && checkedItems.length === prodList.cnt;
+
+  const changeProd = (e: React.MouseEvent<HTMLButtonElement>) => {
+    let btnTarget = (e.target as HTMLButtonElement).value;
+    const findProd = keywordList[Number(btnTarget)];
     showModal({
       modalType: "PostAdModal",
       modalProps: {
@@ -57,15 +33,14 @@ const SetAdTable = ({
     });
   };
   const changeHandler = (checked: boolean, value: number) => {
-    if (checked) {
-      value === 0
-        ? setCheckedItems(keywordList.map((e) => e.k_No))
-        : setCheckedItems([...checkedItems, value]);
-    } else {
+    if (checked)
+      setCheckedItems(
+        value === 0 ? keywordList.map((e) => e.k_No) : [...checkedItems, value]
+      );
+    else
       setCheckedItems(
         value === 0 ? [] : checkedItems.filter((el) => el !== value)
       );
-    }
   };
 
   //상품이 없을 경우
@@ -157,13 +132,7 @@ const thList = [
 ];
 
 // 테이블 목록
-const Thead = ({
-  changeHandler,
-  isAllCheck,
-}: {
-  changeHandler: any;
-  isAllCheck: boolean;
-}) => {
+const Thead = (changeHandler: any, isAllCheck: boolean) => {
   return (
     <thead>
       <tr>

@@ -2,25 +2,11 @@ import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import { SmallDropdown } from "../../../elements/dropdown/DropDown";
 import { Input100 } from "../../../elements/inputs/Inputs";
 import styles from "./postAdTable.module.scss";
-
-interface PropsType {
-  pNo?: number | null;
-  pName?: string | null;
-  keyword?: string | null;
-  level?: number | undefined;
-  levelCost?: number;
-  cost?: number | null;
-  adStatus?: boolean;
-}
+import { PropsType } from "./postAdTable.type";
 
 const thList = ["키워드", "예상순위", "예상금액", "입찰가"];
-const PostAdTable = ({
-  initalState,
-  setInitalState,
-}: {
-  initalState: PropsType;
-  setInitalState: Dispatch<SetStateAction<PropsType>>;
-}) => {
+
+const PostAdTable = ({ initalState, setInitalState }: PropsType) => {
   const { level, levelCost, adStatus, keyword, cost } = initalState;
   //elememt 드롭다운 감지
   const [selected, setSelected] = useState<string>();
@@ -28,12 +14,13 @@ const PostAdTable = ({
 
   //드롭다운 데이터 업데이트
   useEffect(() => {
-    selected &&
-      setInitalState((prev) => ({ ...prev, level: Number(selected) }));
+    if (!selected) return;
+    setInitalState((prev) => ({ ...prev, level: Number(selected) }));
   }, [selected]);
 
   useEffect(() => {
-    inputNum && setInitalState((prev) => ({ ...prev, cost: inputNum }));
+    if (!inputNum) return;
+    setInitalState((prev) => ({ ...prev, cost: inputNum }));
   }, [inputNum]);
 
   return (
