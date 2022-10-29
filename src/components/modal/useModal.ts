@@ -11,7 +11,7 @@ export default function useModal() {
 
   const hideModal = () => {
     setModal(null);
-    document.body.style.overflow = "unset"; //모달 스크롤 방지
+    document.body.style.overflow = "unset"; // 스크롤 
   };
 
   return {
