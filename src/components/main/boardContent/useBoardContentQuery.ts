@@ -1,8 +1,9 @@
 import { useQueries } from "react-query";
 import { getBords } from "../../../shared/apis/api";
+import { BoardType } from "./boardContent.type";
 
 const queryFn = async (heroId: string) => await getBords(heroId);
-const useBoardContent = () => {
+const useBoardContentQuery = () => {
   const res = useQueries([
     {
       queryKey: "newOrder",
@@ -17,6 +18,6 @@ const useBoardContent = () => {
       queryFn: () => queryFn("on-products"),
     },
   ]);
-  return res?.map((lists) => lists?.data?.data);
+  return { data: res?.map((lists: BoardType) => lists?.data?.data) };
 };
-export default useBoardContent;
+export default useBoardContentQuery;
