@@ -1,16 +1,16 @@
 import styles from "./keywordRanking.module.scss";
-import useKeywordRanking from "./useKeywordRanking";
+import useKeywordRankingQuery from "./useKeywordRankingQuery";
 
 const KeywordRanking = () => {
-  const data: string[] = useKeywordRanking();
+  const { data: rankingRes } = useKeywordRankingQuery();
 
-  const rankingList = data?.map((list, index) => (
+  const rankingList = rankingRes?.map((list, index) => (
     <li key={index}>
       <span className={styles.ranking}>{index + 1}</span>
       {list}
     </li>
   ));
-  
+
   return (
     <section id={styles.KeywordRanking}>
       <h3>광고 키워드 순위</h3>
