@@ -1,7 +1,3 @@
-export interface BizType {
+export interface BizMoneyType {
   a_Charge: number;
-}
-
-export interface PropsType {
-  type: string;
 }
