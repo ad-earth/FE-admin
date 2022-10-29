@@ -2,7 +2,6 @@ import styles from "./adBanner.module.scss";
 import character from "../../../assets/bannerCharacter.svg";
 import { useNavigate } from "react-router-dom";
 
-//text
 const title = "광고지구로 비즈니스 성장을 이루세요";
 const subText1 =
   "CPC 키워드 광고를 통해 잠재적 고객을 찾아 비즈니스 성장을 경험해보세요";
