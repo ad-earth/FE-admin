@@ -132,7 +132,13 @@ const thList = [
 ];
 
 // 테이블 목록
-const Thead = (changeHandler: any, isAllCheck: boolean) => {
+const Thead = ({
+  changeHandler,
+  isAllCheck,
+}: {
+  changeHandler: any;
+  isAllCheck: boolean;
+}) => {
   return (
     <thead>
       <tr>
