@@ -1,15 +1,13 @@
 import styles from "./nav.module.scss";
 import { NavLink } from "react-router-dom";
-//components,elements
-import BizMoney from "../../main/bizMoney/BizMoney";
+import { BizMoneyNav } from "../../main/bizMoney/BizMoney";
 import { WithdrawalBtn } from "../../../elements/buttons/Buttons";
-//hook
 import useModal from "../../modal/useModal";
 
 const Nav = () => {
   const { showModal } = useModal();
 
-  //회원탈퇴 모달 클릭
+  //회원탈퇴 모달 클릭 => 모달 open
   const withdrawalClcik = () => {
     showModal({
       modalType: "WithdrawalModal",
@@ -24,7 +22,7 @@ const Nav = () => {
     <nav id={styles.nav}>
       {/* Biz money */}
       <div className={styles.bizMoneyBox}>
-        <BizMoney type="nav" />
+        <BizMoneyNav />
       </div>
       {/* sideNav */}
       <ul className={styles.asideNav}>
