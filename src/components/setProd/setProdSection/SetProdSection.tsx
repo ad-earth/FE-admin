@@ -7,18 +7,19 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 //components,elements
 import SetProdTabel from "../../tables/setProdTable/SetProdTable";
 import ProdButton from "../prodButton/ProdButton";
-import { MediumDropdown } from "../../../elements/dropdown/DropDown";
-import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
+
 //hook
-import { useSetProd } from "./useSetProd";
-import { useDelProd } from "./useDelProd";
+import { useSetProdQuery } from "./useSetProdQuery";
+import { useDelProdQuery } from "./useDelProdQuery";
 //type
 import { List, Paginationtype } from "./setProdSection.type";
+import ProdFilter from "../prodFilter/ProdFilter";
 
 const SetProdSection = () => {
   const navigate = useNavigate();
+
   // 드롭다운 데이터
-  const [selected, setSelected] = useState<string>("전체");
+  const [filterData, setFilterData] = useState("전체");
   // 페이지네이션
   const [pagination, setPagination] = useState<Paginationtype>({
     category: "전체",
@@ -40,25 +41,26 @@ const SetProdSection = () => {
   const [addhandler, setAddhandler] = useState<boolean>(false);
 
   // 테이블 데이터 hook
-  const { data } = useSetProd(pagination.category, pagination.page);
+  const { data: tabelData } = useSetProdQuery(
+    pagination.category,
+    pagination.page
+  );
   // 데이터 삭제 hook
-  const { mutate, isLoading, isError, error, isSuccess } = useDelProd();
+  const { mutate } = useDelProdQuery();
 
   // 데이터가 있을경우 페이지길이값, 데이터 useState
   useEffect(() => {
-    if (data) {
-      setList(data.data.list);
-      setPageLength(Math.ceil(data.data.cnt / 10));
-    }
-    return;
-  }, [data]);
+    if (!tabelData) return;
+    setList(tabelData.data.list);
+    setPageLength(Math.ceil(tabelData?.data.cnt / 10));
+  }, [tabelData]);
 
   //페이지값이 변경될때 마다 해당 페이지 데이터 요청
   useEffect(() => {
-    if (pageHandler) {
-      setPagination({ ...pagination, page: pageHandler });
-      setDefaultPage(pageHandler);
-    }
+    if (!pageHandler) return;
+    setPagination({ ...pagination, page: pageHandler });
+    setDefaultPage(pageHandler);
+    setCheckedItems([]);
   }, [pageHandler]);
 
   //페이지 번호 가져오기
@@ -69,38 +71,37 @@ const SetProdSection = () => {
     setpageHandler(page);
   };
 
-  //조회 버튼 클릭시 카테고리 데이터 요청
-  const selectClick = () => {
+  // 카테고리별 데이터 요청
+  useEffect(() => {
+    if (!filterData) return;
     setDefaultPage(1);
-    setPagination({ category: selected, page: 1 });
-  };
+    setPagination({ category: filterData, page: 1 });
+    setCheckedItems([]);
+  }, [filterData]);
+
   //상품등록 페이지 이동
   useEffect(() => {
-    addhandler && navigate("/postProd");
+    if (!addhandler) return;
+    navigate("/postProd");
   }, [addhandler]);
+
   //상품 삭제
   useEffect(() => {
-    if (delhandler) {
-      checkedItems.length !== 0
-        ? mutate(checkedItems, {
-            onSuccess: () => {
-              alert("삭제완료");
-            },
-          })
-        : alert("삭제할 상품이 없습니다.");
-    }
+    if (!delhandler) return;
+    checkedItems.length !== 0
+      ? mutate(checkedItems, {
+          onSuccess: () => {
+            alert("삭제완료");
+          },
+        })
+      : alert("삭제할 상품이 없습니다.");
     setDelhandler(false);
   }, [delhandler]);
 
   return (
     <div id={styles.setProd}>
       <div className={styles.searchBox}>
-        <MediumDropdown
-          itemList={selectList}
-          selected={selected}
-          setSelected={setSelected}
-        />
-        <SmallBlueBtn onClick={selectClick}>조회</SmallBlueBtn>
+        <ProdFilter setFilterData={setFilterData} />
       </div>
       <ProdButton setDelhandler={setDelhandler} setAddhandler={setAddhandler} />
       <SetProdTabel
@@ -125,17 +126,6 @@ const SetProdSection = () => {
 
 export default SetProdSection;
 
-//default data
-const selectList = [
-  "전체",
-  "욕실",
-  "주방",
-  "음료용품",
-  "식품",
-  "생활",
-  "화장품",
-  "문구",
-];
 const theme = createTheme({
   palette: {
     primary: {
