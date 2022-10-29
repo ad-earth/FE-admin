@@ -1,23 +1,8 @@
-import { useState, SetStateAction, Dispatch } from "react";
 import Stack from "@mui/material/Stack";
 import { AntSwitch } from "./switch.style";
+import { SwitchType } from "./switch.type";
 
-interface SwitchType {
-  checked: boolean;
-}
-const Switch = ({
-  checked,
-  adStatus,
-  setAdStatus,
-}: {
-  checked: boolean;
-  adStatus: boolean;
-  setAdStatus: Dispatch<SetStateAction<boolean>>;
-}) => {
-  //스위치 토글
-  const switchEvent = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAdStatus(!adStatus);
-
+const Switch = ({ adStatus, setAdStatus }: SwitchType) => {
   return (
     <Stack
       direction="row"
@@ -25,7 +10,7 @@ const Switch = ({
       alignItems="center"
       justifyContent="left"
     >
-      <AntSwitch checked={adStatus} onChange={switchEvent} />
+      <AntSwitch checked={adStatus} onChange={() => setAdStatus(!adStatus)} />
     </Stack>
   );
 };
