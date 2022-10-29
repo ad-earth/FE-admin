@@ -97,3 +97,13 @@
     accent-color: $bg_blue100;
   }
 }
+.hover {
+  cursor: pointer;
+  a {
+    color: $fc_blue300;
+    font-weight: 400;
+  }
+  :hover {
+    text-decoration: underline;
+  }
+}

@@ -72,9 +72,25 @@ const SetProdTabel = (props: PropsType) => {
                     />
                   </td>
                   <td>{item.id}</td>
-                  <td>{item.p_No}</td>
+                  <td className={styles.hover}>
+                    <a
+                      target="_blank"
+                      href={`https://www.adearth.shop/${item.p_No}`}
+                      rel="noopener noreferer nofollow noreferrer"
+                    >
+                      {item.p_No}
+                    </a>
+                  </td>
                   <td>{item.p_Category}</td>
-                  <td>{item.p_Name}</td>
+                  <td className={styles.hover}>
+                    <a
+                      target="_blank"
+                      href={`https://www.adearth.shop/${item.p_No}`}
+                      rel="noopener noreferer nofollow noreferrer"
+                    >
+                      {item.p_Name}
+                    </a>
+                  </td>
                   <td>
                     <Switch status={item.p_Status} no={item.p_No} />
                   </td>
