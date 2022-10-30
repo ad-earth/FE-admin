@@ -32,8 +32,8 @@ const SignUpForm = () => {
     });
   }, [id.val, pwd.val, brand.val, buisness.val, phone.val]);
 
-  // //버튼 비활성 조건
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // 버튼 비활성 조건
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate(formData, {
       onSuccess: () => {
@@ -53,9 +53,19 @@ const SignUpForm = () => {
       },
     });
   };
-
+  const onSubmitSearch = (e: any) => {
+    if (e.key === "Enter") {
+      id.isCheck &&
+        pwd.isCheck &&
+        pCheck.isCheck &&
+        brand.isCheck &&
+        buisness.isCheck &&
+        phone.isCheck &&
+        onSubmit(e);
+    }
+  };
   return (
-    <form id={styles.signUpForm} onSubmit={handleSubmit}>
+    <form id={styles.signUpForm} onSubmit={onSubmit}>
       {/* 아이디 */}
       <SingUpInput
         type="text"
@@ -126,6 +136,7 @@ const SignUpForm = () => {
         value={phone.val}
         name="phone"
         onChange={onChange}
+        onKeyUp={onSubmitSearch}
       />
       <span
         className={`${phone.isCheck ? `${styles.success}` : `${styles.error}`}`}
