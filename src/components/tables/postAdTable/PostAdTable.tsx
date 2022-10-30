@@ -10,7 +10,9 @@ const PostAdTable = ({ initalState, setInitalState }: PropsType) => {
   const { level, levelCost, adStatus, keyword, cost } = initalState;
   //elememt 드롭다운 감지
   const [selected, setSelected] = useState<string>();
-  const [inputNum, setInputNum] = useState<number>();
+  const [inputNum, setInputNum] = useState<number>(
+    cost === 0 ? levelCost : cost
+  );
 
   //드롭다운 데이터 업데이트
   useEffect(() => {
@@ -48,9 +50,8 @@ const PostAdTable = ({ initalState, setInitalState }: PropsType) => {
               <td>
                 <Input100
                   type="number"
-                  min={levelCost ? levelCost : 0}
-                  placeholder={`${levelCost ? levelCost : 0}`}
-                  value={String(cost ? cost : "")}
+                  placeholder={`${inputNum ? inputNum : 0}`}
+                  value={inputNum ? inputNum : ""}
                   setInputNum={setInputNum}
                 />
               </td>

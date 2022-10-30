@@ -46,8 +46,10 @@ const PostAdModal = ({ title }: PostAdType) => {
   const keywordClick = () => {
     if (!adStatus) alert("광고 스위치를 켜주세요");
     input !== "" && input !== " " && input?.length > 0
-      ? setInitalState((prev) => ({ ...prev, keyword: input, level: 1 }))
+      ? setInitalState({ ...initalState, keyword: input, level: 1 })
       : alert("키워드를 입력해주세요");
+
+    console.log(initalState);
   };
 
   //예상금액 업데이트
@@ -65,7 +67,8 @@ const PostAdModal = ({ title }: PostAdType) => {
       setInitalState((prev) => ({
         ...prev,
         keyword: state.keyword ? state.keyword : "",
-        level: state.level ? (state.level === 5 ? 1 : state.level) : 1,
+        level: state.level ? (state.level === 5 ? 1 : state.level) : 0,
+        cost: state.cost ? state.cost : 0,
         adStatus: true,
       }));
     } else {
@@ -78,27 +81,49 @@ const PostAdModal = ({ title }: PostAdType) => {
         adStatus: false,
       }));
       setInput("");
+      setErrorMessage("");
     }
   }, [adStatus]);
 
+  const bodyData = {
+    pNo: initalState.pNo,
+    keyword: initalState.keyword,
+    level: initalState.level,
+    cost: initalState.cost,
+    adStatus: initalState.adStatus,
+  };
   //광고 추가 , 수정 버튼 클릭
   const btnClick = () => {
-    const bodyData = {
-      pNo: initalState.pNo,
-      keyword: initalState.keyword,
-      level: initalState.level,
-      cost: initalState.cost,
-      adStatus: initalState.adStatus,
-    };
     switch (title) {
       case "광고등록":
-        if (initalState.levelCost > initalState.cost)
-          alert("입찰가가 예상금액보다 낮습니다.");
         bodyData.keyword = input;
-        const inputCheck =
-          bodyData?.keyword !== " " && bodyData?.keyword?.length !== 0;
-        inputCheck
-          ? addMutate(bodyData, {
+        if (bodyData.adStatus) {
+          if (!bodyData.keyword)
+            alert("키워드 등록 후 입찰가를 지정해 주세요 ");
+          else {
+            if (bodyData.level === 0)
+              alert("키워드 조회 후 입찰가를 지정해주세요");
+            else {
+              if (initalState.levelCost > initalState.cost)
+                alert("입찰가가 예상금액보다 낮습니다.");
+              else {
+                addMutate(bodyData, {
+                  onSuccess: () => {
+                    alert("등록 완료");
+                    hideModal();
+                  },
+                  onError: (error) => {
+                    setErrorMessage(error.response.data.errorMessage);
+                  },
+                });
+              }
+            }
+          }
+        } else {
+          if (!bodyData.keyword) alert("키워드를 등록해주세요 ");
+          else {
+            console.log(bodyData);
+            addMutate(bodyData, {
               onSuccess: () => {
                 alert("등록 완료");
                 hideModal();
@@ -106,8 +131,9 @@ const PostAdModal = ({ title }: PostAdType) => {
               onError: (error) => {
                 setErrorMessage(error.response.data.errorMessage);
               },
-            })
-          : alert("키워드를 입력해주세요");
+            });
+          }
+        }
         break;
       case "광고수정":
         if (bodyData.adStatus) {
