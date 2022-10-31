@@ -42,7 +42,11 @@ export const MediumBlueBtn = (props: PropsType) => {
   );
 };
 export const MediumWhiteBtn = (props: PropsType) => {
-  return <button className="second white">{props.children}</button>;
+  return (
+    <button className="second white" {...props}>
+      {props.children}
+    </button>
+  );
 };
 export const SmallBlueBtn = (props: PropsType) => {
   return (
@@ -125,4 +129,12 @@ export const NotFoundBtn = (props: NotFoundType) => {
       </button>
     );
   }
+};
+
+export const MediumGrayBtn = (props: PropsType) => {
+  return (
+    <button className="second gray" {...props}>
+      {props.children}
+    </button>
+  );
 };

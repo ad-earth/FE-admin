@@ -1,7 +1,8 @@
 import styles from "./optForm.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { optListState } from "../../../store/option";
 import { Input200 } from "../../../elements/inputs/Inputs";
-import { OptType } from "./optForm.type";
 import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
 
 const OptForm = () => {
@@ -11,18 +12,8 @@ const OptForm = () => {
   const [option, setOption] = useState<string>();
   const [optionPrice, setOptionPrice] = useState<string>();
   const [optionCnt, setOptionCnt] = useState<string>();
-  const [optList, setOptList] = useState([
-    {
-      id: 1,
-      colorCheck: false,
-      optCheck: false,
-      color: "",
-      colorCode: "",
-      option: "",
-      optionPrice: 0,
-      optionCnt: 0,
-    },
-  ]);
+  const [optList, setOptList] = useRecoilState(optListState);
+  // console.log("optList: ", optList);
 
   // 새로운 옵션 리스트 생성
   const addOptList = () => {
@@ -37,78 +28,95 @@ const OptForm = () => {
       optionCnt: 0,
     };
     setOptList([...optList, newOption]);
+    console.log("생성", optList);
   };
 
   // 개별 옵션 리스트 삭제
   const removeOptList = (id: number) => {
     setOptList(optList.filter((el) => el.id !== id));
+    console.log("삭제", optList);
   };
 
   // 색상 입력 여부
   const handleColorCheck = (checked: boolean, name: string) => {
     setColorCheck(!colorCheck);
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], colorCheck: checked };
+      copy[findIndex] = { ...copy[findIndex], colorCheck: checked };
     }
-    setOptList(optList);
+    setOptList(copy);
+    console.log("색상체크", optList);
   };
 
   // 옵션 입력 여부
   const handleOptCheck = (checked: boolean, name: string) => {
     setOptCheck(!optCheck);
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], optCheck: checked };
+      copy[findIndex] = { ...copy[findIndex], optCheck: checked };
     }
-    setOptList(optList);
-  };
-
-  // 컬러피커 색상 선택시 함수
-  const handleColorChange = (value: string, name: string) => {
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
-    if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], colorCode: value };
-    }
+    setOptList(copy);
+    console.log("옵션체크", optList);
   };
 
   // 색상 입력
   const handleSetColor = (value: string, name: string) => {
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], color: value };
+      copy[findIndex] = { ...copy[findIndex], color: value };
     }
-    setOptList(optList);
+    setOptList(copy);
+    console.log("색상입력", optList);
+  };
+
+  // 컬러피커 색상 선택시 함수
+  const handleColorChange = (value: string, name: string) => {
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
+    if (findIndex != -1) {
+      copy[findIndex] = { ...copy[findIndex], colorCode: value };
+    }
+    setOptList(copy);
+    console.log("컬러코드", optList);
   };
 
   // 옵션 입력
   const handleSetOption = (value: string, name: string) => {
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], option: value };
+      copy[findIndex] = { ...copy[findIndex], option: value };
     }
-    setOptList(optList);
+    setOptList(copy);
+    console.log("옵션입력", optList);
   };
 
   // 추가 금액 입력
   const handleSetPrice = (value: string, name: string) => {
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = {
-        ...optList[findIndex],
+      copy[findIndex] = {
+        ...copy[findIndex],
         optionPrice: Number(value),
       };
     }
-    setOptList(optList);
+    setOptList(copy);
+    console.log("금액", optList);
   };
 
   // 수량 입력
   const handleSetOptCnt = (value: string, name: string) => {
-    const findIndex = optList.findIndex((el) => el.id == Number(name));
+    let copy = [...optList];
+    const findIndex = copy.findIndex((el) => el.id == Number(name));
     if (findIndex != -1) {
-      optList[findIndex] = { ...optList[findIndex], optionCnt: Number(value) };
+      copy[findIndex] = { ...copy[findIndex], optionCnt: Number(value) };
     }
-    setOptList(optList);
+    setOptList(copy);
+    console.log("수량", optList);
   };
 
   return (
@@ -144,6 +152,7 @@ const OptForm = () => {
               placeholder={"색상 입력"}
               disabled={!item.colorCheck == true ? true : false}
               value={color}
+              defaultValue={item.color && item.color}
               name={String(item.id)}
               onChange={(e) => {
                 handleSetColor(e.target.value, e.target.name);
@@ -152,14 +161,16 @@ const OptForm = () => {
             <input
               className={styles.colorPic}
               type="color"
-              defaultValue="#ffffff"
+              defaultValue={
+                item.colorCode && item.colorCode ? item.colorCode : "#ffffff"
+              }
               name={String(item.id)}
               onChange={(e) => handleColorChange(e.target.value, e.target.name)}
             />
             <Input200
               placeholder={"옵션 내용"}
               disabled={!item.optCheck == true ? true : false}
-              value={option}
+              value={item.option}
               name={String(item.id)}
               onChange={(e) => {
                 handleSetOption(e.target.value, e.target.name);
@@ -167,7 +178,7 @@ const OptForm = () => {
             />
             <Input200
               placeholder={"0"}
-              value={optionPrice}
+              value={item.optionPrice}
               name={String(item.id)}
               onChange={(e) => {
                 handleSetPrice(e.target.value, e.target.name);
@@ -175,7 +186,7 @@ const OptForm = () => {
             />
             <Input200
               placeholder={"0(필수)"}
-              value={optionCnt}
+              value={item.optionCnt}
               name={String(item.id)}
               onChange={(e) => {
                 handleSetOptCnt(e.target.value, e.target.name);

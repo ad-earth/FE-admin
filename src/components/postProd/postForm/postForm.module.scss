@@ -91,7 +91,13 @@
       }
     }
   }
-  .btnWrap {
+  .btns {
+    width: 800px;
+    margin: 60px auto;
+    @include flex-row;
+    justify-content: space-between;
+  }
+  .center {
     margin: 60px auto;
   }
 }

@@ -1,46 +1,120 @@
-import { useEffect, useMemo, useState } from "react";
-import { MediumDropdown } from "../../../elements/dropdown/DropDown";
 import styles from "./postForm.module.scss";
-import { Input100, Input250, Input500 } from "../../../elements/inputs/Inputs";
+import { useEffect, useMemo, useState } from "react";
+import { useRecoilValue } from "recoil";
+
 import ImgForm from "../imgForm/ImgForm";
 import OptForm from "../optForm/OptForm";
 import Editor from "../editor/Editor";
-import { MediumBlueBtn, SmallBlueBtn } from "../../../elements/buttons/Buttons";
-import { useTest } from "./usePostForm";
+import { optList } from "../../../store/option";
+import {
+  MediumBlueBtn,
+  MediumGrayBtn,
+  MediumWhiteBtn,
+} from "../../../elements/buttons/Buttons";
+import { MediumDropdown } from "../../../elements/dropdown/DropDown";
+import { Input100, Input250, Input500 } from "../../../elements/inputs/Inputs";
+import {
+  useDeleteProd,
+  useEditProd,
+  // useGetProdDetail,
+  usePostProd,
+} from "./usePostForm";
+import { prod } from "../../../store/prod";
+import { getDetail } from "../../../shared/apis/api";
+import { useQuery } from "react-query";
 
 const cate = ["욕실", "주방", "음료용품", "생활", "식품", "화장품", "문구"];
 
 const PostForm = () => {
   const [category, setCategory] = useState("");
-  const [prodName, setProdName] = useState("");
-  const [prodPrice, setProdPrice] = useState("");
-  const [prodDiscount, setProdDiscount] = useState("");
-  const [prodDesc, setProdDesc] = useState("");
-  const [thumb1Url, setThumb1Url] = useState("");
-  const [thumb2Url, setThumb2Url] = useState("");
-  const [contents, setContents] = useState("");
-  console.log(contents);
-  console.log("contents: ", typeof contents);
+  const [prodName, setProdName] = useState<string>("");
+  const [prodPrice, setProdPrice] = useState<string>("");
+  const [isDiscount, setIsDiscount] = useState<boolean>(false);
+  const [prodDiscount, setProdDiscount] = useState<number>(0);
+  const [prodDesc, setProdDesc] = useState<string>("");
+  const [thumb1Url, setThumb1Url] = useState<string>("");
+  const [thumb2Url, setThumb2Url] = useState<string>("");
+  const [contents, setContents] = useState<string>("");
+  const option = useRecoilValue(optList);
+  const status = useRecoilValue(prod);
 
-  const { mutate, isSuccess, data } = useTest(contents);
+  // function useProdDetail(p_No: number) {
+  //   const queryFn = async () => await getDetail(status.prodNumber);
+  //   console.log("queryFn: ", queryFn);
+  //   console.log("getDetail: ", getDetail);
+  //   return useQuery("p", queryFn, { enabled: !!p_No });
+  // }
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log("Success");
+  const call = getDetail(1665348688939);
+  console.log("call: ", call);
+
+  const { mutate: postMutate } = usePostProd();
+  const { mutate: editMutate } = useEditProd();
+  const { mutate } = useDeleteProd();
+  // const { data } = useProdDetail(status.prodNumber);
+  // console.log("data: ", data);
+
+  // useEffect(() => {
+  //   if (status.prodNumber) {
+  //     // console.log(data);
+  //     // console.log(isLoading);
+  //   }
+  // }, [data]);
+
+  // 상품 등록 & 수정
+  const handleSubmit = () => {
+    const bodyData = {
+      p_No: status.prodNumber,
+      p_Category: category,
+      p_Thumbnail: [thumb1Url, thumb2Url],
+      p_Name: prodName,
+      p_Cost: prodPrice,
+      p_Sale: isDiscount,
+      p_Discount: prodDiscount,
+      p_Option: option,
+      p_Desc: prodDesc,
+      p_Content: contents,
+    };
+    if (!status.isProd) {
+      postMutate(bodyData, {
+        onSuccess: () => {
+          alert("상품이 등록되었습니다.");
+        },
+        onError: (error) => {
+          const errMsg = error.response.data.message;
+          alert(errMsg);
+        },
+      });
+    } else if (status.isProd) {
+      editMutate(bodyData, {
+        onSuccess: () => {
+          alert("상품이 수정되었습니다!");
+        },
+        onError: (error) => {
+          const errMsg = error.response.data.message;
+          alert(errMsg);
+        },
+      });
     }
-  }, [isSuccess]);
+  };
 
-  const handleTest = () => {
-    mutate();
+  const handleDelete = () => {
+    mutate([status.prodNumber], {
+      onSuccess: () => {
+        alert("상품을 삭제하였습니다.");
+      },
+    });
   };
 
   // 할인율 적용한 금액 렌더 함수
   const discountShow = useMemo(() => {
     if (prodPrice && prodDiscount) {
+      setIsDiscount(true);
       const discountVal =
         Number(prodPrice) - (Number(prodPrice) / 100) * Number(prodDiscount);
       return <p>{discountVal}원</p>;
     } else {
+      setIsDiscount(false);
       return null;
     }
   }, [prodPrice, prodDiscount]);
@@ -90,9 +164,9 @@ const PostForm = () => {
               <p>할인율</p>
               <div className={styles.contWrap}>
                 <Input100
-                  value={prodDiscount}
+                  value={String(prodDiscount ? prodDiscount : "")}
                   placeholder={"0"}
-                  setInput={setProdDiscount}
+                  setInputNum={setProdDiscount}
                   type={"number"}
                 />
                 <span>%</span>
@@ -117,8 +191,7 @@ const PostForm = () => {
                 setThumb2Url={setThumb2Url}
               />
             </div>
-            {/* 옵션 추가 버튼 */}
-
+            {/* 옵션 선택 */}
             <div className={styles.content}>
               <OptForm />
             </div>
@@ -138,9 +211,17 @@ const PostForm = () => {
         </section>
       </div>
 
-      <div className={styles.btnWrap}>
-        <MediumBlueBtn onClick={handleTest}>상품등록</MediumBlueBtn>
-      </div>
+      {status.isProd ? (
+        <div className={styles.btns}>
+          <MediumBlueBtn>상품 수정</MediumBlueBtn>
+          <MediumWhiteBtn onClick={handleDelete}>상품 삭제</MediumWhiteBtn>
+          <MediumGrayBtn>취소</MediumGrayBtn>
+        </div>
+      ) : (
+        <div className={styles.center}>
+          <MediumBlueBtn onClick={handleSubmit}>상품등록</MediumBlueBtn>
+        </div>
+      )}
     </div>
   );
 };

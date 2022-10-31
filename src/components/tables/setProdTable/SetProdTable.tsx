@@ -4,10 +4,12 @@ import { PropsType } from "./setProdTable.type";
 import Switch from "./switch /Switch";
 import { useSetRecoilState } from "recoil";
 import { prod } from "../../../store/prod"; // atom으로 만든 전역상태
+import { useNavigate } from "react-router-dom";
 
 const SetProdTabel = (props: PropsType) => {
   const { prodList, checkedItems, setCheckedItems } = props;
   const setProd = useSetRecoilState(prod);
+  const navigate = useNavigate();
 
   //thead 체크박스 데이터
   const [allNO, setAllNO] = useState<number[]>([]);
@@ -28,6 +30,7 @@ const SetProdTabel = (props: PropsType) => {
       isProd: true,
       prodNumber: e.target.value,
     });
+    navigate("/postProd");
   };
   return (
     <div className={styles.setProdTable}>
