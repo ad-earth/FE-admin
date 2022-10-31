@@ -143,6 +143,9 @@ const PostAdModal = ({ title }: PostAdType) => {
                   alert("수정 완료");
                   hideModal();
                 },
+                onError: (error) => {
+                  setErrorMessage(error.response.data.errorMessage);
+                },
               })
             : alert("입찰가가 예상금액보다 낮습니다.");
         } else {
