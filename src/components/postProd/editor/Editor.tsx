@@ -8,14 +8,12 @@ import { PropsType } from "./editor.type";
 
 const Editor = ({ contents, setContents }: PropsType) => {
   const QuillRef = useRef<ReactQuill>();
-
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.setAttribute("name", "image");
     input.click();
-
     input.onchange = async () => {
       const s3 = new ReactS3Client(productImgConfig);
       const file = input.files[0];

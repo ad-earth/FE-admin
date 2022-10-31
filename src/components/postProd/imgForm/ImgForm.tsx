@@ -74,21 +74,21 @@ const ImgForm = ({
 
   const showThumb1 = useMemo(() => {
     if (thumb1 == null) {
-      return <img src={down} />;
+      return <img src={thumb1Url ? thumb1Url : down} />;
     }
     if (thumb1) {
       return <img src={thumb1.thumbnail} />;
     }
-  }, [thumb1]);
+  }, [thumb1, thumb1Url]);
 
   const showThumb2 = useMemo(() => {
     if (thumb2 == null) {
-      return <img src={down} />;
+      return <img src={thumb2Url ? thumb2Url : down} />;
     }
     if (thumb2) {
       return <img src={thumb2.thumbnail} />;
     }
-  }, [thumb2]);
+  }, [thumb2, thumb1Url]);
 
   return (
     <div className={styles.imgDiv}>

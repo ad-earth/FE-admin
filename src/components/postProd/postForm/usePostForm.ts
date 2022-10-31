@@ -2,36 +2,14 @@ import { useMutation, useQuery } from "react-query";
 import {
   delProd,
   editProd,
-  // getProdDetail,
+  getProdInfo,
   postProd,
 } from "../../../shared/apis/api";
 import { AxiosResponse, AxiosError } from "axios";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { optListState } from "../../../store/option";
+import { DataType, DataEditType, OptListType, ErrType } from "./postForm.type";
 
-interface ErrType {
-  message: string;
-}
-interface DataType {
-  p_No: number;
-  p_Category: string;
-  p_Thumbnail: string[];
-  p_Name: string;
-  p_Cost: number;
-  p_Sale: boolean;
-  p_Discount: number;
-  p_Option: [
-    {
-      color: string | null;
-      colorCode: string | null;
-      option: string | null;
-      optionPrice: number | null;
-      optionCnt: number | null;
-    }
-  ];
-  p_Desc: string;
-  p_Content: string;
-}
 //상품 등록
 export function usePostProd() {
   const queryFn = async (bodyData: DataType) =>
@@ -53,7 +31,7 @@ export function usePostProd() {
 }
 //상품 수정
 export function useEditProd() {
-  const queryFn = async (bodyData: DataType) =>
+  const queryFn = async (bodyData: DataEditType) =>
     await editProd(
       bodyData.p_No,
       bodyData.p_Category,
@@ -67,7 +45,7 @@ export function useEditProd() {
       bodyData.p_Content
     );
   return useMutation<AxiosResponse, AxiosError<ErrType>, any, unknown>(
-    (bodyData: DataType) => queryFn(bodyData),
+    (bodyData: DataEditType) => queryFn(bodyData),
     {}
   );
 }
@@ -79,8 +57,24 @@ export const useDeleteProd = () => {
   return useMutation((p_No: number[]) => DelProd(p_No));
 };
 // 상품 정보 패칭
-
-// export function useGetProdDetail(p_No: number) {
-//   const queryFn = async () => await getProdDetail(p_No);
-//   return useQuery("p", queryFn, { enabled: !!p_No });
-// }
+export const useGetProdInfo = (p_No: number) => {
+  const setList = useSetRecoilState(optListState);
+  const queryFn = async () => await getProdInfo(p_No);
+  return useQuery("prodInfo", queryFn, {
+    enabled: !!p_No,
+    onSuccess: ({ data }) => {
+      let option = data.p_Option;
+      let optionList = option.map((item: OptListType, i: number) => ({
+        id: i + 1,
+        colorCheck: item.color ? true : false,
+        optCheck: item.option ? true : false,
+        color: item.color,
+        colorCode: item.colorCode,
+        option: item.option,
+        optionPrice: item.optionPrice,
+        optionCnt: item.optionCnt,
+      }));
+      setList(optionList);
+    },
+  });
+};

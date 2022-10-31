@@ -13,7 +13,6 @@ const OptForm = () => {
   const [optionPrice, setOptionPrice] = useState<string>();
   const [optionCnt, setOptionCnt] = useState<string>();
   const [optList, setOptList] = useRecoilState(optListState);
-  // console.log("optList: ", optList);
 
   // 새로운 옵션 리스트 생성
   const addOptList = () => {
@@ -28,13 +27,11 @@ const OptForm = () => {
       optionCnt: 0,
     };
     setOptList([...optList, newOption]);
-    console.log("생성", optList);
   };
 
   // 개별 옵션 리스트 삭제
   const removeOptList = (id: number) => {
     setOptList(optList.filter((el) => el.id !== id));
-    console.log("삭제", optList);
   };
 
   // 색상 입력 여부
@@ -46,7 +43,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], colorCheck: checked };
     }
     setOptList(copy);
-    console.log("색상체크", optList);
   };
 
   // 옵션 입력 여부
@@ -58,7 +54,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], optCheck: checked };
     }
     setOptList(copy);
-    console.log("옵션체크", optList);
   };
 
   // 색상 입력
@@ -69,7 +64,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], color: value };
     }
     setOptList(copy);
-    console.log("색상입력", optList);
   };
 
   // 컬러피커 색상 선택시 함수
@@ -80,7 +74,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], colorCode: value };
     }
     setOptList(copy);
-    console.log("컬러코드", optList);
   };
 
   // 옵션 입력
@@ -91,7 +84,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], option: value };
     }
     setOptList(copy);
-    console.log("옵션입력", optList);
   };
 
   // 추가 금액 입력
@@ -105,7 +97,6 @@ const OptForm = () => {
       };
     }
     setOptList(copy);
-    console.log("금액", optList);
   };
 
   // 수량 입력
@@ -116,7 +107,6 @@ const OptForm = () => {
       copy[findIndex] = { ...copy[findIndex], optionCnt: Number(value) };
     }
     setOptList(copy);
-    console.log("수량", optList);
   };
 
   return (
@@ -151,7 +141,7 @@ const OptForm = () => {
             <Input200
               placeholder={"색상 입력"}
               disabled={!item.colorCheck == true ? true : false}
-              value={color}
+              value={item.color}
               defaultValue={item.color && item.color}
               name={String(item.id)}
               onChange={(e) => {
