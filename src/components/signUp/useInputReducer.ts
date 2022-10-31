@@ -1,11 +1,14 @@
 //정규식 hook
-import { IdCheck, PwdCheck, PhoneCheck } from "../../shared/regExp";
+import { IdCheck, PwdCheck, PhoneCheck } from "../../shared/hooks/regExp";
 //default state data (id,pwd... )
 import { initialValue } from "./initialValue";
 //type
-import { Action } from "./signUpForm.type";
+import { ActionType } from "./signUpForm.type";
 
-export const useInputReducer = (state: typeof initialValue, action: Action) => {
+export function useInputReducer(
+  state: typeof initialValue,
+  action: ActionType
+) {
   switch (action.type) {
     case "id":
       if (action.payload === "err") {
@@ -162,4 +165,4 @@ export const useInputReducer = (state: typeof initialValue, action: Action) => {
     default:
       throw new Error(`${action.type}`);
   }
-};
+}

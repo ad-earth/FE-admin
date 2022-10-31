@@ -21,7 +21,7 @@ export const prodAdState = atom<ProdAdType>({
   default: {
     keyword: null,
     level: null,
-    cost: null,
+    cost: 0,
     adStatus: true,
   },
 });

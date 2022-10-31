@@ -1,4 +1,4 @@
-export interface FormData {
+export interface FormDataType {
   id: string;
   pwd: string;
   brand: string;
@@ -17,11 +17,11 @@ export interface StateType {
   brand: State;
   buisness: State;
   phone: State;
-  onChange: () => void;
 }
 
-export type Action = { type: string; payload?: string; msg?: string };
+export type ActionType = { type: string; payload?: string; msg?: string };
 
+//에러 타입
 export interface ErrType {
   errorMessage: string;
 }

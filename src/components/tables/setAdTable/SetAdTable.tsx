@@ -1,43 +1,23 @@
-import { useState, useEffect } from "react";
-import { SetStateAction, Dispatch } from "react";
 import useModal from "../../modal/useModal";
 import { useSetRecoilState } from "recoil";
 import { prodAdState } from "../../../store/prodAd";
 import styles from "./setAdTable.module.scss";
 import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-interface ProductList {
-  id: number;
-  k_No: number;
-  keyword: string;
-  k_Level: number;
-  k_Cost: number;
-  k_Click: number;
-  clickCost: number;
-  k_Status: boolean;
-}
-interface PropsType {
-  selected: string;
-  prodList: ProductList[];
-  checkedItems: number[];
-  setCheckedItems: Dispatch<SetStateAction<number[]>>;
-}
+import { PropsType } from "./setAdTable.type";
 
 const SetAdTable = (props: PropsType) => {
-  const { selected, prodList, checkedItems, setCheckedItems } = props;
-  //thead 체크박스 데이터
-  const [allNO, setAllNO] = useState<number[]>([]);
-  useEffect(() => {
-    if (prodList) setAllNO(prodList?.map((e) => e.k_No));
-  }, [prodList]);
-
-  //상품 수정 페이지 이동
+  const { prodList, type, checkedItems, setCheckedItems } = props;
+  const navigate = useNavigate();
+  const keywordList = prodList?.keywordList;
+  //상품 수정 모달
   const { showModal } = useModal();
   const setProdAd = useSetRecoilState(prodAdState);
+  const isAllCheck = prodList && checkedItems.length === prodList.cnt;
 
-  const changProd = (e: any) => {
-    const findProd = prodList[e.target.value];
-
+  const changeProd = (e: React.MouseEvent<HTMLButtonElement>) => {
+    let btnTarget = (e.target as HTMLButtonElement).value;
+    const findProd = keywordList[Number(btnTarget)];
     showModal({
       modalType: "PostAdModal",
       modalProps: {
@@ -53,30 +33,47 @@ const SetAdTable = (props: PropsType) => {
     });
   };
   const changeHandler = (checked: boolean, value: number) => {
-    checked
-      ? setCheckedItems(value === 0 ? allNO : [...checkedItems, value]) //체크 데이터 담기
-      : setCheckedItems(
-          value === 0 ? [] : checkedItems.filter((el) => el !== value)
-        );
+    if (checked)
+      setCheckedItems(
+        value === 0 ? keywordList.map((e) => e.k_No) : [...checkedItems, value]
+      );
+    else
+      setCheckedItems(
+        value === 0 ? [] : checkedItems.filter((el) => el !== value)
+      );
   };
+
   //상품이 없을 경우
-  if (selected === "상품없음") {
+  if (type === "none") {
     return (
       <div className={styles.setAdTable}>
         <table>
-          <Thead changeHandler={changeHandler} />
-          <SelectedNone />
+          <Thead changeHandler={changeHandler} isAllCheck={isAllCheck} />
+          <tbody>
+            <tr>
+              <td className={styles.none}>
+                <p> 제품을 등록해 보세요.</p>
+                <SmallBlueBtn onClick={() => navigate("/postProd")}>
+                  상품 등록
+                </SmallBlueBtn>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );
   }
   //해당 상품의 키워드가 없을경우
-  if (prodList?.length === 0) {
+  if (prodList.cnt === 0) {
     return (
       <div className={styles.setAdTable}>
         <table>
-          <Thead changeHandler={changeHandler} />
-          {prodNone}
+          <Thead changeHandler={changeHandler} isAllCheck={isAllCheck} />
+          <tbody>
+            <tr>
+              <td className={styles.none}>등록된 키워드가 없습니다.</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );
@@ -84,9 +81,9 @@ const SetAdTable = (props: PropsType) => {
   return (
     <div className={styles.setAdTable}>
       <table>
-        <Thead changeHandler={changeHandler} />
+        <Thead changeHandler={changeHandler} isAllCheck={isAllCheck} />
         <tbody>
-          {prodList?.map((item, i: number) => {
+          {prodList.keywordList.map((item, i: number) => {
             return (
               <tr key={i}>
                 <td>
@@ -108,7 +105,7 @@ const SetAdTable = (props: PropsType) => {
                 <td>{item.clickCost}</td>
                 <td>{item.k_Status ? "true" : "false"}</td>
                 <td>
-                  <button value={i} onClick={changProd}>
+                  <button value={i} onClick={changeProd}>
                     수정
                   </button>
                 </td>
@@ -134,29 +131,14 @@ const thList = [
   "광고 수정",
 ];
 
-const SelectedNone = () => {
-  const navigate = useNavigate();
-  return (
-    <tbody>
-      <tr>
-        <td className={styles.none}>
-          <p> 제품을 등록해 보세요.</p>
-          <SmallBlueBtn onClick={() => navigate("/postProd")}>
-            상품 등록
-          </SmallBlueBtn>
-        </td>
-      </tr>
-    </tbody>
-  );
-};
-const prodNone = (
-  <tbody>
-    <tr>
-      <td className={styles.none}>등록된 키워드가 없습니다.</td>
-    </tr>
-  </tbody>
-);
-const Thead = ({ changeHandler }: { changeHandler: any }) => {
+// 테이블 목록
+const Thead = ({
+  changeHandler,
+  isAllCheck,
+}: {
+  changeHandler: any;
+  isAllCheck: boolean;
+}) => {
   return (
     <thead>
       <tr>
@@ -164,6 +146,7 @@ const Thead = ({ changeHandler }: { changeHandler: any }) => {
           <input
             type="checkbox"
             value={0}
+            checked={isAllCheck}
             onChange={(e) =>
               changeHandler(e.target.checked, Number(e.target.value))
             }

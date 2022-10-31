@@ -52,6 +52,7 @@ export const SingUpPwdInput = (props: PropsType) => {
       value={value}
       name={name}
       onChange={onChange}
+      autoComplete="off"
     />
   );
 };

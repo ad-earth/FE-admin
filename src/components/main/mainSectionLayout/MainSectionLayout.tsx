@@ -1,6 +1,6 @@
 import AdBanner from "../../banner/adBanner/AdBanner";
 import AdSummary from "../../graphs/adSummary/AdSummary";
-import BizMoney from "../bizMoney/BizMoney";
+import { BizMoneyHome } from "../bizMoney/BizMoney";
 import BoardContent from "../boardContent/BoardContent";
 import KeywordRanking from "../keywordRanking/KeywordRanking";
 import styles from "./MainSectionLayout.module.scss";
@@ -15,7 +15,7 @@ const MainSectionLayout = () => {
           <KeywordRanking />
         </div>
         <div className={styles.container_right}>
-          <BizMoney type="home" />
+          <BizMoneyHome />
           <AdSummary />
         </div>
       </div>

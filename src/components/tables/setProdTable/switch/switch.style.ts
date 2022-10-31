@@ -1,11 +1,12 @@
 import { styled } from "@mui/material/styles";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+import Switch from "@mui/material/Switch";
 
 export const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 32,
   height: 20,
   padding: 0,
   display: "flex",
+  margin: "0 auto",
   "& .MuiSwitch-switchBase": {
     padding: 2,
     "&.Mui-checked": {

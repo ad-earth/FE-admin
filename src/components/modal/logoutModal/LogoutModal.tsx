@@ -2,16 +2,10 @@ import styles from "./logoutModal.module.scss";
 import { ModalCancelBtn, ModalDelBtn } from "../../../elements/buttons/Buttons";
 import useModal from "../useModal";
 import { useNavigate } from "react-router-dom";
+import { LogoutType } from "./logoutModal.type";
 
-export interface LogoutType {
-  title: string;
-}
-
-const LogoutModal = (props: LogoutType) => {
-  const { title } = props;
+const LogoutModal = ({ title }: LogoutType) => {
   const navigate = useNavigate();
-
-  //모달 닫기
   const { hideModal } = useModal();
 
   //로그아웃 버튼 클릭

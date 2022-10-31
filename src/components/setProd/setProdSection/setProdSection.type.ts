@@ -9,3 +9,7 @@ export interface Paginationtype {
   category: string;
   page: number;
 }
+export interface ResType {
+  cnt: number;
+  list: List[];
+}

@@ -199,3 +199,6 @@ export const delProd = (p_No: number[]) =>
 export const getDetail = (p_No: number) => {
   axiosInstance.get(`/admin-products/${p_No}`);
 };
+//등록 상품 요철
+export const getProdInfo = (p_No: number) =>
+  axiosInstance.get(`/admin-products/${p_No}`);
