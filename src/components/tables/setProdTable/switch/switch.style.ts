@@ -6,6 +6,7 @@ export const AntSwitch = styled(Switch)(({ theme }) => ({
   height: 20,
   padding: 0,
   display: "flex",
+  margin: "0 auto",
   "& .MuiSwitch-switchBase": {
     padding: 2,
     "&.Mui-checked": {

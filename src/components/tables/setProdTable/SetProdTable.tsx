@@ -73,23 +73,35 @@ const SetProdTabel = (props: PropsType) => {
                   </td>
                   <td>{item.id}</td>
                   <td className={styles.hover}>
-                    <a
-                      target="_blank"
-                      href={`https://www.adearth.shop/${item.p_No}`}
-                      rel="noopener noreferer nofollow noreferrer"
-                    >
-                      {item.p_No}
-                    </a>
+                    {item.p_Status ? (
+                      <a
+                        target="_blank"
+                        href={`https://www.adearth.shop/detail/${item.p_No}`}
+                        rel="noopener noreferer nofollow noreferrer"
+                      >
+                        {item.p_No}
+                      </a>
+                    ) : (
+                      <span onClick={() => alert("노출되지 않은 상품입니다.")}>
+                        {item.p_No}
+                      </span>
+                    )}
                   </td>
                   <td>{item.p_Category}</td>
                   <td className={styles.hover}>
-                    <a
-                      target="_blank"
-                      href={`https://www.adearth.shop/${item.p_No}`}
-                      rel="noopener noreferer nofollow noreferrer"
-                    >
-                      {item.p_Name}
-                    </a>
+                    {item.p_Status ? (
+                      <a
+                        target="_blank"
+                        href={`https://www.adearth.shop/detail/${item.p_No}`}
+                        rel="noopener noreferer nofollow noreferrer"
+                      >
+                        {item.p_Name}
+                      </a>
+                    ) : (
+                      <span onClick={() => alert("노출되지 않은 상품입니다.")}>
+                        {item.p_Name}
+                      </span>
+                    )}
                   </td>
                   <td>
                     <Switch status={item.p_Status} no={item.p_No} />
