@@ -48,8 +48,6 @@ const PostAdModal = ({ title }: PostAdType) => {
     input !== "" && input !== " " && input?.length > 0
       ? setInitalState({ ...initalState, keyword: input, level: 1 })
       : alert("키워드를 입력해주세요");
-
-    console.log(initalState);
   };
 
   //예상금액 업데이트
@@ -164,12 +162,23 @@ const PostAdModal = ({ title }: PostAdType) => {
         console.log(`err : ${title}`);
     }
   };
+
+  function changeKeywordInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    var str_space = /\s/; // 공백 체크
+    if (str_space.exec(val)) {
+      alert("해당 항목에는 공백을 사용할 수 없습니다.\n공백이 제거됩니다.");
+      return false;
+    } else setInput(e.target.value);
+  }
+
   const Head = (
     <div className={styles.head}>
       <h3>{title}</h3>
       <img src={cancel} alt="닫기" onClick={() => hideModal()} />
     </div>
   );
+
   return (
     <div className={styles.postAdModal}>
       <div className={styles.modalContent}>
@@ -214,9 +223,7 @@ const PostAdModal = ({ title }: PostAdType) => {
               <Input290
                 placeholder="키워드 입력"
                 value={input || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setInput(e.target.value)
-                }
+                onChange={(e) => changeKeywordInput(e)}
               />
               {initalState.adStatus && (
                 <SmallGrayBtn onClick={keywordClick}>조회</SmallGrayBtn>
