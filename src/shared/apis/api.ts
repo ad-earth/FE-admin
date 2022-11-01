@@ -126,6 +126,79 @@ export const getAdLevel = (p_No: number, keyword: string, k_Level: number) =>
   axiosInstance.get(
     `/ad-keyword?p_No=${p_No}&keyword=${keyword}&k_Level=${k_Level}` //키워드 예상금액 조희
   );
-//등록 상품 요철 
+
+// 상품 등록
+export const postProd = (
+  p_Category: string,
+  p_Thumbnail: string[],
+  p_Name: string,
+  p_Cost: number,
+  p_Sale: boolean,
+  p_Discount: number,
+  p_Option: [
+    {
+      color: string | null;
+      colorCode: string | null;
+      option: string | null;
+      optionPrice: number | null;
+      optionCnt: number | null;
+    }
+  ],
+  p_Desc: string,
+  p_Content: string
+) =>
+  axiosInstance.post(`/admin-products`, {
+    p_Category,
+    p_Thumbnail,
+    p_Name,
+    p_Cost,
+    p_Sale,
+    p_Discount,
+    p_Option,
+    p_Desc,
+    p_Content,
+  });
+// 상품 수정
+export const editProd = (
+  p_No: number,
+  p_Category: string,
+  p_Thumbnail: string[],
+  p_Name: string,
+  p_Cost: number,
+  p_Sale: boolean,
+  p_Discount: number,
+  p_Option: [
+    {
+      color: string | null;
+      colorCode: string | null;
+      option: string | null;
+      optionPrice: number | null;
+      optionCnt: number | null;
+    }
+  ],
+  p_Desc: string,
+  p_Content: string
+) =>
+  axiosInstance.put(`/admin-products/${p_No}`, {
+    p_Category,
+    p_Thumbnail,
+    p_Name,
+    p_Cost,
+    p_Sale,
+    p_Discount,
+    p_Option,
+    p_Desc,
+    p_Content,
+  });
+// 상품 삭제
+export const delProd = (p_No: number[]) =>
+  axiosInstance.delete(`/admin-products`, {
+    data: { p_No: p_No },
+  });
+// 상품 상세 정보 가져오기
+export const getDetail = (p_No: number) => {
+  axiosInstance.get(`/admin-products/${p_No}`);
+};
+//등록 상품 요철
 export const getProdInfo = (p_No: number) =>
   axiosInstance.get(`/admin-products/${p_No}`);

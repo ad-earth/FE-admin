@@ -1,0 +1,69 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.optContainer {
+  @include flex-column;
+}
+.optWrap {
+  @include flex-column;
+  margin-bottom: 30px;
+  .optTitleWrap {
+    @include flex-row;
+    input {
+      margin: 18px 10px 0 0;
+    }
+    margin-bottom: 4px;
+    .optTitle {
+      width: 228px;
+      font-size: 14px;
+      font-weight: 500;
+      color: $fc_blue400;
+      margin: 16px 0 0 0;
+    }
+    .size1 {
+      width: 176px;
+    }
+    .size2 {
+      width: 196px;
+    }
+  }
+  .optInputWrap {
+    width: 1040px;
+    @include flex-row;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      margin-top: 10px;
+    }
+    .colorPic {
+      @include size(40px, 40px);
+      border: 1px solid $lc_gray400;
+      border-radius: 8px;
+      padding: 2px;
+      margin-top: 10px;
+      margin-left: -20px;
+    }
+    .colorBox {
+      position: absolute;
+      z-index: 1;
+    }
+    .del {
+      font-size: 16px;
+      color: $fc_blue100;
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

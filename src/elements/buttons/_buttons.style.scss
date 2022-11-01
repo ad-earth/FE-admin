@@ -39,6 +39,11 @@ button {
       color: $fc_white;
       border: 1px solid transparent;
     }
+    &.gray {
+      background: $fc_white;
+      color: $fc_blue400;
+      border: 1px solid $lc_gray400;
+    }
   }
   &.third {
     width: 100px;
