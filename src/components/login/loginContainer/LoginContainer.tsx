@@ -1,21 +1,20 @@
+import styles from "./loginContainer.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-
-import styles from "./loginContainer.module.scss";
+import { useLoginReg } from "./useLoginReg";
+import { postLogin } from "../../../shared/apis/api";
 import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import {
   LoginBlueButton,
   LoginJiguButton,
 } from "../../../elements/buttons/Buttons";
-import { useLoginReg } from "./useLoginReg";
-import { postLogin } from "../../../shared/apis/api";
+import { usePostLoginQuery } from "./usePostLoginQuery";
 
 const LoginContainer = () => {
   const navigate = useNavigate();
   const [id, setId] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(true);
 
   // 기존 토큰 무효화
@@ -23,22 +22,11 @@ const LoginContainer = () => {
     localStorage.removeItem("token");
   }, []);
 
-  useEffect(() => {
-    setError(false);
-    setIsValid(true);
-  }, [id, pwd]);
-
   // 로그인 유효성 검사
   const validation = useLoginReg(id, pwd);
 
   // axios POST 로그인
-  const { mutate, isError } = useMutation(() => postLogin(id, pwd), {
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.data.token);
-      navigate("/home");
-    },
-    onError: () => setError(true),
-  });
+  const { mutate, isError } = usePostLoginQuery(id, pwd);
 
   // 로그인 clickFn
   const handleLogin = () => {
@@ -65,7 +53,7 @@ const LoginContainer = () => {
           아이디와 비밀번호를 다시 확인해주세요.
         </p>
       )}
-      {error ? (
+      {isError ? (
         <p className={styles.errorMsg}>가입한 회원이 아닙니다.</p>
       ) : null}
       <div className={styles.buttonWrapper}>
