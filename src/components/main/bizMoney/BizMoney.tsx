@@ -30,7 +30,6 @@ export { BizMoneyNav, BizMoneyHome };
 
 //base
 function MoneyBox({ boxSize }: { boxSize: boolean }) {
-  console.log(boxSize);
   const button = boxSize ? "충전" : "충전하기";
   const { data: bizMoneyRes } = useGetBizQuery();
   const { mutate } = usePutBizQuery();
