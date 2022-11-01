@@ -13,7 +13,8 @@ const SetAdTable = (props: PropsType) => {
   //상품 수정 모달
   const { showModal } = useModal();
   const setProdAd = useSetRecoilState(prodAdState);
-  const isAllCheck = prodList && checkedItems.length === prodList.cnt;
+  const isAllCheck =
+    prodList && prodList.cnt > 0 && checkedItems.length === prodList.cnt;
 
   const changeProd = (e: React.MouseEvent<HTMLButtonElement>) => {
     let btnTarget = (e.target as HTMLButtonElement).value;
