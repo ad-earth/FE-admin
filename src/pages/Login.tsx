@@ -1,6 +1,6 @@
-import logo from "../assets/logo/logo.svg";
-import LoginContainer from "../components/login/loginContainer/LoginContainer";
 import styles from "./styles/login.module.scss";
+import LoginContainer from "../components/login/loginContainer/LoginContainer";
+import logo from "../assets/logo/logo.svg";
 
 const Login = () => {
   return (
