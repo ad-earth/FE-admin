@@ -5,6 +5,10 @@
   position: fixed;
   height: calc(100vh - 80px);
   background-color: $bg_white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 //bizMoney
 .bizMoneyBox {
@@ -17,12 +21,20 @@
 }
 //nav
 .asideNav {
+  // width: 100%;
+  // font-size: 20px;
+  // font-weight: 500;
+  // margin: 40px 0 0 0;
+  // padding-left: 45px;
+  // line-height: 56px;
+  // flex-grow: 1;
   width: 100%;
   font-size: 20px;
   font-weight: 500;
-  margin: 40px 0 0 0;
-  padding-left: 45px;
-  line-height: 56px;
+  margin: 20px 0 0 0;
+  padding-left: 40px;
+  line-height: 45px;
+  flex-grow: 1;
   li {
     margin-top: 8px;
   }
@@ -47,7 +59,7 @@
 }
 .withdrawalBtn {
   width: 100%;
-  position: absolute;
-  bottom: 0;
+  // position: absolute;
+  // bottom: 0;
   padding: 0 18px 18px;
 }
