@@ -20,12 +20,14 @@ import NotFound from "./pages/NotFound";
 import Loading from "./elements/Loading";
 //GlobalModal components
 import GlobalModal from "./components/modal/GlobalModal";
+// err toast
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       keepPreviousData: true,
-      retry: 2,
     },
   },
 });
@@ -34,6 +36,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
+        <ToastContainer />
         <GlobalModal />
         <Loading />
         <Routes>
