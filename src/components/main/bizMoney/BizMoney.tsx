@@ -1,5 +1,5 @@
 import styles from "./bizMoney.module.scss";
-import { SmallBlueBtn } from "../../../elements/buttons/Buttons";
+import { ChargeBtn, SmallBlueBtn } from "../../../elements/buttons/Buttons";
 import bizNav from "../../../assets/lcon/bizNav.svg";
 import { useGetBizQuery, usePutBizQuery } from "./useBizMoneyQuery";
 
@@ -11,7 +11,7 @@ const BizMoneyNav = () => {
         <img src={bizNav} alt="bizIcon" />
         <h3>Biz money</h3>
       </div>
-      <MoneyBox />
+      <MoneyBox boxSize={true} />
     </section>
   );
 };
@@ -22,15 +22,15 @@ const BizMoneyHome = () => {
     <section className={`${styles.bizMoney} ${styles.home}`}>
       <h3>내 비즈머니</h3>
       <p className={styles.subtitle}>{subtitle}</p>
-      <MoneyBox home />
+      <MoneyBox boxSize={false} />
     </section>
   );
 };
 export { BizMoneyNav, BizMoneyHome };
 
 //base
-function MoneyBox(home: { home?: boolean }) {
-  const button = home ? "충전하기" : "충전";
+function MoneyBox({ boxSize }: { boxSize: boolean }) {
+  const button = boxSize ? "충전" : "충전하기";
   const { data: bizMoneyRes } = useGetBizQuery();
   const { mutate } = usePutBizQuery();
   return (
@@ -38,7 +38,11 @@ function MoneyBox(home: { home?: boolean }) {
       <p>
         {bizMoneyRes?.data.a_Charge} <span>원</span>
       </p>
-      <SmallBlueBtn onClick={() => mutate()}>{button}</SmallBlueBtn>
+      {boxSize ? (
+        <ChargeBtn onClick={() => mutate()}>{button}</ChargeBtn>
+      ) : (
+        <SmallBlueBtn onClick={() => mutate()}>{button}</SmallBlueBtn>
+      )}
     </div>
   );
 }

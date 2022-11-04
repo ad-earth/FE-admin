@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styles from "./setProdTable.module.scss";
 import { PropsType } from "./setProdTable.type";
 import Switch from "./switch/Switch";
@@ -10,11 +9,8 @@ const SetProdTabel = (props: PropsType) => {
   const { prodList, checkedItems, setCheckedItems } = props;
   const setProd = useSetRecoilState(prod);
   const navigate = useNavigate();
-  let isAllCheck;
-  useEffect(() => {
-    if (!prodList) return;
-    isAllCheck = prodList.length === checkedItems.length;
-  }, [prodList]);
+  const isAllCheck =
+    prodList && prodList.length > 0 && checkedItems.length === prodList.length;
 
   const changeHandler = (checked: boolean, value: number) => {
     if (checked)

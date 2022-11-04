@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { toast } from "react-toastify";
 
 const axiosConfig: AxiosRequestConfig = {
   timeout: 3000,
@@ -16,6 +17,24 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const { response } = error;
+    if (response)
+      toast.error(`${Object.values(response.data)[0]}`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     return Promise.reject(error);
   }
 );
