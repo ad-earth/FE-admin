@@ -1,5 +1,5 @@
 import styles from "./editor.module.scss";
-import { useRef, useState, useMemo, useCallback } from "react";
+import { useRef, useMemo, useCallback } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ReactS3Client from "react-aws-s3-typescript";
