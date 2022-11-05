@@ -1,21 +1,21 @@
+import styles from "./findFormBox.module.scss";
 import { useState } from "react";
 import FindForm from "../findForm/FindForm";
-import styles from "./findFormBox.module.scss";
 
 const FindFormBox = () => {
-  const [idActive, setIdActive] = useState(true);
+  const [isId, setIsId] = useState<boolean>(true);
   return (
     <div className={styles.tabContainer}>
       <div className={styles.tabWrapper}>
-        <div className={styles.tabs} onClick={() => setIdActive(true)}>
-          {idActive ? (
+        <div className={styles.tabs} onClick={() => setIsId(true)}>
+          {isId ? (
             <div className={`${styles.tab} ${styles.active}`}>아이디 찾기</div>
           ) : (
             <div className={styles.tab}>아이디 찾기</div>
           )}
         </div>
-        <div className={styles.tabs} onClick={() => setIdActive(false)}>
-          {idActive ? (
+        <div className={styles.tabs} onClick={() => setIsId(false)}>
+          {isId ? (
             <div className={styles.tab}>비밀번호 찾기</div>
           ) : (
             <div className={`${styles.tab} ${styles.active}`}>
@@ -25,7 +25,7 @@ const FindFormBox = () => {
         </div>
       </div>
       <div className={styles.formWrapper}>
-        <FindForm idActive={idActive} />
+        <FindForm isId={isId} />
       </div>
     </div>
   );

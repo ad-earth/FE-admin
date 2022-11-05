@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
-
-import { LoginBlueButton } from "../../../elements/buttons/Buttons";
-import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import styles from "./findPwdForm.module.scss";
+import { useMemo, useState } from "react";
 import { useFindPwdQuery } from "./useFindPwdQuery";
 import { useResetPwdQuery } from "./useResetPwdQuery";
+import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
+import { LoginBlueButton } from "../../../elements/buttons/Buttons";
 
 const FindPwdForm = () => {
   const [id, setId] = useState<string>("");
