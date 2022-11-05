@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
-
+import { useRecoilState } from "recoil";
 import styles from "./prodFilter.module.scss";
 import DatePicker from "../../../elements/datePicker/DatePicker";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
-import { useCategory } from "./useCategory";
-import { PropsType } from "./prodFilter.type";
+import { selectedCategoryState } from "../../../store/filter";
 
-const ProdFilter = (props: PropsType) => {
-  const category = useCategory();
-  const [selected, setSelected] = useState<string>("전체");
-  const [selectedDate, setSelectedDate] = useState<string>("");
-
-  useEffect(() => {
-    props.setCategory(selected === "전체" ? null : selected);
-    props.setDate(selectedDate);
-  }, [selected, selectedDate]);
+const ProdFilter = () => {
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedCategoryState
+  );
 
   return (
     <div className={styles.filterWrapper}>
-      <DatePicker setSelectedDate={setSelectedDate} />
+      <DatePicker />
       <MediumDropdown
         id={"salesReport"}
         placeholder={"카테고리"}
-        itemList={category}
-        selected={selected}
-        setSelected={setSelected}
+        itemList={[
+          "전체",
+          "욕실",
+          "주방",
+          "음료용품",
+          "생활",
+          "식품",
+          "화장품",
+          "문구",
+        ]}
+        selected={selectedCategory}
+        setSelected={setSelectedCategory}
       />
     </div>
   );

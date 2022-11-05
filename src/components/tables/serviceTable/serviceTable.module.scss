@@ -71,3 +71,9 @@ a {
   color: $fc_blue400;
   font-weight: 500;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+  padding-bottom: 40px;
+}

@@ -2,7 +2,7 @@ import styles from "./adReportTable.module.scss";
 import { PropsType } from "./adReportTable.type";
 
 const AdReportTable = (props: PropsType) => {
-  const tHeadList = [
+  const tableHeaders = [
     "NO",
     "키워드",
     "클릭 수",
@@ -17,7 +17,7 @@ const AdReportTable = (props: PropsType) => {
     <table className={styles.tableContainer}>
       <thead className={styles.tHead}>
         <tr>
-          {tHeadList.map((x, idx) => {
+          {tableHeaders.map((x, idx) => {
             return (
               <th key={idx} className={styles.th}>
                 {x}
