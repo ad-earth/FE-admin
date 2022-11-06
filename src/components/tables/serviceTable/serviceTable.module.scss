@@ -1,5 +1,15 @@
 @import "../../../styles/colors";
 
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .buttonWrapper {
   width: 83vw;
   display: flex;
@@ -8,13 +18,10 @@
   gap: 16px;
   margin-top: 40px;
   button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center;
     cursor: pointer;
     &.download {
-      width: 130px;
-      height: 40px;
+      @include size(130px, 40px);
       border: 1px solid $lc_blue400;
       border-radius: 5px;
       background: $bg_white;
@@ -122,8 +129,7 @@
 }
 
 input {
-  width: 12px;
-  height: 12px;
+  @include size(12px, 12px);
   border: 1px solid $lc_gray400;
   cursor: pointer;
   &:checked {

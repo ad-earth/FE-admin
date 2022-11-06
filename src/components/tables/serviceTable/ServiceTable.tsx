@@ -7,6 +7,7 @@ import Pagination from "@mui/material/Pagination";
 import { CSVLink } from "react-csv";
 import { OrderListType } from "./serviceTable.type";
 import { useGetOrderListQuery } from "./useGetOrderListQuery";
+import { usePutConfirmQuery } from "./usePutConfirmQuery";
 import { useExcelQuery } from "./useExcelQuery";
 import { useExcelData } from "./useExcelData";
 import {
@@ -80,7 +81,7 @@ const ServiceTable = () => {
     if (checked) {
       let idArr: number[] = [];
       let confirmList: { o_No: number; p_No: number }[] = [];
-      orderListQuery.data?.data.forEach(
+      orderListQuery.data?.data.list.forEach(
         (el: { id: number; o_No: number; p_No: number }) => {
           idArr.push(el.id);
           confirmList.push({ o_No: el.o_No, p_No: el.p_No });
@@ -94,10 +95,12 @@ const ServiceTable = () => {
     }
   };
 
+  const { mutate } = usePutConfirmQuery(confirmList);
+
   return (
     <div>
       <div className={styles.buttonWrapper}>
-        <SmallGrayBtn>주문확정</SmallGrayBtn>
+        <SmallGrayBtn onClick={() => mutate()}>주문확정</SmallGrayBtn>
         <button className={styles.download}>
           <CSVLink
             headers={excelHeaderList}
@@ -119,7 +122,8 @@ const ServiceTable = () => {
                   type="checkbox"
                   onChange={(e) => handleAllCheck(e.target.checked)}
                   checked={
-                    checkedItems.length === orderListQuery.data?.data.length
+                    checkedItems.length ===
+                    orderListQuery.data?.data.list.length
                       ? true
                       : false
                   }

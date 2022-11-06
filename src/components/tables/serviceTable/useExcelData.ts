@@ -1,36 +1,9 @@
-interface ExcelType {
-  orderNo: number;
-  prodNo: number;
-  prodName: string;
-  prodQty: number;
-  userId: string;
-  userName: string;
-  address: string;
-  phone: string;
-  comment: string;
-  orderDate: string;
-  status: string;
-}
-interface DataType {
-  o_No: number;
-  p_No: number;
-  p_Name: string;
-  p_Cnt: number;
-  u_Id: string;
-  d_Name: string;
-  d_Address1: string;
-  d_Address2: string;
-  d_Address3: string;
-  d_Phone: string;
-  d_Memo: string;
-  o_Date: string;
-  o_Status: string;
-}
+import { ExcelType, OrderListType } from "./serviceTable.type";
 
-export const useExcelData = (data: DataType[]) => {
+export const useExcelData = (data: OrderListType[]) => {
   let excelList: ExcelType[] = [];
   data &&
-    data.map((item: DataType) => {
+    data.map((item: OrderListType) => {
       const list = {
         orderNo: item.o_No,
         prodNo: item.p_No,

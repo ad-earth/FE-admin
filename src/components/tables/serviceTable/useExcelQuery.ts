@@ -1,4 +1,6 @@
 import { useQuery } from "react-query";
+import { AxiosResponse } from "axios";
+import { OrdersResponseType } from "./serviceTable.type";
 import { getOrders } from "../../../shared/apis/api";
 
 export const useExcelQuery = (
@@ -6,7 +8,7 @@ export const useExcelQuery = (
   product: string,
   status: string
 ) => {
-  return useQuery(
+  return useQuery<AxiosResponse<OrdersResponseType>, Error>(
     [
       "excel",
       {

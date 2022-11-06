@@ -1,6 +1,4 @@
-export interface PropsType {}
-
-export type OrderListType = {
+export interface OrderListType {
   id: number;
   o_No: number;
   p_No: number;
@@ -15,5 +13,25 @@ export type OrderListType = {
   d_Memo: string;
   o_Date: string;
   o_Status: string;
-  p_Option: [string, string, string, number, number][];
-};
+  p_Option: [string, string, number, number, number][];
+  p_Price: number;
+}
+
+export interface OrdersResponseType {
+  cnt: 97;
+  list: OrderListType[];
+}
+
+export interface ExcelType {
+  orderNo: number;
+  prodNo: number;
+  prodName: string;
+  prodQty: number;
+  userId: string;
+  userName: string;
+  address: string;
+  phone: string;
+  comment: string;
+  orderDate: string;
+  status: string;
+}
