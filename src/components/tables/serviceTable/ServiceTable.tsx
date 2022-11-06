@@ -1,29 +1,29 @@
-import { useEffect, useMemo, useState } from "react";
-import Tooltip from "@mui/material/Tooltip";
-import { CSVLink } from "react-csv";
-import Pagination from "@mui/material/Pagination";
 import styles from "./serviceTable.module.scss";
-import { ReactComponent as Download } from "../../../assets/lcon/download.svg";
-import { SmallGrayBtn } from "../../../elements/buttons/Buttons";
-import { useExcelData } from "./useExcelData";
-import { useExcelQuery } from "./useExcelQuery";
+import { useEffect, useMemo, useState } from "react";
+import { useRecoilValue } from "recoil";
+import Tooltip from "@mui/material/Tooltip";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Pagination from "@mui/material/Pagination";
+import { CSVLink } from "react-csv";
+import { OrderListType } from "./serviceTable.type";
 import { useGetOrderListQuery } from "./useGetOrderListQuery";
-import { useRecoilState } from "recoil";
+import { useExcelQuery } from "./useExcelQuery";
+import { useExcelData } from "./useExcelData";
 import {
   selectedEndDateState,
   selectedProductState,
   selectedStartDateState,
   selectedStatusState,
 } from "../../../store/filter";
-import { OrderListType } from "./serviceTable.type";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ReactComponent as Download } from "../../../assets/lcon/download.svg";
+import { SmallGrayBtn } from "../../../elements/buttons/Buttons";
 
 const ServiceTable = () => {
   const [confirmList, setConfirmList] = useState([]);
-  const [product, setProduct] = useRecoilState(selectedProductState);
-  const [status, setStatus] = useRecoilState(selectedStatusState);
-  const [startDate, setStartDate] = useRecoilState(selectedStartDateState);
-  const [endDate, setEndDate] = useRecoilState(selectedEndDateState);
+  const product = useRecoilValue(selectedProductState);
+  const status = useRecoilValue(selectedStatusState);
+  const startDate = useRecoilValue(selectedStartDateState);
+  const endDate = useRecoilValue(selectedEndDateState);
 
   const [page, setPage] = useState<number>(1);
   const handlePage = (event: React.ChangeEvent<unknown>, value: number) => {

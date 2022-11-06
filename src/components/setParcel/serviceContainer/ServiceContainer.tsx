@@ -1,7 +1,6 @@
 import styles from "./serviceContainer.module.scss";
-import { useState } from "react";
-import ServiceTable from "../../tables/serviceTable/ServiceTable";
 import ParcelFilter from "../parcelFilter/ParcelFilter";
+import ServiceTable from "../../tables/serviceTable/ServiceTable";
 
 const ServiceContainer = () => {
   return (
