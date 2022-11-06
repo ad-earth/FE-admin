@@ -2,7 +2,7 @@ import styles from "./loginContainer.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePostLoginQuery } from "./usePostLoginQuery";
-import { useLoginReg } from "./useLoginReg";
+import { IdCheck, PwdCheck } from "../../../shared/hooks/regExp";
 import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import {
   LoginBlueButton,
@@ -20,10 +20,16 @@ const LoginContainer = () => {
   }, []);
 
   const { mutate, isError } = usePostLoginQuery(id, pwd);
-  const validation = useLoginReg(id, pwd);
+
+  const idCheck = IdCheck(id);
+  const pwdCheck = PwdCheck(pwd);
+
+  useEffect(() => {
+    setIsValid(idCheck && pwdCheck);
+  }, [idCheck, pwdCheck]);
 
   const handleLogin = () => {
-    validation ? mutate() : setIsValid(false);
+    isValid ? mutate() : setIsValid(false);
   };
 
   return (
@@ -43,9 +49,7 @@ const LoginContainer = () => {
         />
       </div>
       {!isValid && (
-        <p className={styles.errorMsg}>
-          아이디와 비밀번호를 다시 확인해주세요.
-        </p>
+        <p className={styles.errorMsg}>아이디와 비밀번호를 확인해주세요.</p>
       )}
       {isError ? (
         <p className={styles.errorMsg}>가입한 회원이 아닙니다.</p>
