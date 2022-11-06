@@ -24,41 +24,40 @@
 }
 .tableContainer {
   width: 83vw;
+  min-height: 550px;
   margin-top: 16px;
   border-radius: 5px;
-  border-collapse: collapse;
   background: $bg_white;
-}
-.tHead {
-  width: 83vw;
-  font-weight: 700;
-  background: $bg_gray300;
-  .th {
-    font-size: 12px;
+  table {
+    width: inherit;
+    border-collapse: collapse;
+  }
+  thead {
+    width: 83vw;
+    font-weight: 700;
+    background: $bg_gray300;
     height: 50px;
+  }
+  th {
+    font-size: 12px;
     &:first-child {
       border-radius: 5px 0px 0px 0px;
     }
     &:last-child {
       border-radius: 0px 5px 0px 0px;
     }
-    input {
-      width: 12px;
-      height: 12px;
-    }
   }
-}
-.tBody {
-  tr {
-    border-bottom: 1px solid $lc_gray300;
-    &:last-child {
-      border-radius: 0px 0px 5px 5px;
-      border-bottom: none;
+  tbody {
+    tr {
+      border-bottom: 1px solid $lc_gray300;
+      &:last-child {
+        border-radius: 0px 0px 5px 5px;
+      }
     }
     td {
-      height: 50px;
       font-size: 12px;
       text-align: center;
+      height: 50px;
       input {
         width: 12px;
         height: 12px;
@@ -66,6 +65,80 @@
     }
   }
 }
+
+table th:nth-child(1),
+table th:nth-child(2),
+table td:nth-child(1),
+table td:nth-child(2) {
+  width: 2%;
+}
+
+table th:nth-child(3),
+table th:nth-child(4),
+table th:nth-child(10),
+table td:nth-child(3),
+table td:nth-child(4),
+table td:nth-child(10) {
+  width: 10%;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+  width: 20%;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+  width: 3%;
+}
+
+table th:nth-child(7),
+table th:nth-child(13),
+table td:nth-child(7),
+table td:nth-child(13) {
+  width: 5%;
+}
+
+table th:nth-child(8),
+table td:nth-child(8) {
+  width: 8%;
+}
+
+table th:nth-child(9),
+table td:nth-child(9) {
+  width: 11%;
+}
+
+table th:nth-child(11),
+table th:nth-child(12),
+table td:nth-child(11),
+table td:nth-child(12) {
+  width: 7%;
+}
+
+table td.noData {
+  padding: 0;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: inherit;
+  line-height: 50px;
+  border-bottom: none;
+  color: $fc_gray500;
+  font-size: 14px;
+}
+
+input {
+  width: 12px;
+  height: 12px;
+  border: 1px solid $lc_gray400;
+  cursor: pointer;
+  &:checked {
+    accent-color: $bg_blue100;
+  }
+}
+
 a {
   text-decoration: none;
   color: $fc_blue400;
