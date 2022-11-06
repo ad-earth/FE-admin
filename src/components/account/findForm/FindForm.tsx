@@ -6,6 +6,7 @@ import FindPwdForm from "../findPwdForm/FindPwdForm";
 
 const FindForm = (props: PropsType) => {
   const navigate = useNavigate();
+
   return (
     <div className={styles.formContainer}>
       {props.isId ? <FindIdForm /> : <FindPwdForm />}

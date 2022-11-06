@@ -40,16 +40,16 @@ function App() {
           <Route path="/" element={<DefaultLoginLayout />}>
             <Route index element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="/find_account" element={<Account />} />
+            <Route path="find_account" element={<Account />} />
           </Route>
           <Route element={<DefaultLayout />}>
             <Route path="home" element={<Main />} />
             <Route path="setProd" element={<SetProd />} />
             <Route path="postProd" element={<PostProd />} />
-            <Route path="/shipping_service" element={<SetParcel />} />
-            <Route path="/sales_report" element={<ProdReport />} />
+            <Route path="shipping_service" element={<SetParcel />} />
+            <Route path="sales_report" element={<ProdReport />} />
             <Route path="setAd" element={<SetAd />} />
-            <Route path="/ad_report" element={<AdReport />} />
+            <Route path="ad_report" element={<AdReport />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -4,6 +4,7 @@ import FindForm from "../findForm/FindForm";
 
 const FindFormBox = () => {
   const [isId, setIsId] = useState<boolean>(true);
+
   return (
     <div className={styles.tabContainer}>
       <div className={styles.tabWrapper}>
