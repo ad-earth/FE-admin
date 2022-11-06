@@ -110,7 +110,7 @@ const ServiceTable = () => {
           </CSVLink>
         </button>
       </div>
-      <div className={styles.tableContainer}>
+      <div className={styles.serviceTable}>
         <table id="orderList">
           <thead>
             <tr>
