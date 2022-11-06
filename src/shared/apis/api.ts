@@ -70,7 +70,7 @@ export const putOrderConfirm = (
 
 // 배송관리 조회
 export const getOrders = (
-  page: string,
+  page: number,
   postQty: string,
   date: string,
   product: string,

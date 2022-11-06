@@ -1,18 +1,51 @@
 @import "../../../styles/colors";
 
-.tableContainer {
+.salesTable {
   width: 83vw;
+  min-height: 550px;
   margin-top: 16px;
   border-radius: 5px;
-  border-collapse: collapse;
   background: $bg_white;
-}
-.tHead {
-  width: 83vw;
-  font-weight: 700;
-  background: $bg_gray300;
+  table {
+    width: inherit;
+    border-collapse: collapse;
 
-  .th {
+    th:nth-child(1),
+    th:nth-child(4),
+    td:nth-child(1),
+    td:nth-child(4) {
+      width: 10%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 20%;
+    }
+
+    th:nth-child(2),
+    th:nth-child(3),
+    td:nth-child(2),
+    td:nth-child(3) {
+      width: 30%;
+    }
+
+    td.noData {
+      display: inline-block;
+      position: absolute;
+      width: 83vw;
+      margin: 250px auto;
+      border-bottom: none;
+      color: $fc_gray500;
+      font-size: 14px;
+    }
+  }
+  thead {
+    width: 83vw;
+    height: 50px;
+    font-weight: 700;
+    background: $bg_gray300;
+  }
+  th {
     font-size: 12px;
     height: 50px;
     &:first-child {
@@ -22,15 +55,14 @@
       border-radius: 0px 5px 0px 0px;
     }
   }
-}
-.tBody {
-  .tr {
-    border-bottom: 1px solid $lc_gray300;
-    &:last-child {
-      border-radius: 0px 0px 5px 5px;
-      border-bottom: none;
+  tbody {
+    tr {
+      border-bottom: 1px solid $lc_gray300;
+      &:last-child {
+        border-radius: 0px 0px 5px 5px;
+      }
     }
-    .td {
+    td {
       height: 50px;
       font-size: 12px;
       text-align: center;

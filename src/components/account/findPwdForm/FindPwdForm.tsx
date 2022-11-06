@@ -1,28 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
-
-import { LoginBlueButton } from "../../../elements/buttons/Buttons";
-import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import styles from "./findPwdForm.module.scss";
-import { useFindPwdQuery } from "./useFindPwdQuery";
-import { useResetPwdQuery } from "./useResetPwdQuery";
+import { useMemo, useState } from "react";
+import { useGetPwdQuery } from "./useGetPwdQuery";
+import { usePutPwdQuery } from "./usePutPwdQuery";
+import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
+import { LoginBlueButton } from "../../../elements/buttons/Buttons";
 
 const FindPwdForm = () => {
   const [id, setId] = useState<string>("");
   const [businessNumber, setBusinessNumber] = useState<string>("");
   const [newPwd, setNewPwd] = useState<string>("");
 
-  const authData = useFindPwdQuery(id, businessNumber);
+  const pwdQuery = useGetPwdQuery(id, businessNumber);
   const { authNumber } = useMemo(
-    () => ({ authNumber: authData.data?.data.a_Idx }),
-    [authData]
+    () => ({ authNumber: pwdQuery.data?.data.a_Idx }),
+    [pwdQuery]
   );
 
-  const resetData = useResetPwdQuery(authNumber, newPwd);
+  const resetQuery = usePutPwdQuery(authNumber, newPwd);
 
   return (
     <div className={styles.container}>
       <div className={styles.inputWrapper}>
-        {authData.isSuccess ? (
+        {pwdQuery.isSuccess ? (
           <PwdInput placeholder="새로운 비밀번호" setInput={setNewPwd} />
         ) : (
           <>
@@ -30,40 +29,40 @@ const FindPwdForm = () => {
               placeholder="아이디"
               type="text"
               setInput={setId}
-              onKeyDown={(e) => e.key === "Enter" && authData.refetch()}
+              onKeyDown={(e) => e.key === "Enter" && pwdQuery.refetch()}
             />
             <LoginInput
               placeholder="사업자 번호 예) 1234567890"
               type="text"
               setInput={setBusinessNumber}
-              onKeyDown={(e) => e.key === "Enter" && authData.refetch()}
+              onKeyDown={(e) => e.key === "Enter" && pwdQuery.refetch()}
             />
           </>
         )}
       </div>
-      {authData.isSuccess && (
+      {pwdQuery.isSuccess && (
         <p className={`${styles.msg}`}>새로운 비밀번호를 입력해주세요.</p>
       )}
-      {authData.isError && (
+      {pwdQuery.isError && (
         <p className={`${styles.msg} ${styles.error}`}>
           존재하지 않는 회원입니다. 다시 확인해주세요.
         </p>
       )}
-      {resetData.isSuccess && (
+      {resetQuery.isSuccess && (
         <p className={`${styles.msg}`}>비밀번호가 변경되었습니다.</p>
       )}
-      {resetData.isError && (
+      {resetQuery.isError && (
         <p className={`${styles.msg} ${styles.error}`}>
           올바른 비밀번호 형식이 아닙니다. 다시 입력해주세요.
         </p>
       )}
       <div className={styles.buttonWrapper}>
-        {authData.isSuccess ? (
-          <LoginBlueButton onClick={() => resetData.refetch()}>
+        {pwdQuery.isSuccess ? (
+          <LoginBlueButton onClick={() => resetQuery.refetch()}>
             비밀번호 재설정
           </LoginBlueButton>
         ) : (
-          <LoginBlueButton onClick={() => authData.refetch()}>
+          <LoginBlueButton onClick={() => pwdQuery.refetch()}>
             비밀번호 찾기
           </LoginBlueButton>
         )}

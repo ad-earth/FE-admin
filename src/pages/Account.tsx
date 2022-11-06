@@ -1,6 +1,6 @@
+import styles from "./styles/account.module.scss";
 import FindFormBox from "../components/account/findFormBox/FindFormBox";
 import logo from "../assets/logo/logo.svg";
-import styles from "./styles/account.module.scss";
 
 const Account = () => {
   return (

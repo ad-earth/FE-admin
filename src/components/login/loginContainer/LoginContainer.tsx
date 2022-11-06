@@ -1,49 +1,37 @@
+import styles from "./loginContainer.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-
-import styles from "./loginContainer.module.scss";
+import { usePostLoginQuery } from "./usePostLoginQuery";
+import { IdCheck, PwdCheck } from "../../../shared/hooks/regExp";
 import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import {
   LoginBlueButton,
   LoginJiguButton,
 } from "../../../elements/buttons/Buttons";
-import { useLoginReg } from "./useLoginReg";
-import { postLogin } from "../../../shared/apis/api";
 
 const LoginContainer = () => {
   const navigate = useNavigate();
   const [id, setId] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(true);
 
-  // 기존 토큰 무효화
   useEffect(() => {
     localStorage.removeItem("token");
   }, []);
 
+  const { mutate, isError } = usePostLoginQuery(id, pwd);
+
+  const idCheck = IdCheck(id);
+  const pwdCheck = PwdCheck(pwd);
+
   useEffect(() => {
-    setError(false);
-    setIsValid(true);
-  }, [id, pwd]);
+    setIsValid(idCheck && pwdCheck);
+  }, [idCheck, pwdCheck]);
 
-  // 로그인 유효성 검사
-  const validation = useLoginReg(id, pwd);
-
-  // axios POST 로그인
-  const { mutate, isError } = useMutation(() => postLogin(id, pwd), {
-    onSuccess: (data) => {
-      localStorage.setItem("token", data.data.token);
-      navigate("/home");
-    },
-    onError: () => setError(true),
-  });
-
-  // 로그인 clickFn
   const handleLogin = () => {
-    validation ? mutate() : setIsValid(false);
+    isValid ? mutate() : setIsValid(false);
   };
+
   return (
     <>
       <div className={styles.inputWrapper}>
@@ -61,15 +49,13 @@ const LoginContainer = () => {
         />
       </div>
       {!isValid && (
-        <p className={styles.errorMsg}>
-          아이디와 비밀번호를 다시 확인해주세요.
-        </p>
+        <p className={styles.errorMsg}>아이디와 비밀번호를 확인해주세요.</p>
       )}
-      {error ? (
+      {isError ? (
         <p className={styles.errorMsg}>가입한 회원이 아닙니다.</p>
       ) : null}
       <div className={styles.buttonWrapper}>
-        <LoginBlueButton onClick={() => handleLogin}>로그인</LoginBlueButton>
+        <LoginBlueButton onClick={() => handleLogin()}>로그인</LoginBlueButton>
         <LoginJiguButton />
       </div>
       <div className={`${styles.buttonWrapper} ${styles.row}`}>

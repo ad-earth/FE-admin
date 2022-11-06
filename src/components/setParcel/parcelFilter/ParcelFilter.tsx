@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
-
+import styles from "./parcelFilter.module.scss";
+import { useRecoilState } from "recoil";
+import { useGetProductsQuery } from "./useGetProductsQuery";
+import {
+  selectedProductState,
+  selectedStatusState,
+} from "../../../store/filter";
 import DatePicker from "../../../elements/datePicker/DatePicker";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
-import styles from "./parcelFilter.module.scss";
-import { PropsType } from "./parcelFilter.type";
-import { useProductQuery } from "./useProductQuery";
 
-const ParcelFilter = (props: PropsType) => {
-  const [selectedDate, setSelectedDate] = useState<string>(null);
-  const [selectedProduct, setSelectedProduct] = useState<string>(null);
-  const [selectedStatus, setSelectedStatus] = useState<string>(null);
+const ParcelFilter = () => {
+  const [selectedProduct, setSelectedProduct] =
+    useRecoilState(selectedProductState);
+  const [selectedStatus, setSelectedStatus] =
+    useRecoilState(selectedStatusState);
 
-  useEffect(() => {
-    props.setDate(selectedDate);
-    props.setProduct(selectedProduct);
-    props.setStatus(selectedStatus);
-  }, [selectedDate, selectedProduct, selectedStatus]);
-
-  const productList = useProductQuery();
+  const productList = useGetProductsQuery();
 
   return (
     <div className={styles.filterWrapper}>
-      <DatePicker setSelectedDate={setSelectedDate} />
+      <DatePicker />
       <MediumDropdown
         id={"parcelProducts"}
         placeholder={"상품"}

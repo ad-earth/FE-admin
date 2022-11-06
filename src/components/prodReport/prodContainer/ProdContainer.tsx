@@ -1,28 +1,33 @@
-import { useState } from "react";
-
 import styles from "./prodContainer.module.scss";
-import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
+import { useRecoilValue } from "recoil";
+import { useGetSalesQuery } from "./useGetSalesQuery";
+import {
+  selectedCategoryState,
+  selectedEndDateState,
+  selectedStartDateState,
+} from "../../../store/filter";
 import ProdFilter from "../prodFilter/ProdFilter";
-import { useSalesQuery } from "./useSalesQuery";
+import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
 
 const ProdContainer = () => {
-  const [category, setCategory] = useState<string>(null);
-  const [date, setDate] = useState<string>(null);
+  const startDate = useRecoilValue(selectedStartDateState);
+  const endDate = useRecoilValue(selectedEndDateState);
+  const category = useRecoilValue(selectedCategoryState);
 
-  // axios GET 보고서 데이터 조회
-  const salesData = useSalesQuery(category, date);
+  const salesQuery = useGetSalesQuery(
+    category === "전체" ? null : category,
+    `[${startDate},${endDate}]`
+  );
 
   return (
     <div className={styles.tableContainer}>
-      <ProdFilter setCategory={setCategory} setDate={setDate} />
+      <ProdFilter />
       <div className={styles.salesSummary}>
-        상품 총 수량: <span>{salesData.data?.data.cnt} 개</span>
+        상품 총 수량: <span>{salesQuery.data?.data.cnt} 개</span>
         &nbsp;&nbsp;&nbsp;&nbsp;전체 판매 금액:
-        <span>
-          {salesData && salesData.data?.data.totalPrice.toLocaleString()} 원
-        </span>
+        <span>{salesQuery.data?.data.totalPrice.toLocaleString()} 원</span>
       </div>
-      <ProdReportTable productData={salesData.data?.data.products} />
+      <ProdReportTable productData={salesQuery.data?.data.products} />
     </div>
   );
 };

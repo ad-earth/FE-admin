@@ -1,5 +1,3 @@
-export interface PropsType {
-  setDate: (date: string) => void;
-  setProduct: (product: string) => void;
-  setStatus: (status: string) => void;
+export interface ProductsResponseType {
+  productList: { p_No: number; p_Name: string }[];
 }
