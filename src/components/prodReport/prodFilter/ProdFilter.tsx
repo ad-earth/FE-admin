@@ -1,8 +1,8 @@
-import { useRecoilState } from "recoil";
 import styles from "./prodFilter.module.scss";
+import { useRecoilState } from "recoil";
+import { selectedCategoryState } from "../../../store/filter";
 import DatePicker from "../../../elements/datePicker/DatePicker";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
-import { selectedCategoryState } from "../../../store/filter";
 
 const ProdFilter = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(

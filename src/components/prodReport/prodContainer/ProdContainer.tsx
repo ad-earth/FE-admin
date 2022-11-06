@@ -1,18 +1,18 @@
 import styles from "./prodContainer.module.scss";
-import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
-import ProdFilter from "../prodFilter/ProdFilter";
+import { useRecoilValue } from "recoil";
 import { useGetSalesQuery } from "./useGetSalesQuery";
-import { useRecoilState } from "recoil";
 import {
   selectedCategoryState,
   selectedEndDateState,
   selectedStartDateState,
 } from "../../../store/filter";
+import ProdFilter from "../prodFilter/ProdFilter";
+import ProdReportTable from "../../tables/prodReportTable/ProdReportTable";
 
 const ProdContainer = () => {
-  const [startDate, setStartDate] = useRecoilState(selectedStartDateState);
-  const [endDate, setEndDate] = useRecoilState(selectedEndDateState);
-  const [category, setCategory] = useRecoilState(selectedCategoryState);
+  const startDate = useRecoilValue(selectedStartDateState);
+  const endDate = useRecoilValue(selectedEndDateState);
+  const category = useRecoilValue(selectedCategoryState);
 
   const salesQuery = useGetSalesQuery(
     category === "전체" ? null : category,

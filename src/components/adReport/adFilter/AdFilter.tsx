@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-
 import styles from "./adFilter.module.scss";
+import { useRecoilState } from "recoil";
+import { useGetProductsQuery } from "./useGetProductsQuery";
+import { selectedProductNumberState } from "../../../store/filter";
 import DatePicker from "../../../elements/datePicker/DatePicker";
 import { MediumDropdown } from "../../../elements/dropdown/DropDown";
-import { useProductQuery } from "./useProductQuery";
-import { useRecoilState } from "recoil";
-import { selectedProductNumberState } from "../../../store/filter";
 
 const AdFilter = () => {
-  const productNumbers = useProductQuery();
+  const productNumbers = useGetProductsQuery();
   const [selectedProductNumber, setSelectedProductNumber] = useRecoilState(
     selectedProductNumberState
   );

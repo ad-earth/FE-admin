@@ -1,5 +1,5 @@
 export interface PropsType {
-  dataList?: {
+  dataList: {
     keyword: string;
     k_Click: number;
     k_Cost: number;

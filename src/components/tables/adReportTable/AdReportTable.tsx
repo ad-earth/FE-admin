@@ -13,6 +13,7 @@ const AdReportTable = (props: PropsType) => {
     "판매금액",
     "수익율",
   ];
+
   return (
     <div className={styles.adTable}>
       <table>
