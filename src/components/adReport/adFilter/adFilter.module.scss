@@ -1,0 +1,11 @@
+@import "../../../styles/colors";
+
+.filterWrapper {
+  margin-top: 16px;
+  width: 83vw;
+  background: $bg_white;
+  border-radius: 5px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 32px;
+}

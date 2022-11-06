@@ -1,0 +1,19 @@
+@import "../../../styles/colors";
+
+#LoginLayout {
+  main {
+    width: 100vw;
+    display: flex;
+    height: 100vh;
+  }
+}
+.mainWrap {
+  width: 50vw;
+  height: 100vh;
+  background: $bg_white;
+}
+.slideBannerWrap {
+  width: 50vw;
+  height: 100vh;
+  background: $bg_blue200;
+}

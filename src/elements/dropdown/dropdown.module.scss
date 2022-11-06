@@ -1,0 +1,27 @@
+@import "../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+.select {
+  @include size(250px, 40px);
+  color: $fc_blue400;
+  border-color: $lc_gray400;
+  border-radius: 5px;
+  .menuItem {
+    color: $fc_blue400;
+    font-size: 14px;
+    font-weight: 400;
+    z-index: 99999;
+    .Mui-selected {
+      background-color: $bg_gray100;
+    }
+  }
+}
+.smallSelect {
+  @include size(70px, 30px);
+  border-color: $lc_gray400;
+  z-index: 99999;
+}

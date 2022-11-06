@@ -1,0 +1,36 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formContainer {
+  @include size(460px, 383px);
+  @include center;
+  border: {
+    width: 0px 1px 1px 1px;
+    style: solid;
+    color: $lc_blue100;
+    radius: 0px 5px 5px 5px;
+  }
+  .buttonWrapper {
+    width: 460px;
+    @include center;
+    justify-content: center;
+    margin-top: 32px;
+    flex-direction: row;
+    color: $fc_gray500;
+    button {
+      border: none;
+      background: none;
+      color: $fc_gray500;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "../../styles/colors";
+
+#signUpForm {
+  display: flex;
+  flex-direction: column;
+  :is(.success, .error) {
+    height: 14px;
+    margin: 0px 0 16px 0;
+    text-align: left;
+  }
+  .success {
+    color: $fc_green;
+  }
+  .error {
+    color: $fc_red;
+  }
+  input {
+    margin-bottom: 4px;
+    &[type="submit"] {
+      cursor: pointer;
+    }
+  }
+  .findeWrap {
+    text-align: center;
+    margin-top: 32px;
+    color: $fc_gray500;
+    span {
+      color: $fc_blue100;
+      margin-left: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+  :disabled {
+    color: $fc_gray500;
+    background-color: $bg_gray200;
+  }
+}

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.container_left {
+  flex-basis: 40%;
+}
+.container_right {
+  display: flex;
+  flex-basis: 57%;
+  flex-direction: column;
+  justify-content: space-between;
+}

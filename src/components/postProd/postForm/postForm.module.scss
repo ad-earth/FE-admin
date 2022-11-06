@@ -1,0 +1,114 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.formContainer {
+  width: 100%;
+  @include flex-column;
+  justify-content: center;
+  .contentWrapper {
+    @include size(1600px, auto);
+    background-color: $bg_white;
+    margin: auto;
+    padding: 60px;
+
+    .section {
+      width: 100%;
+      @include flex-row;
+
+      .left {
+        width: 100px;
+        p {
+          font-weight: 500;
+          font-size: 16px;
+          margin-bottom: 50px;
+          &.gap1 {
+            margin-bottom: 108px;
+          }
+          &.gap2 {
+            margin-bottom: 92px;
+          }
+        }
+      }
+
+      .right {
+        @include flex-column;
+        p {
+          font-weight: 500;
+          font-size: 16px;
+          margin-right: 34px;
+        }
+        .content {
+          @include flex-row;
+          margin-bottom: 34px;
+          span {
+            font-size: 16px;
+            font-weight: 500;
+            color: $fc_blue400;
+            margin-left: 8px;
+          }
+          .contWrap {
+            @include flex-row;
+            align-items: center;
+            margin-right: 50px;
+            p {
+              margin-left: 30px;
+            }
+            // input [number] 화살표 제거
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            /* Firefox */
+            input[type="number"] {
+              -moz-appearance: textfield;
+            }
+          }
+          .textArea {
+            @include size(1378px, 100px);
+            padding: 19px 20px;
+            border: 1px solid $lc_gray400;
+            border-radius: 8px;
+            &::placeholder {
+              color: $fc_blue400;
+            }
+          }
+          .check {
+            border: 1px solid $lc_gray400;
+            color: $bg_blue100;
+            margin: 0 14px 20px 5px;
+          }
+          label {
+            margin: 0 50px 0 0;
+          }
+        }
+        .quill {
+          @include size(1378px, 704px);
+          margin-bottom: 40px;
+        }
+      }
+    }
+  }
+  .btns {
+    width: 800px;
+    margin: 60px auto;
+    @include flex-row;
+    justify-content: space-between;
+  }
+  .center {
+    margin: 60px auto;
+  }
+}

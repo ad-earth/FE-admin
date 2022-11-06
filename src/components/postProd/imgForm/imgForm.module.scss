@@ -1,0 +1,21 @@
+@import "../../../styles/colors";
+.imgDiv {
+  display: flex;
+  flex-direction: row;
+  .imgBox {
+    width: 80px;
+    height: 80px;
+    margin-right: 24px;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  input {
+    display: none;
+  }
+}

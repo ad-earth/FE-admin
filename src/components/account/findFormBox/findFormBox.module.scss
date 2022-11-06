@@ -1,0 +1,47 @@
+@import "../../../styles/colors";
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabContainer {
+  width: 460px;
+  margin-top: 63px;
+  @include center;
+  flex-direction: column;
+  .tabWrapper {
+    @include size(460px, 50px);
+    display: flex;
+    .tabs {
+      @include size(230px, 50px);
+      @include center;
+      cursor: pointer;
+      .tab {
+        @include size(230px, 50px);
+        font-size: 16px;
+        color: $fc_gray500;
+        background: $bg_gray200;
+        @include center;
+        border: {
+          bottom: 1px solid $lc_blue100;
+          radius: 5px 5px 0px 0px;
+        }
+        &.active {
+          color: $fc_blue100;
+          background: $bg_white;
+          border: {
+            width: 1px 1px 0px 1px;
+            style: solid;
+            color: $lc_blue100;
+          }
+        }
+      }
+    }
+  }
+}
