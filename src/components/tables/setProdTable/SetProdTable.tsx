@@ -9,8 +9,9 @@ const SetProdTabel = (props: PropsType) => {
   const { prodList, checkedItems, setCheckedItems } = props;
   const setProd = useSetRecoilState(prod);
   const navigate = useNavigate();
-  const isAllCheck =
-    prodList && prodList.length > 0 && checkedItems.length === prodList.length;
+  const isAllCheck = prodList
+    ? prodList.length > 0 && checkedItems.length === prodList.length
+    : false;
 
   const changeHandler = (checked: boolean, value: number) => {
     if (checked)
@@ -59,7 +60,7 @@ const SetProdTabel = (props: PropsType) => {
                   <td>
                     <input
                       id="check"
-                      value={item.p_No}
+                      value={item.p_No ?? ""}
                       type="checkbox"
                       checked={checkedItems.includes(item.p_No) ? true : false}
                       onChange={(e) =>
