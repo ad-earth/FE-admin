@@ -1,37 +1,64 @@
-import { useState } from "react";
-import Tooltip from "@mui/material/Tooltip";
-import { CSVLink } from "react-csv";
-
 import styles from "./serviceTable.module.scss";
+import { useEffect, useMemo, useState } from "react";
+import { useRecoilValue } from "recoil";
+import Tooltip from "@mui/material/Tooltip";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Pagination from "@mui/material/Pagination";
+import { CSVLink } from "react-csv";
+import { OrderListType } from "./serviceTable.type";
+import { useGetOrderListQuery } from "./useGetOrderListQuery";
+import { usePutConfirmQuery } from "./usePutConfirmQuery";
+import { useExcelQuery } from "./useExcelQuery";
+import { useExcelData } from "./useExcelData";
+import {
+  selectedEndDateState,
+  selectedProductState,
+  selectedStartDateState,
+  selectedStatusState,
+} from "../../../store/filter";
 import { ReactComponent as Download } from "../../../assets/lcon/download.svg";
 import { SmallGrayBtn } from "../../../elements/buttons/Buttons";
-import { PropsType } from "./serviceTable.type";
-import { useHeaderList } from "./useHeaderList";
-import { useExcelData } from "./useExcelData";
-import { useExcelQuery } from "./useExcelQuery";
-import { useExcelHeaderList } from "./useExcelHeaderList";
-import { useOrderConfirmQuery } from "./useOrderConfirmQuery";
-import { putOrderConfirm } from "../../../shared/apis/api";
-import { useMutation, useQueryClient } from "react-query";
 
-const ServiceTable = (props: PropsType) => {
+const ServiceTable = () => {
   const [confirmList, setConfirmList] = useState([]);
+  const product = useRecoilValue(selectedProductState);
+  const status = useRecoilValue(selectedStatusState);
+  const startDate = useRecoilValue(selectedStartDateState);
+  const endDate = useRecoilValue(selectedEndDateState);
 
-  // 엑셀 데이터
-  const headers = useExcelHeaderList();
+  const [page, setPage] = useState<number>(1);
+  const handlePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  useEffect(() => {
+    setPage(1);
+  }, [product, status, startDate, endDate]);
+
+  const orderListQuery = useGetOrderListQuery(
+    page,
+    `[${startDate},${endDate}]`,
+    product === "전체" ? null : product,
+    status === "전체" ? null : status
+  );
+
+  const { orderList, dataQty } = useMemo(
+    () => ({
+      orderList: orderListQuery.data?.data.list,
+      dataQty: orderListQuery.data?.data.cnt,
+    }),
+    [orderListQuery]
+  );
+
   const { data } = useExcelQuery(
-    "0",
-    "0",
-    props.date,
-    props.product,
-    props.status
+    `[${startDate},${endDate}]`,
+    product === "전체" ? null : product,
+    status === "전체" ? null : status
   );
   const excelData = useExcelData(data?.data.list);
 
-  // 체크박스 상태 관리
-  const [checkItems, setCheckItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
-  // 체크박스 단일 선택
   const handleSingleCheck = (
     checked: boolean,
     id: number,
@@ -39,63 +66,44 @@ const ServiceTable = (props: PropsType) => {
     productNumber: number
   ) => {
     if (checked) {
-      setCheckItems([...checkItems, id]);
+      setCheckedItems([...checkedItems, id]);
       setConfirmList([
         ...confirmList,
         { o_No: orderNumber, p_No: productNumber },
       ]);
     } else {
-      // 선택 해제
-      setCheckItems(checkItems.filter((el) => el !== id));
+      setCheckedItems(checkedItems.filter((el) => el !== id));
       setConfirmList(confirmList.filter((o_No) => o_No !== orderNumber));
     }
   };
 
-  // 체크박스 전체 선택
   const handleAllCheck = (checked: boolean) => {
     if (checked) {
       let idArr: number[] = [];
       let confirmList: { o_No: number; p_No: number }[] = [];
-      // 전체 체크 박스 체크
-      props?.orderList.forEach((el) => {
-        idArr.push(el.id);
-        confirmList.push({ o_No: el.o_No, p_No: el.p_No });
-      });
-      setCheckItems(idArr);
+      orderListQuery.data?.data.list.forEach(
+        (el: { id: number; o_No: number; p_No: number }) => {
+          idArr.push(el.id);
+          confirmList.push({ o_No: el.o_No, p_No: el.p_No });
+        }
+      );
+      setCheckedItems(idArr);
       setConfirmList(confirmList);
-    }
-    // 전체 체크 박스 체크 해제
-    else {
-      setCheckItems([]);
+    } else {
+      setCheckedItems([]);
       setConfirmList([]);
     }
   };
 
-  // 테이블 제목 리스트
-  const headerList = useHeaderList();
-
-  // 주문 확정
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation(() => putOrderConfirm(confirmList), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("orders");
-      setConfirmList([]);
-      setCheckItems([]);
-    },
-    onError: ({ response }) => {
-      console.log(response.data.errorMessage);
-      setConfirmList([]);
-      setCheckItems([]);
-    },
-  });
+  const { mutate } = usePutConfirmQuery(confirmList);
 
   return (
     <div>
       <div className={styles.buttonWrapper}>
-        <SmallGrayBtn onClick={mutate}>주문확정</SmallGrayBtn>
+        <SmallGrayBtn onClick={() => mutate()}>주문확정</SmallGrayBtn>
         <button className={styles.download}>
           <CSVLink
-            headers={headers}
+            headers={excelHeaderList}
             data={excelData}
             filename="order_list.csv"
             target="_blank"
@@ -105,30 +113,30 @@ const ServiceTable = (props: PropsType) => {
           </CSVLink>
         </button>
       </div>
-      <table id="orderList" className={styles.tableContainer}>
-        <thead className={styles.tHead}>
-          <tr className={styles.tr}>
-            <th className={styles.th}>
-              <input
-                type="checkbox"
-                onChange={(e) => handleAllCheck(e.target.checked)}
-                checked={
-                  checkItems.length ===
-                  (props.orderList && props.orderList.length)
-                    ? true
-                    : false
-                }
-              />
-            </th>
-            {headerList.map((header, idx) => {
-              return <th key={idx}>{header}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody className={styles.tBody}>
-          {props.orderList && props.orderList.length ? (
-            props.orderList.map((x) => {
-              return (
+      <div className={styles.serviceTable}>
+        <table id="orderList">
+          <thead>
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  onChange={(e) => handleAllCheck(e.target.checked)}
+                  checked={
+                    checkedItems.length ===
+                    orderListQuery.data?.data.list.length
+                      ? true
+                      : false
+                  }
+                />
+              </th>
+              {headerList.map((header, idx) => {
+                return <th key={idx}>{header}</th>;
+              })}
+            </tr>
+          </thead>
+          {orderList?.length ? (
+            <tbody>
+              {orderList?.map((x: OrderListType) => (
                 <tr key={x.id}>
                   <td>
                     <input
@@ -141,7 +149,7 @@ const ServiceTable = (props: PropsType) => {
                           x.p_No
                         )
                       }
-                      checked={checkItems.includes(x.id) ? true : false}
+                      checked={checkedItems.includes(x.id) ? true : false}
                     />
                   </td>
                   <td>{x.id}</td>
@@ -175,29 +183,68 @@ const ServiceTable = (props: PropsType) => {
                   <td>{x.o_Date}</td>
                   <td>{x.o_Status}</td>
                 </tr>
-              );
-            })
+              ))}
+            </tbody>
           ) : (
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className={styles.noData}>해당하는 상품이 없습니다.</td>
+              </tr>
+            </tbody>
           )}
-        </tbody>
-      </table>
+        </table>
+      </div>
+
+      <ThemeProvider theme={theme}>
+        <Pagination
+          className={styles.pagination}
+          count={Math.ceil(dataQty / 10)}
+          page={page}
+          onChange={handlePage}
+          variant="outlined"
+          shape="rounded"
+          color="primary"
+          boundaryCount={3}
+        />
+      </ThemeProvider>
     </div>
   );
 };
 
 export default ServiceTable;
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4e60ff",
+    },
+  },
+});
+export const headerList = [
+  "No",
+  "주문번호",
+  "상품번호",
+  "상품명",
+  "수량",
+  "아이디",
+  "수령인",
+  "주소",
+  "연락처",
+  "배송메시지",
+  "주문일자",
+  "배송상태",
+];
+
+export const excelHeaderList = [
+  { label: "주문번호", key: "orderNo" },
+  { label: "상품번호", key: "prodNo" },
+  { label: "상품명", key: "prodName" },
+  { label: "수량", key: "prodQty" },
+  { label: "아이디", key: "userId" },
+  { label: "수령인", key: "userName" },
+  { label: "주소", key: "address" },
+  { label: "연락처", key: "phone" },
+  { label: "배송메시지", key: "comment" },
+  { label: "주문일자", key: "orderDate" },
+  { label: "배송상태", key: "status" },
+];
