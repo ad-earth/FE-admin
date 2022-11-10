@@ -130,7 +130,7 @@ const SignUpForm = () => {
       </span>
 
       {/* 연락처 */}
-      <input
+      <SingUpInput
         type="tel"
         placeholder="연락처  예) 010-0000-0000"
         value={phone.val}
