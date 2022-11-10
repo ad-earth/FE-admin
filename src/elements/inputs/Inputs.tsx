@@ -30,12 +30,12 @@ export const PwdInput = (props: PropsType) => {
 };
 //회원가입
 export const SingUpInput = (props: PropsType) => {
-  const { value, name, placeholder, onChange } = props;
+  const { value, name, placeholder, onChange, type } = props;
   return (
     <input
       className="login"
       placeholder={placeholder}
-      type="text"
+      type={type ? type : "text"}
       value={value}
       name={name}
       onChange={onChange}
