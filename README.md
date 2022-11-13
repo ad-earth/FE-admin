@@ -2,10 +2,10 @@
 ![adearth](https://user-images.githubusercontent.com/105091138/195831143-6d111bdf-cb33-4919-a0c8-d813124c89d7.png)
 
 ## 📌 바로가기
-> [구매자 (지구샵 클론 코딩)](https://adearth.shop)<br />
-> [구매자 FE GitHub Repository](https://github.com/ad-earth/FE-client)<br />
 > [판매자 (CPC 키워드 광고주 솔루션)](https://adearth-admin.shop)<br />
 > [판매자 FE GitHub Repository](https://github.com/ad-earth/FE-admin)<br />
+> [구매자 (지구샵 클론 코딩)](https://adearth.shop)<br />
+> [구매자 FE GitHub Repository](https://github.com/ad-earth/FE-client)<br />
 > [BE GitHub Repository](https://github.com/ad-earth/BE-server)<br />
 
 ## [🙌 프로젝트 개요](https://github.com/ad-earth/FE-client/wiki/Project-Summary)
