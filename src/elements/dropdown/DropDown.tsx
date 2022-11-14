@@ -86,7 +86,7 @@ export const AllMediumDropdown = (props: AllPropsType) => {
     setSelected(Number(e.target.value));
   };
   return (
-    <FormControl>
+    <FormControl style={{ width: 100, whiteSpace: "nowrap" }}>
       <Select
         className={styles.select}
         value={selected}
@@ -99,6 +99,7 @@ export const AllMediumDropdown = (props: AllPropsType) => {
             className={styles.menuItem}
             key={idx}
             value={item.p_No}
+            sx={{ fontSize: "0.9rem" }}
           >
             {item.p_Name}
           </MenuItem>
