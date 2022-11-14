@@ -43,10 +43,10 @@
 | 판매자 (광고 보고서) | 일자, 상품 별로 보고서를 조회할 수 있습니다.<br />총 클릭 수(광고 키워드 클릭 수)와 전환 수(클릭 대비 실 구매 수)를 그래프로 제공해 한 눈에 정보를 파악하기 쉽습니다.<br />광고 키워드 별 클릭 수, 평균 클릭 비용, 전환율, 수익율 등의 광고 매출 정보를 확인할 수 있습니다.|
 
 ## 📗 Ground Rule
-* [📖 Git Flow](https://github.com/ad-earth/FE-client/wiki/Git-Flow)
-* [📖 Git Convention](https://github.com/ad-earth/FE-client/wiki/Git-Convention)
-* [📖 Commit Message Prefix](https://github.com/ad-earth/FE-client/wiki/Commit-Message-Prefix)
-* [📖 Convention](https://github.com/ad-earth/FE-client/wiki/Convention)
+* [📖 Git Flow](https://github.com/ad-earth/FE-admin/wiki/Git-Flow)
+* [📖 Git Convention](https://github.com/ad-earth/FE-admin/wiki/Git-Convention)
+* [📖 Commit Message Prefix](https://github.com/ad-earth/FE-admin/wiki/Commit-Message-Prefix)
+* [📖 Convention](https://github.com/ad-earth/FE-admin/wiki/Convention)
 
 
 <!-- ## 🚀 트러블슈팅 
