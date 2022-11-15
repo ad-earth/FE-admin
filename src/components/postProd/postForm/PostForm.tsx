@@ -21,6 +21,7 @@ import {
 } from "./usePostForm";
 import { prod } from "../../../store/prod";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const cate = ["욕실", "주방", "음료용품", "생활", "식품", "화장품", "문구"];
 
@@ -38,6 +39,7 @@ const PostForm = () => {
   const option = useRecoilValue(optList);
   const status = useRecoilValue(prod);
 
+  const EditorComponent = React.lazy(() => import("./../editor/Editor"));
   const { mutate: postMutate } = usePostProd();
   const { mutate: editMutate } = useEditProd();
   const { mutate } = useDeleteProd();
@@ -204,7 +206,7 @@ const PostForm = () => {
           {/* 상품 상세 내용 입력(퀼) */}
           <div className={styles.right}>
             <div className={styles.quill}>
-              <Editor contents={contents} setContents={setContents} />
+              <EditorComponent contents={contents} setContents={setContents} />
             </div>
           </div>
         </section>

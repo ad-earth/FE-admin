@@ -61,7 +61,8 @@ export const useGetProdInfo = (p_No: number) => {
   const setList = useSetRecoilState(optListState);
   const queryFn = async () => await getProdInfo(p_No);
   return useQuery("prodInfo", queryFn, {
-    enabled: !!p_No,
+    refetchOnWindowFocus: false,
+    // enabled: !!p_No,
     onSuccess: ({ data }) => {
       let option = data.p_Option;
       let optionList = option.map((item: OptListType, i: number) => ({
