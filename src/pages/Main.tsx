@@ -1,6 +1,6 @@
 import styles from "./styles/main.module.scss";
 import MainSectionLayout from "../components/main/mainSectionLayout/MainSectionLayout";
-import SlideBanner from "../components/banner/slideBanner/SlideBanner";
+import MainBanner from "../components/banner/mainBanner/MainBanner";
 
 const Main = () => {
   return (
@@ -9,7 +9,7 @@ const Main = () => {
         <MainSectionLayout />
       </div>
       <div className={styles.container_right}>
-        <SlideBanner />
+        <MainBanner />
       </div>
     </div>
   );
