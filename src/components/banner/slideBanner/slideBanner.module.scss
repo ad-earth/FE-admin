@@ -1,15 +1,15 @@
-.Base {
+.base {
   width: 100%;
   height: 100vh;
   overflow: hidden;
 }
-.Container {
+.container {
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
-.CarouselList {
+.carouselList {
   position: absolute;
   list-style: none;
   width: 100%;
@@ -20,7 +20,7 @@
   overflow: hidden;
 }
 
-.CarouselListItem {
+.carouselListItem {
   width: 100%;
   flex: 1 0 100%;
   transition: 200ms ease;
@@ -39,16 +39,16 @@
 .activeIndex2 {
   transform: translateX(-200%);
 }
-.Nav {
+.nav {
   position: absolute;
   list-style: none;
   left: calc(50% - 30px);
   top: 20px;
 }
-.NavItem {
+.navItem {
   display: inline-block;
 }
-.NavBtn {
+.navBtn {
   width: 15px;
   height: 15px;
   border-radius: 80%;

@@ -28,16 +28,16 @@ const SlideBanner = () => {
   console.log(activeIndex);
   return (
     <div
-      className={styles.Base}
+      className={styles.base}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={styles.Container}>
-        <ul className={styles.CarouselList}>
+      <div className={styles.container}>
+        <ul className={styles.carouselList}>
           {banners.map((url, idx) => (
             <li
               className={`
-              ${styles.CarouselListItem} 
+              ${styles.carouselListItem} 
               ${`
               ${
                 activeIndex === 0
@@ -54,17 +54,16 @@ const SlideBanner = () => {
             </li>
           ))}
         </ul>
-        <ul className={styles.Nav}>
+        <ul className={styles.nav}>
           {Array.from({ length: banners.length }).map((_, idx) => (
-            <li className={styles.NavItem} key={idx}>
+            <li className={styles.navItem} key={idx}>
               <button
                 className={`
-              ${styles.NavBtn} 
+              ${styles.navBtn} 
               ${`
               ${activeIndex === idx && `${styles.activeNav} `}
             `}
               `}
-                // isActive={activeIndex === idx}
                 onClick={() => goTo(idx)}
               />
             </li>
