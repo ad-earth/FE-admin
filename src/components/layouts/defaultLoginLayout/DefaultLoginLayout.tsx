@@ -1,5 +1,6 @@
 import styles from "./defaultLoginLayout.module.scss";
 import { Outlet } from "react-router-dom";
+import SlideBanner from "../../banner/slideBanner/SlideBanner";
 
 const LoginLayout = () => {
   return (
@@ -8,7 +9,9 @@ const LoginLayout = () => {
         <div className={styles.mainWrap}>
           <Outlet />
         </div>
-        <div className={styles.slideBannerWrap}>슬라이드</div>
+        <div className={styles.slideBannerWrap}>
+          <SlideBanner />
+        </div>
       </main>
     </div>
   );
