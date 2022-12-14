@@ -38,15 +38,13 @@ const SlideBanner = () => {
             <li
               className={`
               ${styles.carouselListItem} 
-              ${`
-              ${
+              ${`${
                 activeIndex === 0
                   ? `${styles.activeIndex0} `
                   : activeIndex === 1
                   ? `${styles.activeIndex1} `
                   : `${styles.activeIndex2} : ""`
-              }
-            `}
+              }`}
               `}
               key={idx}
             >
@@ -58,12 +56,9 @@ const SlideBanner = () => {
           {Array.from({ length: banners.length }).map((_, idx) => (
             <li className={styles.navItem} key={idx}>
               <button
-                className={`
-              ${styles.navBtn} 
-              ${`
-              ${activeIndex === idx && `${styles.activeNav} `}
-            `}
-              `}
+                className={`${styles.navBtn} ${`${
+                  activeIndex === idx && `${styles.activeNav} `
+                }`}`}
                 onClick={() => goTo(idx)}
               />
             </li>
