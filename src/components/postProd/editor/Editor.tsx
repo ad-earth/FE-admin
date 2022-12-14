@@ -1,12 +1,17 @@
 import styles from "./editor.module.scss";
-import { useRef, useMemo, useCallback } from "react";
+import React, { useRef, useMemo, useCallback, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ReactS3Client from "react-aws-s3-typescript";
 import { productImgConfig } from "../../../shared/utils/s3Config";
 import { PropsType } from "./editor.type";
 
-const Editor = ({ contents, setContents }: PropsType) => {
+const Editor = ({
+  contents,
+  setContents,
+}: // prevContents
+PropsType) => {
+  console.log(contents);
   const QuillRef = useRef<ReactQuill>();
   const imageHandler = useCallback(() => {
     const input = document.createElement("input");
@@ -70,6 +75,7 @@ const Editor = ({ contents, setContents }: PropsType) => {
           }
         }}
         value={contents}
+        // defaultValue={prevContents}
         onChange={setContents}
         modules={modules}
         theme="snow"
