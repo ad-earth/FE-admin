@@ -38,6 +38,7 @@ const PostForm = () => {
   const option = useRecoilValue(optList);
   const status = useRecoilValue(prod);
 
+  // const EditorComponent = React.lazy(() => import("./../editor/Editor"));
   const { mutate: postMutate } = usePostProd();
   const { mutate: editMutate } = useEditProd();
   const { mutate } = useDeleteProd();
