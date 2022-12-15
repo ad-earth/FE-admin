@@ -21,13 +21,6 @@
 }
 //nav
 .asideNav {
-  // width: 100%;
-  // font-size: 20px;
-  // font-weight: 500;
-  // margin: 40px 0 0 0;
-  // padding-left: 45px;
-  // line-height: 56px;
-  // flex-grow: 1;
   width: 100%;
   font-size: 20px;
   font-weight: 500;
@@ -40,7 +33,7 @@
   }
 }
 //클릭 비활성
-.inactive {
+.inActive {
   color: $fc_blue400;
 }
 //클릭활성
@@ -59,7 +52,5 @@
 }
 .withdrawalBtn {
   width: 100%;
-  // position: absolute;
-  // bottom: 0;
   padding: 0 18px 18px;
 }

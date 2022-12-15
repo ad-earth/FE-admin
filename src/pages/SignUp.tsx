@@ -4,7 +4,7 @@ import logo from "../assets/logo/logo.svg";
 
 const SignUp = () => {
   return (
-    <section id="signUp" className={styles.signUp}>
+    <section className={styles.signUp}>
       <img src={logo} alt="logo" />
       <span className={styles.title}>사업자 회원가입</span>
       <SignUpForm />

@@ -7,13 +7,13 @@ import Nav from "../nav/Nav";
 
 const DefaultLayout = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token: string = localStorage.getItem("token");
 
   // 로그인 유저 확인
   useEffect(() => {
     if (token) return;
     navigate("/");
-  }, [token]);
+  }, [token, navigate]);
 
   return (
     <div id={styles.DefaultLayout}>

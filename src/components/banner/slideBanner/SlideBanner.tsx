@@ -25,7 +25,6 @@ const SlideBanner = () => {
   //포커스
   const handleMouseEnter = () => setIsFocused(true);
   const handleMouseLeave = () => setIsFocused(false);
-  console.log(activeIndex);
   return (
     <div
       className={styles.base}

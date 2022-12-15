@@ -2,7 +2,7 @@ import styles from "./loginContainer.module.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePostLoginQuery } from "./usePostLoginQuery";
-import { IdCheck, PwdCheck } from "../../../shared/hooks/regExp";
+import { IdCheck, PwdCheck } from "../../../shared/hooks/useRegExp";
 import { LoginInput, PwdInput } from "../../../elements/inputs/Inputs";
 import {
   LoginBlueButton,

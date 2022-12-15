@@ -93,7 +93,6 @@ const SignUpForm = () => {
       </span>
       {/* 비밀번호 확인 */}
       <SingUpPwdInput
-        // type="password"
         placeholder="비밀번호 확인"
         value={pCheck.val}
         name="pCheck"
