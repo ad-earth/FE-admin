@@ -4,6 +4,16 @@ import { BizMoneyNav } from "../../main/bizMoney/BizMoney";
 import { WithdrawalBtn } from "../../../elements/buttons/Buttons";
 import useModal from "../../modal/useModal";
 
+//nav data
+const nav = [
+  { id: 1, name: "메인", path: "/home" },
+  { id: 2, name: "배송 관리", path: "/shipping_service" },
+  { id: 3, name: "상품 등록", path: "/postProd" },
+  { id: 4, name: "상품 관리", path: "/setProd" },
+  { id: 5, name: "상품 보고서", path: "/sales_report" },
+  { id: 6, name: "광고 관리", path: "/setAd" },
+  { id: 7, name: "광고 보고서", path: "/ad_report" },
+];
 const Nav = () => {
   const { showModal } = useModal();
 
@@ -31,7 +41,7 @@ const Nav = () => {
             <NavLink
               to={link.path}
               className={({ isActive }) =>
-                isActive ? `${styles.isActive}` : `${styles.inactive}`
+                isActive ? `${styles.isActive}` : `${styles.inActive}`
               }
             >
               {link.name}
@@ -45,14 +55,5 @@ const Nav = () => {
     </nav>
   );
 };
-const nav = [
-  { id: 1, name: "메인", path: "/home" },
-  { id: 2, name: "배송 관리", path: "/shipping_service" },
-  { id: 3, name: "상품 등록", path: "/postProd" },
-  { id: 4, name: "상품 관리", path: "/setProd" },
-  { id: 5, name: "상품 보고서", path: "/sales_report" },
-  { id: 6, name: "광고 관리", path: "/setAd" },
-  { id: 7, name: "광고 보고서", path: "/ad_report" },
-];
 
 export default Nav;

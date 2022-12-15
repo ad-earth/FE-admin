@@ -4,6 +4,26 @@ import ReactApexChart from "react-apexcharts";
 import useAdSummary from "./useAdSummaryQuery";
 import { useWindowResize } from "./useWindowResize";
 
+//default data
+const seriesData = [
+  { name: "광고비", data: [0, 0, 0] },
+  { name: "매출", data: [0, 0, 0] },
+];
+let optionData = {
+  chart: { width: 400, background: "transparent" },
+  colors: ["#4e60ff", "#009667"],
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      columnWidth: "70%", //폭
+      endingShape: "rounded",
+    },
+  },
+  dataLabels: { enabled: false }, //그래프 숫자 표시
+  xaxis: { categories: ["월", "월", "월"] },
+  fill: { opacity: 1 }, //그래프 투명도
+};
+
 const AdSummary = () => {
   const { summaryRes } = useAdSummary();
   const month = summaryRes?.map((data) => data.month);
@@ -16,6 +36,7 @@ const AdSummary = () => {
   const copySelectedTags = [...series];
   //options
   const [options, setOptions] = useState(optionData);
+  
   // ReactApexChart 라이브러리 데이터 업데이트
   useEffect(() => {
     if (!summaryRes) return;
@@ -45,23 +66,3 @@ const AdSummary = () => {
 };
 
 export default AdSummary;
-
-//default data
-const seriesData = [
-  { name: "광고비", data: [0, 0, 0] },
-  { name: "매출", data: [0, 0, 0] },
-];
-let optionData = {
-  chart: { width: 400, background: "transparent" },
-  colors: ["#4e60ff", "#009667"],
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      columnWidth: "70%", //폭
-      endingShape: "rounded",
-    },
-  },
-  dataLabels: { enabled: false }, //그래프 숫자 표시
-  xaxis: { categories: ["월", "월", "월"] },
-  fill: { opacity: 1 }, //그래프 투명도
-};

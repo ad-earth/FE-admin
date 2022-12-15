@@ -1,0 +1,55 @@
+@import "../../../styles//colors";
+.section {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 5px;
+}
+.article {
+  width: 90%;
+  margin: 0 auto;
+}
+.heading {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #283080;
+  font-weight: normal;
+}
+.heading span {
+  font-size: 30px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.accordionCont {
+  margin-bottom: 15px;
+}
+.title {
+  background-color: #a5a9ba;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.title::after {
+  content: "+";
+  float: right;
+  transition: 0.3s;
+}
+.title.active::after {
+  content: "-";
+}
+.title.active {
+  background-color: $bg_blue200;
+}
+.desc {
+  padding: 20px;
+  display: none;
+}
+.desc p {
+  font-size: 14px;
+}
+.desc.active {
+  display: block;
+}
