@@ -4,7 +4,7 @@ import MainBanner from "../components/banner/mainBanner/MainBanner";
 
 const Main = () => {
   return (
-    <div id="mainWrap" className={styles.container1}>
+    <div className={styles.container}>
       <div className={styles.container_left}>
         <MainSectionLayout />
       </div>

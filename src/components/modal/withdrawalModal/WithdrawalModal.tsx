@@ -9,6 +9,7 @@ const WithdrawalModal = ({ title }: WithdrawalType) => {
   const navigate = useNavigate();
   const { hideModal } = useModal();
   const { mutate, isSuccess } = useWithdrawalQuery();
+
   //회원탈퇴 성공시
   if (isSuccess) {
     localStorage.clear();
